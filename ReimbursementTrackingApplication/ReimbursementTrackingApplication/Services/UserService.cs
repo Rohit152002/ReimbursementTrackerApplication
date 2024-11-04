@@ -11,12 +11,12 @@ namespace ReimbursementTrackingApplication.Services
 {
     public class UserService : IUserServices
     {
-        private readonly IRepository<int,User> _repository;
+        private readonly IRepository<int, User> _repository;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly ITokenService _tokenService;
 
-        public UserService(IRepository<int,User> repository,IMapper mapper, ILogger<UserService> logger,ITokenService tokenService)
+        public UserService(IRepository<int, User> repository, IMapper mapper, ILogger<UserService> logger, ITokenService tokenService)
         {
             _repository = repository;
             _mapper = mapper;
@@ -31,20 +31,21 @@ namespace ReimbursementTrackingApplication.Services
             byte[] currentPasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(changePassword.currentPassword));
 
 
-            if (currentPasswordHash.Length != user.Password.Length || !currentPasswordHash.SequenceEqual(user.Password))
+            if (!currentPasswordHash.SequenceEqual(user.Password))
             {
                 throw new Exception("Invalid current password");
             }
+
 
             if (changePassword.newPassword != changePassword.confirmPassword)
             {
                 throw new Exception("New password and confirm password do not match");
             }
 
-            HMACSHA256 newHmac = new HMACSHA256(); 
+            HMACSHA256 newHmac = new HMACSHA256();
             byte[] newPasswordHash = newHmac.ComputeHash(Encoding.UTF8.GetBytes(changePassword.newPassword));
 
-            
+
             user.Password = newPasswordHash;
             user.HashKey = newHmac.Key;
 
@@ -59,8 +60,20 @@ namespace ReimbursementTrackingApplication.Services
         public async Task<UserDTO> GetUserProfile(int id)
         {
             var user = await _repository.Get(id);
-            var userDTO=  _mapper.Map<UserDTO>(user);
+            // var userDTO = new _mapper.Map<UserDTO>(user);
+            var userDTO = mappings(user);
             return userDTO;
+        }
+
+        public UserDTO mappings(User user)
+        {
+            // return _mapper.Map<UserDTO>(user);
+            return new UserDTO()
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Department = user.Department
+            };
         }
 
         public async Task<LoginResponseDTO> Login(LoginDTO login)
@@ -103,15 +116,15 @@ namespace ReimbursementTrackingApplication.Services
             }
             catch (NotFoundException ex)
             {
-                throw new Exception($"Failed to login {ex.Message}");
+                throw new NotFoundException($"Failed to login {ex.Message}");
             }
             catch (Exception ex)
             {
                 throw new Exception($"Failed to login {ex.Message}");
             }
-            }
+        }
 
-            public async Task<LoginResponseDTO> Register(UserCreateDTO registerUser)
+        public async Task<LoginResponseDTO> Register(UserCreateDTO registerUser)
         {
             HMACSHA256 hmac = new HMACSHA256();
             byte[] passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerUser.Password));
@@ -148,11 +161,18 @@ namespace ReimbursementTrackingApplication.Services
          u.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
          u.Department.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
 
-           
+
             var sortedUsers = filteredUsers.OrderBy(u => u.UserName);
 
-           
+
             var userDTOs = _mapper.Map<IEnumerable<UserDTO>>(sortedUsers);
+            return userDTOs;
+        }
+
+        public async Task<IEnumerable<UserDTO>> GetAllUsers()
+        {
+            var users = await _repository.GetAll();
+            var userDTOs = _mapper.Map<IEnumerable<UserDTO>>(users);
             return userDTOs;
         }
     }

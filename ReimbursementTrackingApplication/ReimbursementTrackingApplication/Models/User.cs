@@ -26,20 +26,15 @@
         public IEnumerable<ApprovalStage> Approvals { get; set; }
         public IEnumerable<ReimbursementRequest> Request { get; set; }
         public BankAccount Bank { get; set; }
-        public IEnumerable< Employee> ManageEmployee { get; set; }  
+        public IEnumerable<Employee> ManageEmployee { get; set; }
         public Employee Employee { get; set; }
         public User()
         {
             CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow; 
-            //Bank = new BankAccount();
-            //ManageEmployee = new List<Employee>();
-            //Employee = new Employee();
-            //Approvals = new List<ApprovalStage>();
-            //Request = new List<ReimbursementRequest>();
+            UpdatedAt = DateTime.UtcNow;
+
         }
 
-        // Method to manually update the UpdatedAt timestamp
         public void Update()
         {
             UpdatedAt = DateTime.UtcNow;

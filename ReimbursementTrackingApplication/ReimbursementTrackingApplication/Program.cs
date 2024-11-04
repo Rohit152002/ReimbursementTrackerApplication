@@ -3,6 +3,7 @@ using ReimbursementTrackingApplication.Context;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models;
 using ReimbursementTrackingApplication.Repositories;
+using ReimbursementTrackingApplication.Services;
 
 namespace ReimbursementTrackingApplication
 {
@@ -28,8 +29,17 @@ namespace ReimbursementTrackingApplication
 
             #region Repositories
             builder.Services.AddScoped<IRepository<int, User>, UserRepository>();
-            builder.Services.AddScoped<IRepository<int,ReimbursementRequest>,ReimbursementRequestRepository>();
+            builder.Services.AddScoped<IRepository<int, ReimbursementRequest>, ReimbursementRequestRepository>();
             #endregion
+
+            #region  Services
+            builder.Services.AddScoped<IUserServices, UserService>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
+            #endregion
+
+
+
+
             builder.Services.AddControllers();
 
 

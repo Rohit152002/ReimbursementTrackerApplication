@@ -2892,27 +2892,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\.nuget\\packages\\": {}
+    "/Users/rohit/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj",
+      "projectUniqueName": "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication.csproj",
       "projectName": "ReimbursementTrackingApplication",
-      "projectPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj",
-      "packagesPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\obj\\",
+      "projectPath": "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication.csproj",
+      "packagesPath": "/Users/rohit/.nuget/packages/",
+      "outputPath": "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/rohit/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2970,24 +2967,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.35, 6.0.35]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2996,7 +2975,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -2,8 +2,8 @@
 {
     public class UserDTO
     {
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public Departments Departments { get; set; }
+        public string UserName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public Departments Department { get; set; }
     }
 }
