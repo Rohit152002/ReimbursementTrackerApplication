@@ -1,0 +1,678 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementprojecttest\\services\\userservicetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|solutionrelative:reimbursementprojecttest\\services\\userservicetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\dtos\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\dtos\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\dtos\\usertokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\dtos\\usertokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementprojecttest\\repositories\\userrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|solutionrelative:reimbursementprojecttest\\repositories\\userrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\repositories\\reimbursementrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\repositories\\reimbursementrequestrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\dtos\\usercreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\dtos\\usercreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\interfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\interfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\interfaces\\iuserservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\interfaces\\iuserservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementprojecttest\\reimbursementprojecttest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|solutionrelative:reimbursementprojecttest\\reimbursementprojecttest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\reimbursementrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\reimbursementrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\dtos\\changepassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\dtos\\changepassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\mapper\\userprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\mapper\\userprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementprojecttest\\repositories\\reimbursementrequestrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}|ReimbursementProjectTest\\ReimbursementProjectTest.csproj|solutionrelative:reimbursementprojecttest\\repositories\\reimbursementrequestrepositorytest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\reimbursementitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\reimbursementitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\approvalstage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\approvalstage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\exceptions\\collectionemptyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\exceptions\\collectionemptyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\exceptions\\couldnotaddexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\exceptions\\couldnotaddexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\misc\\customexceptionfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\misc\\customexceptionfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\dtos\\errorresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\dtos\\errorresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\context\\contextapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\context\\contextapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104061732_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ReimbursementTrackingApplication\\Migrations\\20241104061732_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104061311_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ReimbursementTrackingApplication\\Migrations\\20241104061311_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104060932_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ReimbursementTrackingApplication\\Migrations\\20241104060932_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\bankaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\bankaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\policy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\policy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|c:\\users\\rohit.laishram.pyramidindia\\documents\\apiproject\\reimbursementtrackingapplication\\reimbursementtrackingapplication\\models\\expensecategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}|ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj|solutionrelative:reimbursementtrackingapplication\\models\\expensecategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserServiceTest.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\Services\\UserServiceTest.cs",
+              "RelativeDocumentMoniker": "ReimbursementProjectTest\\Services\\UserServiceTest.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\Services\\UserServiceTest.cs",
+              "RelativeToolTip": "ReimbursementProjectTest\\Services\\UserServiceTest.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAowHsAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T10:20:31.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Services\\UserService.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Services\\UserService.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAUwDoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:06:19.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReimbursementRequestRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Repositories\\ReimbursementRequestRepository.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Repositories\\ReimbursementRequestRepository.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Repositories\\ReimbursementRequestRepository.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Repositories\\ReimbursementRequestRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T08:08:28.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\LoginResponseDTO.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\DTOs\\LoginResponseDTO.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\LoginResponseDTO.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\DTOs\\LoginResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T08:58:51.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserRepositoryTest.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\Repositories\\UserRepositoryTest.cs",
+              "RelativeDocumentMoniker": "ReimbursementProjectTest\\Repositories\\UserRepositoryTest.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\Repositories\\UserRepositoryTest.cs",
+              "RelativeToolTip": "ReimbursementProjectTest\\Repositories\\UserRepositoryTest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:35:49.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\User.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\User.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\User.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA3wBIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T04:28:32.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\UserCreateDTO.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\DTOs\\UserCreateDTO.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\UserCreateDTO.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\DTOs\\UserCreateDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T08:55:37.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\DTOs\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\LoginDTO.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\DTOs\\LoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T08:55:07.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserTokenDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\UserTokenDTO.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\DTOs\\UserTokenDTO.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\UserTokenDTO.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\DTOs\\UserTokenDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:33:36.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:21:54.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\UserDTO.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\DTOs\\UserDTO.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\UserDTO.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\DTOs\\UserDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:02:29.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Services\\TokenService.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Services\\TokenService.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Services\\TokenService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAmwBEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:34:45.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ITokenService.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Interfaces\\ITokenService.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Interfaces\\ITokenService.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Interfaces\\ITokenService.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Interfaces\\ITokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:33:16.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IUserServices.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Interfaces\\IUserServices.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Interfaces\\IUserServices.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Interfaces\\IUserServices.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Interfaces\\IUserServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T08:52:46.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ReimbursementProjectTest",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\ReimbursementProjectTest.csproj",
+              "RelativeDocumentMoniker": "ReimbursementProjectTest\\ReimbursementProjectTest.csproj",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\ReimbursementProjectTest.csproj",
+              "RelativeToolTip": "ReimbursementProjectTest\\ReimbursementProjectTest.csproj",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-04T06:51:25.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\Employee.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\Employee.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\Employee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwAgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T04:37:45.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ChangePasswordDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\ChangePasswordDTO.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\DTOs\\ChangePasswordDTO.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\ChangePasswordDTO.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\DTOs\\ChangePasswordDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:45:48.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Program.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Program.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Program.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Program.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAswBkAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:06:38.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ReimbursementRequest.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ReimbursementRequest.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\ReimbursementRequest.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ReimbursementRequest.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\ReimbursementRequest.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAA/wCAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T04:50:24.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "UserProfile.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Mapper\\UserProfile.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Mapper\\UserProfile.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Mapper\\UserProfile.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Mapper\\UserProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T09:50:51.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\appsettings.json",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\appsettings.json",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\appsettings.json",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-04T04:22:08.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ReimbursementRequestRepositoryTest.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\Repositories\\ReimbursementRequestRepositoryTest.cs",
+              "RelativeDocumentMoniker": "ReimbursementProjectTest\\Repositories\\ReimbursementRequestRepositoryTest.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\Repositories\\ReimbursementRequestRepositoryTest.cs",
+              "RelativeToolTip": "ReimbursementProjectTest\\Repositories\\ReimbursementRequestRepositoryTest.cs",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAAwKUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T08:19:11.59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Interfaces\\IRepository.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Interfaces\\IRepository.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Interfaces\\IRepository.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Interfaces\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:20:07.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ReimbursementItem.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ReimbursementItem.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\ReimbursementItem.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ReimbursementItem.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\ReimbursementItem.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAA7wBEAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T04:49:52.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ApprovalStage.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ApprovalStage.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\ApprovalStage.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ApprovalStage.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\ApprovalStage.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA1wAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T05:09:38.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\Payment.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\Payment.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\Payment.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAswAkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T05:00:04.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "NotFoundException.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Exceptions\\NotFoundException.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Exceptions\\NotFoundException.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Exceptions\\NotFoundException.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Exceptions\\NotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:31:33.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "CollectionEmptyException.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Exceptions\\CollectionEmptyException.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Exceptions\\CollectionEmptyException.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Exceptions\\CollectionEmptyException.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Exceptions\\CollectionEmptyException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:31:54.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "CouldNotAddException.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Exceptions\\CouldNotAddException.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Exceptions\\CouldNotAddException.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Exceptions\\CouldNotAddException.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Exceptions\\CouldNotAddException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:31:02.812Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ErrorResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\ErrorResponseDTO.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\DTOs\\ErrorResponseDTO.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\DTOs\\ErrorResponseDTO.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\DTOs\\ErrorResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:27:22.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "CustomExceptionFilter.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Misc\\CustomExceptionFilter.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Misc\\CustomExceptionFilter.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Misc\\CustomExceptionFilter.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Misc\\CustomExceptionFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:26:02.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "20241104061732_init.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104061732_init.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Migrations\\20241104061732_init.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104061732_init.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Migrations\\20241104061732_init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:17:32.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ContextApp.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Context\\ContextApp.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Context\\ContextApp.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Context\\ContextApp.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Context\\ContextApp.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA2wB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T05:27:07.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "20241104061311_init.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104061311_init.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Migrations\\20241104061311_init.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104061311_init.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Migrations\\20241104061311_init.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:13:11.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "20241104060932_init.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104060932_init.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Migrations\\20241104060932_init.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Migrations\\20241104060932_init.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Migrations\\20241104060932_init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T06:09:32.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "BankAccount.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\BankAccount.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\BankAccount.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\BankAccount.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\BankAccount.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAA0wBQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T04:45:15.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Policy.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\Policy.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\Policy.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\Policy.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\Policy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T04:48:07.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "ExpenseCategory.cs",
+              "DocumentMoniker": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ExpenseCategory.cs",
+              "RelativeDocumentMoniker": "ReimbursementTrackingApplication\\Models\\ExpenseCategory.cs",
+              "ToolTip": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\Models\\ExpenseCategory.cs",
+              "RelativeToolTip": "ReimbursementTrackingApplication\\Models\\ExpenseCategory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T04:47:40.257Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
