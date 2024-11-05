@@ -8,14 +8,15 @@
         public double Amount { get; set; }
         public int CategoryId { get; set; }
         public ExpenseCategory Category { get; set; }
-        public string Description { get; set; }
-        public string receiptFile { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public string receiptFile { get; set; } = string.Empty;
         public DateTime DateIncurred { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public ReimbursementItem()
         {
             DateIncurred = DateTime.Now;
-            Request= new ReimbursementRequest();
-            Category = new ExpenseCategory();
+            //Request = new ReimbursementRequest();
+            //Category = new ExpenseCategory();
         }
 
     }

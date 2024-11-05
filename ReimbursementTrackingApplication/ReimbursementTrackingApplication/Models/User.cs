@@ -27,12 +27,17 @@
         public IEnumerable<ReimbursementRequest> Request { get; set; }
         public BankAccount Bank { get; set; }
         public IEnumerable<Employee> ManageEmployee { get; set; }
+        public bool IsDeleted { get; set; }= false;
         public Employee Employee { get; set; }
         public User()
         {
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-
+            Approvals = new List<ApprovalStage>();
+            Request= new List<ReimbursementRequest>();
+            ManageEmployee = new List<Employee>();
+            //Bank= new BankAccount();
+            //Employee= new Employee();
         }
 
         public void Update()

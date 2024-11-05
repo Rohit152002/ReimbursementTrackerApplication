@@ -22,15 +22,17 @@
         public IEnumerable<ReimbursementItem> Items { get; set; }
         public IEnumerable<ApprovalStage> Approvals { get; set; }
         public Payment Payment { get; set; }
-
+        public bool IsDeleted { get; set; } = false;
         public ReimbursementRequest()
         {
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-        //    Items= new List<ReimbursementItem>();
-        //    Payment= new Payment();
+            Items = new List<ReimbursementItem>();
+            //Payment = new Payment();
+            //Policy = new Policy();
+            //User= new User();
 
-        //Approvals= new List<ApprovalStage>();   
+            Approvals = new List<ApprovalStage>();
         }
 
         // Method to manually update the UpdatedAt timestamp

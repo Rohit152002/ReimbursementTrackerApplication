@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -66,5 +67,26 @@ namespace ReimbursementProjectTest.Controllers
             Assert.AreEqual(200, resultObject.StatusCode);
 
         }
+        [Test]
+        [TestCase("TestUser2", "testPassword", "laishramrohit15@gmail.com", "TestHashKey", Departments.Admin)]
+        public async Task RegisterUserTestException(string username, string password, string email, string hashKey, Departments department)
+        {
+            
+            var user = new UserCreateDTO
+            {
+                UserName = username,
+                Password = password,
+                Email = email,
+                Department = department
+            };
+
+            
+            userController.ModelState.AddModelError("Email", "Invalid email format");
+
+     
+            Assert.ThrowsAsync<Exception>(async() => await userController.Register(user));
+
+        }
+
     }
 }

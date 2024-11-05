@@ -10,9 +10,9 @@ namespace ReimbursementTrackingApplication.Interfaces
 
         public Task<UserDTO> GetUserProfile(int id);
 
-        public Task<IEnumerable<UserDTO>> GetAllUsers();
-        public Task<IEnumerable<UserDTO>> SearchUser(string searchTerm);
-        Task<bool> ChangePassword(ChangePasswordDTO changePassword);
+        public Task<PaginatedResultDTO<UserDTO>> GetAllUsers(int pageno , int pageSize );
+        public Task<PaginatedResultDTO<UserDTO>> SearchUser(string searchTerm, int pageno, int pageSize);
+        public Task<bool> ChangePassword(ChangePasswordDTO changePassword);
 
     }
 }

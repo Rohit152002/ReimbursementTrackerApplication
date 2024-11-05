@@ -3919,32 +3919,35 @@
     ]
   },
   "packageFolders": {
-    "/Users/rohit/.nuget/packages/": {}
+    "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementProjectTest/ReimbursementProjectTest.csproj",
-      "projectName": "ReimbursementProjectTest",
-      "projectPath": "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementProjectTest/ReimbursementProjectTest.csproj",
-      "packagesPath": "/Users/rohit/.nuget/packages/",
-      "outputPath": "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementProjectTest/obj/",
+      "projectUniqueName": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\ReimbursementUnitProjectTest.csproj",
+      "projectName": "ReimbursementUnitProjectTest",
+      "projectPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\ReimbursementUnitProjectTest.csproj",
+      "packagesPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementProjectTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/rohit/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication.csproj": {
-              "projectPath": "/Users/rohit/Documents/celsior_training/ReimbursementTrackerApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication/ReimbursementTrackingApplication.csproj"
+            "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj": {
+              "projectPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj"
             }
           }
         }
@@ -4004,12 +4007,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.35, 6.0.35]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.35, 6.0.35]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.35, 6.0.35]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

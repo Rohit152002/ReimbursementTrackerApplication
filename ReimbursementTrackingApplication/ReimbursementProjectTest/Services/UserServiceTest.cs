@@ -66,6 +66,8 @@ namespace ReimbursementProjectTest.Services
             var addedUser = await userService.Register(user);
             Assert.IsTrue(addedUser.UserName == user.UserName);
         }
+        
+        
         [Test]
         [TestCase("TestUser2", "null", "TestHashKey", "laishramrohit15@gmail.com", Departments.Admin)]
         public async Task RegisterTestException(string username, string password, string email, string hashKey, Departments department)
@@ -88,6 +90,8 @@ namespace ReimbursementProjectTest.Services
              });
         }
 
+        
+        
         [Test]
         [TestCase("TestUser2", "TestPassword", "laishramrohit15@gmail.com", "TestHashKey", Departments.Admin)]
         public async Task TestAuthenticate(string username, string password, string email, string hashKey, Departments department)
@@ -152,6 +156,8 @@ namespace ReimbursementProjectTest.Services
 
 
         }
+        
+        
         [Test]
         public async Task TestExceptionInvalidUsernameAndPassword()
         {
@@ -193,9 +199,9 @@ namespace ReimbursementProjectTest.Services
             var changePasswordDTO = new ChangePasswordDTO
             {
                 UserId = 1,
-                currentPassword = currentPassword, // Correct current password
-                newPassword = newPassword, // New password
-                confirmPassword = confirmPassword // Matching confirm password
+                currentPassword = currentPassword,
+                newPassword = newPassword, 
+                confirmPassword = confirmPassword 
             };
 
 
@@ -205,6 +211,8 @@ namespace ReimbursementProjectTest.Services
             // Assert
             Assert.IsTrue(result);
         }
+        
+        
         [Test]
         [TestCase(3, "test", "newpassword", "newpassword")]
         public async Task TestIncorrectNotSamePassword(int userId, string currentPassword, string newPassword, string confirmPassword)
@@ -312,17 +320,23 @@ namespace ReimbursementProjectTest.Services
                 Email = "laishramrohit15@gmail.com",
                 Department = Departments.IT
             };
-            UserDTO userDTO = new UserDTO
-            {
-                UserName = "Rohit Laishram",
-                Email = "laishramrohit15@gmail.com",
-                Department = Departments.IT
-            };
+            var userList = new List<User>
+        {
+            new User { UserName = "Rohit Laishram", Email = "laishramrohit15@gmail.com", Department = Departments.IT }
+            
+        };
+
+            var userDTOList = new List<UserDTO>
+        {
+            new UserDTO { UserName = "Rohit Laishram", Email = "laishramrohit15@gmail.com", Department = Departments.IT }
+          
+        };
+            mapper.Setup(m => m.Map<IList<UserDTO>>(It.IsAny<IList<User>>()))
+                   .Returns(userDTOList);
             var userService = new UserService(repository, mapper.Object, logger.Object, mockTokenService.Object);
-            mapper.Setup(m => m.Map<UserDTO>(user)).Returns(userDTO);
             var addedUser = await userService.Register(user);
-            IEnumerable<UserDTO> users = await userService.GetAllUsers();
-            Assert.NotNull(users);
+            PaginatedResultDTO<UserDTO> users = await userService.GetAllUsers(1,10);
+            Assert.NotNull(users.Data);
         }
 
         [Test]
@@ -344,7 +358,7 @@ namespace ReimbursementProjectTest.Services
             var userService = new UserService(repository, mapper.Object, logger.Object, mockTokenService.Object);
             mapper.Setup(m => m.Map<UserDTO>(user)).Returns(userDTO);
             var addedUser = await userService.Register(user);
-            IEnumerable<UserDTO> users = await userService.SearchUser("Rohit");
+            PaginatedResultDTO<UserDTO> users = await userService.SearchUser("Rohit",1,10);
             Assert.NotNull(users);
         }
 

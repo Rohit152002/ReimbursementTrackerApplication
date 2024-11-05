@@ -10,13 +10,14 @@
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public IEnumerable<ReimbursementRequest> Requests { get;set; }
+        public bool IsDeleted { get; set; } = false;
 
         public Employee()
         {
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow; 
-            User = new User();
-            Manager= new User();
+            //User = new User();
+            //Manager= new User();
             Requests= new List<ReimbursementRequest>();
         }
 

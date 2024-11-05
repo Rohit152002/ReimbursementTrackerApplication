@@ -34,6 +34,9 @@ namespace ReimbursementTrackingApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
 
@@ -84,6 +87,9 @@ namespace ReimbursementTrackingApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -111,6 +117,9 @@ namespace ReimbursementTrackingApplication.Migrations
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ManagerId")
                         .HasColumnType("int");
@@ -140,6 +149,9 @@ namespace ReimbursementTrackingApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -159,6 +171,9 @@ namespace ReimbursementTrackingApplication.Migrations
 
                     b.Property<double>("AmountPaid")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -187,6 +202,9 @@ namespace ReimbursementTrackingApplication.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("MaxAmount")
                         .HasColumnType("int");
@@ -225,6 +243,9 @@ namespace ReimbursementTrackingApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("RequestId")
                         .HasColumnType("int");
 
@@ -259,7 +280,13 @@ namespace ReimbursementTrackingApplication.Migrations
                     b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("PolicyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<double>("TotalAmount")
@@ -304,9 +331,8 @@ namespace ReimbursementTrackingApplication.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<byte[]>("Password")
                         .IsRequired()
@@ -314,6 +340,10 @@ namespace ReimbursementTrackingApplication.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -392,7 +422,8 @@ namespace ReimbursementTrackingApplication.Migrations
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Item_Category");
 
                     b.HasOne("ReimbursementTrackingApplication.Models.ReimbursementRequest", "Request")
                         .WithMany("Items")

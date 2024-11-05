@@ -25,12 +25,13 @@
         public Status Status { get; set; } = Status.Pending;
         public DateTime ReviewDate { get; set; }
         public string Comments { get; set; } = string.Empty;
+        public bool IsDeleted { get; set; } = false;
 
         public ApprovalStage()
         {
             ReviewDate = DateTime.Now;
-            Request= new ReimbursementRequest();
-            Review = new User();
+            //Request= new ReimbursementRequest();
+            //Review = new User();
         }
     }
 }

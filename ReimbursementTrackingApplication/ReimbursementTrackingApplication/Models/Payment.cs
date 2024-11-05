@@ -25,11 +25,12 @@
         public PaymentMethod PaymentMethod { get; set; }
         public DateTime PaymentDate { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         public Payment()
         {
             PaymentDate = DateTime.Now;
-            Request = new ReimbursementRequest();
+            //Request = new ReimbursementRequest();
 
         }
 

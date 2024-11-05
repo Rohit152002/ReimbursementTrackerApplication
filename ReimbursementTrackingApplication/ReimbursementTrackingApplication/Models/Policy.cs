@@ -7,6 +7,7 @@
         public int MaxAmount { get; set; }
         public string PolicyDescription { get; set; } = string.Empty;
         public IEnumerable<ReimbursementRequest> Reimbursements { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         public Policy()
         {

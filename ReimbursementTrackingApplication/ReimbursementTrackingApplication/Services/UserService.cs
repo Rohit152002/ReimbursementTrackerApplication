@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using ReimbursementTrackingApplication.Exceptions;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models;
@@ -153,7 +154,7 @@ namespace ReimbursementTrackingApplication.Services
             }
         }
 
-        public async Task<IEnumerable<UserDTO>> SearchUser(string searchTerm)
+        public async Task<PaginatedResultDTO<UserDTO>> SearchUser(string searchTerm, int pageno, int pageSize)
         {
             var users = await _repository.GetAll();
             var filteredUsers = users.Where(u =>
@@ -164,16 +165,34 @@ namespace ReimbursementTrackingApplication.Services
 
             var sortedUsers = filteredUsers.OrderBy(u => u.UserName);
 
+            var total = sortedUsers.Count();
+            var userDTOs = _mapper.Map<IList<UserDTO>>(sortedUsers);
+            return new PaginatedResultDTO<UserDTO>
+            {
+                CurrentPage = pageno,
+                PageSize = pageSize,
+                TotalCount = total,
+                TotalPages = (int)Math.Ceiling(total / (double)pageSize),
+                Data = userDTOs
 
-            var userDTOs = _mapper.Map<IEnumerable<UserDTO>>(sortedUsers);
-            return userDTOs;
+            }; ;
         }
 
-        public async Task<IEnumerable<UserDTO>> GetAllUsers()
+        public async Task<PaginatedResultDTO<UserDTO>> GetAllUsers(int pageno, int pageSize)
         {
             var users = await _repository.GetAll();
-            var userDTOs = _mapper.Map<IEnumerable<UserDTO>>(users);
-            return userDTOs;
+            var total = users.Count();
+            var request= users.Skip((pageno-1)*pageSize).Take(pageSize).ToList();
+            var userDTOs = _mapper.Map<IList<UserDTO>>(request);
+            return new PaginatedResultDTO<UserDTO>
+            {
+                CurrentPage = pageno,
+                PageSize = pageSize,
+                TotalCount = total,
+                TotalPages= (int)Math.Ceiling(total / (double)pageSize),
+                Data=userDTOs
+                
+            };
         }
     }
 }

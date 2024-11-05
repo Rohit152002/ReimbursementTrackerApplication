@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public IEnumerable<ReimbursementItem> Items { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         public ExpenseCategory()
         {

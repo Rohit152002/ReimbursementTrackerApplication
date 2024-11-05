@@ -13,12 +13,13 @@ namespace ReimbursementTrackingApplication.Models
         public string BranchAddress { get; set; }
         public DateTime CreatedAt {  get; set; }
         public DateTime UpdatedAt { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         public BankAccount()
         {
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow; 
-            User = new User();
+            //User = new User();
         }
 
         public void Update()

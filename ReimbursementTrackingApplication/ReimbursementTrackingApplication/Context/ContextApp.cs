@@ -20,6 +20,7 @@ namespace ReimbursementTrackingApplication.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            
 
             modelBuilder.Entity<Employee>()
                 .HasOne(u => u.Manager)
@@ -35,11 +36,15 @@ namespace ReimbursementTrackingApplication.Context
                 .HasConstraintName("FK_Employee_User")
                 .OnDelete(DeleteBehavior.Cascade);
 
+        
             modelBuilder.Entity<BankAccount>()
                 .HasOne(u => u.User)
                 .WithOne(u => u.Bank)
                 .HasForeignKey<BankAccount>(b => b.UserId)
                 .HasConstraintName("FK_Bank_User");
+
+            //modelBuilder.Entity<Employee>()
+            //   .HasKey(e => new { e.EmployeeId, e.ManagerId });
 
             modelBuilder.Entity<ReimbursementRequest>()
                 .HasOne(r => r.Policy)
@@ -58,6 +63,12 @@ namespace ReimbursementTrackingApplication.Context
                 .WithMany(r => r.Items)
                 .HasForeignKey(i => i.RequestId)
                 .HasConstraintName("FK_Item_Request");
+
+            modelBuilder.Entity<ReimbursementItem>()
+                .HasOne(i => i.Category)
+                .WithMany(r => r.Items)
+                .HasForeignKey(i => i.CategoryId)
+                .HasConstraintName("FK_Item_Category");
 
             modelBuilder.Entity<ApprovalStage>()
                 .HasOne(a => a.Request)
@@ -78,7 +89,12 @@ namespace ReimbursementTrackingApplication.Context
                 .HasForeignKey<Payment>(p => p.RequestId)
                 .HasConstraintName("FK_Payment_Request");
 
-
+            //approvals
+            //Approvals = new List<ApprovalStage>();
+            //Request = new List<ReimbursementRequest>();
+            //ManageEmployee = new List<Employee>();
+            //Bank = new BankAccount();
+            //Employee = new Employee();
         }
     }
 }
