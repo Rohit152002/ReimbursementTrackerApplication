@@ -86,6 +86,7 @@ namespace ReimbursementTrackingApplication.Repositories
             {
                 var payment = await Get(key);
                 _context.Payments.Update(entity);
+              
                 await _context.SaveChangesAsync();
                 return entity;
             }

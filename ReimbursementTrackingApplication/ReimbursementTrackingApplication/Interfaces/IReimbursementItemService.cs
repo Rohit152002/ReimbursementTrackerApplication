@@ -9,5 +9,6 @@ namespace ReimbursementTrackingApplication.Interfaces
         public Task<PaginatedResultDTO<ResponseReimbursementItemDTO>> GetItemsByRequestIdAsync(int requestId, int pageNumber, int pageSize);
         public Task<SuccessResponseDTO<ResponseReimbursementItemDTO>> UpdateItemAsync(int itemId, ReimbursementItemDTO itemDto);
         public Task<SuccessResponseDTO<ResponseReimbursementItemDTO>> DeleteItemAsync(int itemId);
+        public Task<PaginatedResultDTO<ResponseReimbursementItemDTO>> GetAllItems( int pageNumber, int pageSize);
     }
 }

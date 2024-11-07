@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
 using System.IdentityModel.Tokens.Jwt;
@@ -24,6 +25,7 @@ namespace ReimbursementTrackingApplication.Services
                     new Claim(ClaimTypes.Role, user.Department),
 
                 };
+            
 
             var _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
 

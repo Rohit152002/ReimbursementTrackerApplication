@@ -81,6 +81,7 @@ namespace ReimbursementTrackingApplication.Repositories
             {
                 var user = await Get(key);
                 _context.Approvals.Update(entity);
+                
                 await _context.SaveChangesAsync();
                 return entity;
             }

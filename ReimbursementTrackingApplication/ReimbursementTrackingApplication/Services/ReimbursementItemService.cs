@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models;
 using ReimbursementTrackingApplication.Models.DTOs;
@@ -61,10 +62,13 @@ namespace ReimbursementTrackingApplication.Services
                 var itemDTO = _mapper.Map<ResponseReimbursementItemDTO>(item);
                 item.IsDeleted = true;
                 await _repository.Update(item.Id, item);
+                itemDTO.CategoryName= (await _categoryRepository.Get(item.CategoryId)).Name;
                 return new SuccessResponseDTO<ResponseReimbursementItemDTO>
-                { IsSuccess=true,
-                Message="Item Deleted Successfully",
-                Data=itemDTO};
+                { 
+                    IsSuccess=true,
+                    Message="Item Deleted Successfully",
+                    Data=itemDTO
+                };
 
             }
             catch (Exception e)
@@ -80,9 +84,13 @@ namespace ReimbursementTrackingApplication.Services
             {
                  var item = await _repository.Get(itemId);
                 var itemDTO = _mapper.Map<ResponseReimbursementItemDTO>(item);
-                itemDTO.CategoryName =( await _categoryRepository.Get(itemId)).Name;
+                itemDTO.CategoryName =( await _categoryRepository.Get(item.CategoryId)).Name;
                 return new SuccessResponseDTO<ResponseReimbursementItemDTO>
-                { IsSuccess=true,Message= "Item ResponseReimbursementItemDTO fetch", Data=itemDTO};
+                { 
+                    IsSuccess=true,
+                    Message= "Item  fetch successfully", 
+                    Data=itemDTO
+                };
             }catch(Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -90,14 +98,57 @@ namespace ReimbursementTrackingApplication.Services
         }
 
 
-        public Task<PaginatedResultDTO<ResponseReimbursementItemDTO>>  GetItemsByRequestIdAsync(int requestId, int pageNumber, int pageSize)
+        public async Task<PaginatedResultDTO<ResponseReimbursementItemDTO>>  GetItemsByRequestIdAsync(int requestId, int pageNumber, int pageSize)
         {
-            throw new NotImplementedException();
+           try
+            {
+                var items = (await _repository.GetAll()).Where(r=>r.RequestId==requestId && r.IsDeleted == false);
+                var total = items.Count();
+                var pagedItems = items
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+                var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(pagedItems);
+                foreach(var item in itemsDTO)
+                {
+                    item.CategoryName= (await _categoryRepository.Get(item.CategoryId)).Name;
+                }
+                return new PaginatedResultDTO<ResponseReimbursementItemDTO>
+                {
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize,
+                    TotalCount = total,
+                    TotalPages = (int)Math.Ceiling(total / (double)pageSize),
+                    Data = itemsDTO
+
+                };
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
         }
 
-        public Task<SuccessResponseDTO<ResponseReimbursementItemDTO>> UpdateItemAsync(int itemId, ReimbursementItemDTO itemDto)
+        public async Task<SuccessResponseDTO<ResponseReimbursementItemDTO>> UpdateItemAsync(int itemId, ReimbursementItemDTO itemDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var item = await MappingItems(itemDto);
+
+               var itemUpdate=  await _repository.Update(itemId, item);
+                var responseItem=  _mapper.Map<ResponseReimbursementItemDTO>(itemUpdate);
+                responseItem.CategoryName= (await _categoryRepository.Get(itemUpdate.CategoryId)).Name;
+                return new SuccessResponseDTO<ResponseReimbursementItemDTO>
+                {
+                    IsSuccess = true,
+                    Message = "Update Successfully",
+                    Data = responseItem
+                };
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<string> SaveFileAsync(IFormFile file)
@@ -116,6 +167,38 @@ namespace ReimbursementTrackingApplication.Services
             }
 
             return uniqueFileName;
+        }
+
+        public async Task<PaginatedResultDTO<ResponseReimbursementItemDTO>> GetAllItems( int pageNumber, int pageSize)
+        {
+            try
+            {
+
+            var items = await _repository.GetAll();
+            var total = items.Count();
+            var pagedItems = items
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(pagedItems);
+            foreach (var item in itemsDTO)
+            {
+                item.CategoryName = (await _categoryRepository.Get(item.CategoryId)).Name;
+            }
+            return new PaginatedResultDTO<ResponseReimbursementItemDTO>
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalCount = total,
+                TotalPages = (int)Math.Ceiling(total / (double)pageSize),
+                Data = itemsDTO
+
+            };
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
     }
 }

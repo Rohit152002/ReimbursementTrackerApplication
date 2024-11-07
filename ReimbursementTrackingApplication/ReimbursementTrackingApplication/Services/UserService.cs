@@ -166,7 +166,7 @@ namespace ReimbursementTrackingApplication.Services
             var sortedUsers = filteredUsers.OrderBy(u => u.UserName);
 
             var total = sortedUsers.Count();
-            var userDTOs = _mapper.Map<IList<UserDTO>>(sortedUsers);
+            var userDTOs = _mapper.Map<List<UserDTO>>(sortedUsers);
             return new PaginatedResultDTO<UserDTO>
             {
                 CurrentPage = pageno,
@@ -183,7 +183,7 @@ namespace ReimbursementTrackingApplication.Services
             var users = await _repository.GetAll();
             var total = users.Count();
             var request= users.Skip((pageno-1)*pageSize).Take(pageSize).ToList();
-            var userDTOs = _mapper.Map<IList<UserDTO>>(request);
+            var userDTOs = _mapper.Map<List<UserDTO>>(request);
             return new PaginatedResultDTO<UserDTO>
             {
                 CurrentPage = pageno,

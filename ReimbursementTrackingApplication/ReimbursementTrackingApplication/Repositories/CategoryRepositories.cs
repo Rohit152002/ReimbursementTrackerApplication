@@ -54,7 +54,7 @@ namespace ReimbursementTrackingApplication.Repositories
                 var request = await _context.Expenses.FirstOrDefaultAsync(u => u.Id == key);
                 if (request == null)
                 {
-                    throw new Exception();
+                    throw new Exception("Expenses not found");
                 }
                 return request;
             }
@@ -79,8 +79,9 @@ namespace ReimbursementTrackingApplication.Repositories
         {
             try
             {
-                var user = await Get(key);
+                var category = await Get(key);
                 _context.Expenses.Update(entity);
+              
                 await _context.SaveChangesAsync();
                 return entity;
             }

@@ -80,15 +80,16 @@ namespace ReimbursementTrackingApplication.Repositories
         {
             try
             {
-                var user = await Get(key);
+                var request = await Get(key);
                 _context.ReimbursementRequests.Update(entity);
+                request.Update();
                 await _context.SaveChangesAsync();
                 return entity;
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Could not update user details");
-                throw new Exception("Unable to modify user object");
+                _logger.LogError(e, "Could not update request details");
+                throw new Exception("Unable to modify request object");
             }
         }
     }

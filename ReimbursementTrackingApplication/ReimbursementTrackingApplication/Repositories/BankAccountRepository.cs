@@ -81,6 +81,7 @@ namespace ReimbursementTrackingApplication.Repositories
             {
                 var user = await Get(key);
                 _context.BankAccounts.Update(entity);
+                user.Update();
                 await _context.SaveChangesAsync();
                 return entity;
             }

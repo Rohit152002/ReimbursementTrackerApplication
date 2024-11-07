@@ -18,7 +18,7 @@
         public string Comments { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public RequestStatus Status { get; set; }
+        public RequestStatus Status { get; set; }=RequestStatus.Pending;
         public IEnumerable<ReimbursementItem> Items { get; set; }
         public IEnumerable<ApprovalStage> Approvals { get; set; }
         public Payment Payment { get; set; }

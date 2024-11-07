@@ -2,7 +2,7 @@
 {
     public class ResponseReimbursementItemDTO
     {
-
+        public int Id { get; set; }
         public int RequestId { get; set; }
         public double Amount { get; set; }
         public int CategoryId { get; set; }

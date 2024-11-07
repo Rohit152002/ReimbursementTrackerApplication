@@ -78,7 +78,7 @@ namespace ReimbursementProjectTest.Repositories
             var deleteUser = await repository.Delete(addedUser.Id);
             Assert.AreEqual(user.UserName, deleteUser.UserName);
         }
-
+     
         [Test]
         public async Task DeleteUserExceptions()
         {
