@@ -8,7 +8,9 @@ namespace ReimbursementTrackingApplication.Misc
     {
         public override void OnException(ExceptionContext context)
         {
-            context.Result = new BadRequestObjectResult(new ErrorResponseDTO
+            
+            context.Result = new BadRequestObjectResult
+            (new ErrorResponseDTO
             {
                 ErrorMessage = context.Exception.Message,
                 ErrorNumber = 500

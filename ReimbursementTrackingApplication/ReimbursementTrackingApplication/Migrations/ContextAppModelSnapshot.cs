@@ -286,6 +286,9 @@ namespace ReimbursementTrackingApplication.Migrations
                     b.Property<int>("PolicyId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Stage")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 

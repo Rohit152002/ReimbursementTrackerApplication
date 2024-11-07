@@ -22,7 +22,7 @@
         public int ReviewId { get; set; }
         public User Review { get; set; }
         public Stage Stage { get; set; }
-        public Status Status { get; set; } = Status.Pending;
+        public Status Status { get; set; } = Status.Approved;
         public DateTime ReviewDate { get; set; }
         public string Comments { get; set; } = string.Empty;
         public bool IsDeleted { get; set; } = false;

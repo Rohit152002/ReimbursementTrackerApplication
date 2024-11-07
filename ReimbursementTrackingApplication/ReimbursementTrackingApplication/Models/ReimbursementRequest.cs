@@ -18,6 +18,7 @@
         public string Comments { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public Stage Stage { get; set; } = Stage.Manager;
         public RequestStatus Status { get; set; }=RequestStatus.Pending;
         public IEnumerable<ReimbursementItem> Items { get; set; }
         public IEnumerable<ApprovalStage> Approvals { get; set; }
