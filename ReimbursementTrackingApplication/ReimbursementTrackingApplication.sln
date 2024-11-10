@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReimbursementTrackingApplication", "ReimbursementTrackingApplication\ReimbursementTrackingApplication.csproj", "{E4E795FA-4CE9-450D-893B-D69D0DC82B1B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReimbursementUnitProjectTest", "ReimbursementProjectTest\ReimbursementUnitProjectTest.csproj", "{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReimbursementUnitProjectTest", "ReimbursementUnitProjectTest\ReimbursementUnitProjectTest.csproj", "{55B85DEA-3A14-4EDC-9BDF-B57C2D2CF70D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

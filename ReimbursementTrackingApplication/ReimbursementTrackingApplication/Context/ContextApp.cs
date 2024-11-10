@@ -89,6 +89,45 @@ namespace ReimbursementTrackingApplication.Context
                 .HasForeignKey<Payment>(p => p.RequestId)
                 .HasConstraintName("FK_Payment_Request");
 
+            modelBuilder.Entity<ApprovalStage>()
+                .Property(a => a.Stage)
+                .HasConversion(a => a.ToString(),
+                a => (Stage)Enum.Parse(typeof(Stage), a)    
+             );
+
+            modelBuilder.Entity<ApprovalStage>()
+                .Property(a => a.Status)
+                .HasConversion(a => a.ToString(),
+                a => (Status)Enum.Parse(typeof(Status), a)
+             );
+
+            modelBuilder.Entity<Payment>()
+                .Property(a => a.PaymentStatus)
+                .HasConversion(a => a.ToString(),
+                a => (PaymentStatus)Enum.Parse(typeof(PaymentStatus), a)
+             );
+
+            modelBuilder.Entity<ReimbursementRequest>()
+                .Property(a => a.Stage)
+                .HasConversion(a => a.ToString(),
+                a => (Stage)Enum.Parse(typeof(Stage), a)
+             );
+
+            modelBuilder.Entity<ReimbursementRequest>()
+                .Property(a => a.Status)
+                .HasConversion(a => a.ToString(),
+                a => (RequestStatus)Enum.Parse(typeof(RequestStatus), a)
+             );
+
+
+            modelBuilder.Entity<User>()
+                           .Property(a => a.Department)
+                           .HasConversion(a => a.ToString(),
+                           a => (Departments)Enum.Parse(typeof(Departments), a)
+                        );
+
+
+
             //approvals
             //Approvals = new List<ApprovalStage>();
             //Request = new List<ReimbursementRequest>();

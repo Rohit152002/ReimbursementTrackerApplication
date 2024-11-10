@@ -1,4 +1,6 @@
-﻿namespace ReimbursementTrackingApplication.Models.DTOs
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace ReimbursementTrackingApplication.Models.DTOs
 {
     public class CreateReimbursementRequestDTO
     {
@@ -6,7 +8,7 @@
         public int PolicyId { get; set; }
         public double TotalAmount { get; set; }
         public string Comments { get; set; } = string.Empty;
-
-        public List<ReimbursementItemDTO> Items { get; set; }
+        
+        public List<RequestITemDTO> Items { get; set; }
     }
 }

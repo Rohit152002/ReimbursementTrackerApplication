@@ -22,9 +22,9 @@
         public int RequestId { get; set; }
         public ReimbursementRequest Request { get; set; }
         public double AmountPaid { get; set; }
-        public PaymentMethod PaymentMethod { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
         public DateTime PaymentDate { get; set; }
-        public PaymentStatus PaymentStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }= PaymentStatus.Pending;
         public bool IsDeleted { get; set; } = false;
 
         public Payment()

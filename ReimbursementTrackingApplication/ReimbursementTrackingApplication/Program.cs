@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using ReimbursementTrackingApplication.Context;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Misc;
@@ -33,6 +34,11 @@ namespace ReimbursementTrackingApplication
             #region mapper
             builder.Services.AddAutoMapper(typeof(User));
             builder.Services.AddAutoMapper(typeof(ReimbursementItem));
+            builder.Services.AddAutoMapper(typeof(ReimbursementRequest));
+            builder.Services.AddAutoMapper(typeof(ApprovalStage));
+            builder.Services.AddAutoMapper(typeof(Employee));
+            builder.Services.AddAutoMapper(typeof(ExpenseCategory));
+            builder.Services.AddAutoMapper(typeof(Policy));
             #endregion
 
             #region Repositories
@@ -61,6 +67,24 @@ namespace ReimbursementTrackingApplication
                         provider.GetRequiredService<IMapper>()
                         )
                 );
+            builder.Services.AddScoped<IReimbursementRequestService>(
+                provider =>
+                new ReimbursementRequestService(
+                    provider.GetRequiredService<IRepository<int, ReimbursementRequest>>(),
+                    provider.GetRequiredService<IRepository<int, Policy>>(),
+                    provider.GetRequiredService<IMapper>(),
+                    uploadFolder,
+                    provider.GetRequiredService<IRepository<int, ReimbursementItem>>(),
+                    provider.GetRequiredService<IRepository<int, Employee>>(),
+                    provider.GetRequiredService<IRepository<int, ExpenseCategory>>(),
+                    provider.GetRequiredService<IRepository<int, User>>()
+                )
+            );
+            //builder.Services.AddScoped<IReimbursementRequestService, ReimbursementRequestService>();
+            builder.Services.AddScoped<IPolicyService, PolicyService>();
+            builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IApprovalService, ApprovalService>();
             #endregion
 
             #region Authentication
@@ -85,7 +109,7 @@ namespace ReimbursementTrackingApplication
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+         
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -94,7 +118,7 @@ namespace ReimbursementTrackingApplication
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

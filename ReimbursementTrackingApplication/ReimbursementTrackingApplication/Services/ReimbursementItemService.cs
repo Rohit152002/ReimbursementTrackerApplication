@@ -13,7 +13,11 @@ namespace ReimbursementTrackingApplication.Services
         private readonly IRepository<int, ExpenseCategory> _categoryRepository;
         private readonly string _uploadFolder;
         private readonly IMapper _mapper;
-        public ReimbursementItemService(IRepository<int, ReimbursementItem> repository,IRepository<int,ExpenseCategory> categoryRepository, string uploadFolder,IMapper mapper)
+        public ReimbursementItemService(
+            IRepository<int, ReimbursementItem> repository,
+            IRepository<int,ExpenseCategory> categoryRepository,
+            string uploadFolder,
+            IMapper mapper)
         {
             _repository = repository;
             _categoryRepository = categoryRepository;   
@@ -27,12 +31,13 @@ namespace ReimbursementTrackingApplication.Services
             {
                 var reimbursementItems = await MappingItems(itemDto);
                 var item= await _repository.Add(reimbursementItems);
-                var reponseItem = _mapper.Map<ResponseReimbursementItemDTO>(item);
+                var responseItem = _mapper.Map<ResponseReimbursementItemDTO>(item);
+                responseItem.CategoryName = (await _categoryRepository.Get(responseItem.CategoryId)).Name;
                 return new SuccessResponseDTO<ResponseReimbursementItemDTO>
                 {
                     IsSuccess = true,
                     Message="Item Added Successfully",
-                    Data=reponseItem
+                    Data=responseItem
                 };
 
             }
@@ -126,7 +131,7 @@ namespace ReimbursementTrackingApplication.Services
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(ex.Message);
             }
         }
 

@@ -61,21 +61,11 @@ namespace ReimbursementTrackingApplication.Services
         public async Task<UserDTO> GetUserProfile(int id)
         {
             var user = await _repository.Get(id);
-            // var userDTO = new _mapper.Map<UserDTO>(user);
-            var userDTO = mappings(user);
+             var userDTO = _mapper.Map<UserDTO>(user);
             return userDTO;
         }
 
-        public UserDTO mappings(User user)
-        {
-            // return _mapper.Map<UserDTO>(user);
-            return new UserDTO()
-            {
-                UserName = user.UserName,
-                Email = user.Email,
-                Department = user.Department
-            };
-        }
+      
 
         public async Task<LoginResponseDTO> Login(LoginDTO login)
         {
@@ -143,7 +133,12 @@ namespace ReimbursementTrackingApplication.Services
                 LoginResponseDTO response = new LoginResponseDTO()
                 {
                     UserName = user.UserName,
-                    Email = user.Email
+                    Email = user.Email,
+                     Token = await _tokenService.GenerateToken(new UserTokenDTO()
+                     {
+                         Username = user.UserName,
+                         Department = user.Department.ToString()
+                     })
                 };
                 return response;
             }
