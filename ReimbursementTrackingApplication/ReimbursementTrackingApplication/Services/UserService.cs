@@ -132,6 +132,7 @@ namespace ReimbursementTrackingApplication.Services
                 var addedUser = await _repository.Add(user);
                 LoginResponseDTO response = new LoginResponseDTO()
                 {
+                    Id = addedUser.Id,
                     UserName = user.UserName,
                     Email = user.Email,
                      Token = await _tokenService.GenerateToken(new UserTokenDTO()

@@ -31,8 +31,8 @@
         public Employee Employee { get; set; }
         public User()
         {
-            CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
             Approvals = new List<ApprovalStage>();
             Request= new List<ReimbursementRequest>();
             ManageEmployee = new List<Employee>();
@@ -42,7 +42,7 @@
 
         public void Update()
         {
-            UpdatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.Now;
         }
     }
 

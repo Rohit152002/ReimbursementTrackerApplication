@@ -16,6 +16,7 @@ namespace ReimbursementTrackingApplication.Controllers
         {
             _userService = userService;
         }
+
         [HttpPost("register")]
         public async Task<ActionResult<LoginResponseDTO>> Register(UserCreateDTO createDTO)
         {
@@ -30,7 +31,7 @@ namespace ReimbursementTrackingApplication.Controllers
             }
         }
         [HttpPost("Login")]
-        public async Task<ActionResult<LoginResponseDTO>> Register(LoginDTO login)
+        public async Task<ActionResult<LoginResponseDTO>> Login(LoginDTO login)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +62,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpGet("users")]
-        public async Task<ActionResult<PaginatedResultDTO<UserDTO>>> GetAllUsers(int pagenumber, int pageSize)
+        public async Task<ActionResult<PaginatedResultDTO<UserDTO>>> GetAllUsersAsync(int pagenumber, int pageSize)
         {
             try
             {
@@ -90,7 +91,7 @@ namespace ReimbursementTrackingApplication.Controllers
             }
         }
         [HttpPost("change")]
-        public async Task<ActionResult<SuccessResponseDTO<int>>> ChangePassword(ChangePasswordDTO changePasswordDTO)
+        public async Task<ActionResult<SuccessResponseDTO<bool>>> ChangePassword(ChangePasswordDTO changePasswordDTO)
         {
             try
             {

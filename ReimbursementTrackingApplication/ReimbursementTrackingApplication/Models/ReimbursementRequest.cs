@@ -26,8 +26,8 @@
         public bool IsDeleted { get; set; } = false;
         public ReimbursementRequest()
         {
-            CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
             Items = new List<ReimbursementItem>();
             //Payment = new Payment();
             //Policy = new Policy();
@@ -39,7 +39,7 @@
         // Method to manually update the UpdatedAt timestamp
         public void Update()
         {
-            UpdatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.Now;
         }
     }
 }

@@ -212,6 +212,172 @@
     ]
   },
   {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.BankController",
+    "Method": "AddBankAccount",
+    "RelativePath": "api/Bank",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bankAccount",
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.BankDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseBankDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.BankController",
+    "Method": "UpdateBankAccount",
+    "RelativePath": "api/Bank",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "bankAccount",
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.BankDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseBankDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.BankController",
+    "Method": "DeleteBankAccount",
+    "RelativePath": "api/Bank/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.BankController",
+    "Method": "GetBankAccountById",
+    "RelativePath": "api/Bank/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseBankDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.BankController",
+    "Method": "GetAllBankAccounts",
+    "RelativePath": "api/Bank/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.PaginatedResultDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseBankDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.BankController",
+    "Method": "GetBankAccountByUserId",
+    "RelativePath": "api/Bank/user/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseBankDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.CategoryController",
     "Method": "AddCategories",
     "RelativePath": "api/Category",
@@ -380,7 +546,7 @@
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.EmployeeController",
     "Method": "DeleteAssignEmployee",
-    "RelativePath": "api/Employee",
+    "RelativePath": "api/Employee/{employeeId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -388,7 +554,7 @@
       {
         "Name": "employeeId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -813,6 +979,68 @@
     ]
   },
   {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementItemController",
+    "Method": "GetItemByRequestId",
+    "RelativePath": "api/ReimbursementItem",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pagenumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pagesize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.PaginatedResultDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseReimbursementItemDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementItemController",
+    "Method": "GetItemById",
+    "RelativePath": "api/ReimbursementItem/{itemId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseReimbursementItemDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementRequestController",
     "Method": "AddRequestAsync",
     "RelativePath": "api/ReimbursementRequest",
@@ -901,6 +1129,37 @@
     "ReturnTypes": [
       {
         "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementRequestController",
+    "Method": "GetAllRequest",
+    "RelativePath": "api/ReimbursementRequest/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseReimbursementRequestDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1096,7 +1355,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.SuccessResponseDTO\u00601[[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1108,7 +1367,7 @@
   },
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.UserController",
-    "Method": "Register",
+    "Method": "Login",
     "RelativePath": "api/User/Login",
     "HttpMethod": "POST",
     "IsController": true,
@@ -1196,7 +1455,7 @@
   },
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.UserController",
-    "Method": "GetAllUsers",
+    "Method": "GetAllUsersAsync",
     "RelativePath": "api/User/users",
     "HttpMethod": "GET",
     "IsController": true,

@@ -142,7 +142,7 @@ namespace ReimbursementTrackingApplication.Services
                 ResponseReimbursementRequestDTO requestDTO = _mapper.Map<ResponseReimbursementRequestDTO>(request);
 
                 requestDTO.PolicyName= (await _policyRepository.Get(request.PolicyId)).PolicyName;
-
+                requestDTO.Items = await GetItemsByRequestId(requestDTO.Id);
                 requestDTO.User=  await GetUser(request.UserId);
                 return new SuccessResponseDTO<ResponseReimbursementRequestDTO>()
                 {
@@ -167,8 +167,8 @@ namespace ReimbursementTrackingApplication.Services
                 var requests = await _repository.GetAll();
                 var filter_request = requests.Where(r => r.UserId == userId && r.IsDeleted==false).ToList();
 
-                var total = requests.Count();
-                var pagedItems = requests
+                var total = filter_request.Count();
+                var pagedItems = filter_request
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
                     .ToList();
@@ -179,6 +179,7 @@ namespace ReimbursementTrackingApplication.Services
                 foreach(var request in requestDTOs)
                 {
                     request.Items = await GetItemsByRequestId(request.Id);
+
                 }
 
                 return new PaginatedResultDTO<ResponseReimbursementRequestDTO>
@@ -201,6 +202,10 @@ namespace ReimbursementTrackingApplication.Services
         {
             var items = (await _itemRepository.GetAll()).Where(r => r.RequestId == requestId && r.IsDeleted == false).ToList();
             var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
+            foreach(var item in itemsDTO)
+            {
+                item.CategoryName = (await _categoryRepository.Get(item.CategoryId)).Name;
+            }
             return itemsDTO;
         }
 
@@ -387,7 +392,7 @@ namespace ReimbursementTrackingApplication.Services
                     }
                   
                 }
-                var total = requestEmployee.Count();
+                var total = requestEmployee.Count;
                 var pagedItems = requestEmployee
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
@@ -460,8 +465,8 @@ namespace ReimbursementTrackingApplication.Services
             var requests = await _repository.GetAll();
             var filter_request = requests.Where(r=>r.IsDeleted == false).ToList();
 
-            var total = requests.Count();
-            var pagedItems = requests
+            var total = filter_request.Count;
+            var pagedItems = filter_request
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();

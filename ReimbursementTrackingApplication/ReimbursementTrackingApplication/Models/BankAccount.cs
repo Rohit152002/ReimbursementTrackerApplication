@@ -7,7 +7,7 @@ namespace ReimbursementTrackingApplication.Models
         public int Id { get; set; }
         public int UserId {  get; set; }
         public User User { get; set; }
-        public double AccNo { get; set; }
+        public string AccNo { get; set; }
         public string BranchName { get; set; }
         public string IFSCCode { get; set; }
         public string BranchAddress { get; set; }
@@ -17,14 +17,14 @@ namespace ReimbursementTrackingApplication.Models
 
         public BankAccount()
         {
-            CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow; 
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now; 
             //User = new User();
         }
 
         public void Update()
         {
-            UpdatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.Now;
         }
     }
 }

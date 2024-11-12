@@ -125,7 +125,7 @@ namespace ReimbursementTrackingApplication.Controllers
                 return Ok(result);
 
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 return BadRequest(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
 

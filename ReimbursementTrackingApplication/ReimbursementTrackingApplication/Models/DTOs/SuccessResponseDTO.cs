@@ -9,7 +9,7 @@
 
         public SuccessResponseDTO()
         {
-            Timestamp = DateTime.UtcNow;
+            Timestamp = DateTime.Now;
         }
     }
 }

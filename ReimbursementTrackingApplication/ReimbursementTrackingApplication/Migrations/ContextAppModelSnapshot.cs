@@ -71,8 +71,9 @@ namespace ReimbursementTrackingApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("AccNo")
-                        .HasColumnType("float");
+                    b.Property<string>("AccNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BranchAddress")
                         .IsRequired()

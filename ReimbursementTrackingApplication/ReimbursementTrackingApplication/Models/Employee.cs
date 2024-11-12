@@ -14,8 +14,8 @@
 
         public Employee()
         {
-            CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow; 
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now; 
             //User = new User();
             //Manager= new User();
             Requests= new List<ReimbursementRequest>();
@@ -24,7 +24,7 @@
  
         public void Update()
         {
-            UpdatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.Now;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
 using ReimbursementTrackingApplication.Services;
 
@@ -9,8 +10,8 @@ namespace ReimbursementTrackingApplication.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly PaymentService _paymentService;
-        public PaymentController(PaymentService paymentService)
+        private readonly IPaymentService _paymentService;
+        public PaymentController(IPaymentService paymentService)
         {
             _paymentService=paymentService;
 

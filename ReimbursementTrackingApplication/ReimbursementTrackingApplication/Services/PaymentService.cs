@@ -161,7 +161,7 @@ namespace ReimbursementTrackingApplication.Services
                 return new SuccessResponseDTO<ResponsePayment>()
                 {
                     IsSuccess = true,
-                    Message = "Deleted Successfully",
+                    Message = "Fetch Successfully",
                     Data = responsePayment
                 };
             }
@@ -263,7 +263,7 @@ namespace ReimbursementTrackingApplication.Services
                 return new SuccessResponseDTO<ResponsePayment>()
                 {
                     IsSuccess = true,
-                    Message = "Deleted Successfully",
+                    Message = "Payment Successfully",
                     Data = responsePayment
                 };
             }

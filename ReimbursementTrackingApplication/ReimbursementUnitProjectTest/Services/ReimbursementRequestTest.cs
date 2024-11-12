@@ -365,6 +365,9 @@ namespace ReimbursementUnitProjectTest.Services
                 Comments = "Request for Businees ",
                 Items = responseItems
             };
+
+            //var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
+            mapper.Setup(m => m.Map<List<ResponseReimbursementItemDTO>>(It.IsAny<List<ReimbursementItem>>())).Returns(responseItems);
             mapper.Setup(m => m.Map<ResponseReimbursementRequestDTO>(It.IsAny<ReimbursementRequest>())).Returns(reimRequestDTO);
             var request = await requestService.GetRequestByIdAsync(1);
             Assert.NotNull(request.Data);

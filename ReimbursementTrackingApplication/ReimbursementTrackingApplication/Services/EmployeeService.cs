@@ -85,7 +85,7 @@ namespace ReimbursementTrackingApplication.Services
                     result.Add(newEmployeeDTO);
 
                 }
-                var total = result.Count();
+                var total = employees.Count();
                 var pagedItems = result
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)

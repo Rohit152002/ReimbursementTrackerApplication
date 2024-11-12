@@ -39,6 +39,7 @@ namespace ReimbursementTrackingApplication
             builder.Services.AddAutoMapper(typeof(Employee));
             builder.Services.AddAutoMapper(typeof(ExpenseCategory));
             builder.Services.AddAutoMapper(typeof(Policy));
+            builder.Services.AddAutoMapper(typeof(BankAccount));
             #endregion
 
             #region Repositories
@@ -85,6 +86,8 @@ namespace ReimbursementTrackingApplication
             builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IApprovalService, ApprovalService>();
+            builder.Services.AddScoped<IBankService, BankService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
             #endregion
 
             #region Authentication

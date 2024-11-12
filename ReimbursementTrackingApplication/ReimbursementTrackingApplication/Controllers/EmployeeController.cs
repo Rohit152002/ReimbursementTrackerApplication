@@ -29,7 +29,7 @@ namespace ReimbursementTrackingApplication.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{employeeId}")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> DeleteAssignEmployee(int employeeId)
         {
             try
