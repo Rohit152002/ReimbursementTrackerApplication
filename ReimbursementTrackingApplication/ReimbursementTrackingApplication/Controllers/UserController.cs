@@ -4,17 +4,22 @@ using Microsoft.AspNetCore.Http;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
 using ReimbursementTrackingApplication.Models;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAll")]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userService;
-        public UserController(IUserServices userService)
+        private readonly IMailSender _mailSender;
+        public UserController(IUserServices userService, IMailSender mailSender)
         {
             _userService = userService;
+            _mailSender = mailSender;
         }
 
         [HttpPost("register")]
@@ -23,6 +28,9 @@ namespace ReimbursementTrackingApplication.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userService.Register(createDTO);
+
+                var message = new Message(new string[] { createDTO.Email }, "Registration Succesfull", "Registration is Completed .");
+                _mailSender.SendEmail(message);
                 return Ok(user);
             }
             else
@@ -45,6 +53,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<UserDTO>> GetUserProfileAsync(int id)
         {
             try

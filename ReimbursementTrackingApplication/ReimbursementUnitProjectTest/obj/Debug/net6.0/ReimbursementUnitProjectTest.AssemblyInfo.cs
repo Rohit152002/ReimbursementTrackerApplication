@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReimbursementUnitProjectTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+523b99daa285be82f9f67b58e20d67ff1b40d372")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4ac267a0d6e44e1793f29af14da3bbe46df911e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReimbursementUnitProjectTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReimbursementUnitProjectTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

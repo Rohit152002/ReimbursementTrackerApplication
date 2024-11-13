@@ -12,7 +12,7 @@ using ReimbursementTrackingApplication.Context;
 namespace ReimbursementTrackingApplication.Migrations
 {
     [DbContext(typeof(ContextApp))]
-    [Migration("20241112064017_init")]
+    [Migration("20241113162811_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

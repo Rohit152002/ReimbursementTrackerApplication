@@ -12,11 +12,10 @@ namespace ReimbursementTrackingApplication.Services
     {
         private readonly IRepository<int,ReimbursementRequest> _repository;
         private readonly IRepository<int,Policy> _policyRepository;
-        //private readonly IUserServices _userService;
-        //private readonly IReimbursementItemService _itemService;
+
         private readonly string _uploadFolder;
         private readonly IRepository<int, ReimbursementItem> _itemRepository;
-        //private readonly IEmployeeService _employeeService;
+
         private readonly IRepository<int,Employee> _employeeRepository;
         private readonly IRepository<int, ExpenseCategory> _categoryRepository;
         private readonly IRepository<int, User> _userRepository;
@@ -35,11 +34,10 @@ namespace ReimbursementTrackingApplication.Services
             _userRepository = userRepository;
             _repository = repository;
             _policyRepository = policyRepository;
-            //_userService = userService;
+
             _mapper=mapper;
             _uploadFolder = uploadFolder;
-            //_itemService = itemService;
-            //_employeeService = employeeService;
+
             _itemRepository = itemRepository;
             _employeeRepository = employeeRepository;
             _categoryRepository = categoryRepository;
@@ -70,15 +68,17 @@ namespace ReimbursementTrackingApplication.Services
                 };
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-     
+
 
         private async Task<List<ResponseReimbursementItemDTO>> AddItemsAsync(IEnumerable<RequestITemDTO> itemDTOs, int id)
         {
+            List<ResponseReimbursementItemDTO> responseItemDTOs= new List<ResponseReimbursementItemDTO>();
+
             List<ReimbursementItemDTO> items = new List<ReimbursementItemDTO>();
             foreach(var item in itemDTOs)
             {
@@ -91,13 +91,11 @@ namespace ReimbursementTrackingApplication.Services
                     receiptFile = item.receiptFile
                 };
                 items.Add(new_item);
+                var result = await AddItemService(new_item);
+                responseItemDTOs.Add(result);
             }
-            var itemTasks = items.Select(async item =>
-            {
-                //item.RequestId = id;
-                return await AddItemService(item);
-            });
-            return (await Task.WhenAll(itemTasks)).ToList();
+
+            return responseItemDTOs;
         }
 
         private ReimbursementRequest MapRequest(CreateReimbursementRequestDTO requestDto)
@@ -107,7 +105,7 @@ namespace ReimbursementTrackingApplication.Services
             {
                 totalsum += item.Amount;
             }
-            return new ReimbursementRequest { 
+            return new ReimbursementRequest {
                 UserId= requestDto.UserId,
                 PolicyId= requestDto.PolicyId,
                 TotalAmount= totalsum,
@@ -138,7 +136,7 @@ namespace ReimbursementTrackingApplication.Services
            try
             {
                 ReimbursementRequest request = await _repository.Get(requestId);
-               
+
                 ResponseReimbursementRequestDTO requestDTO = _mapper.Map<ResponseReimbursementRequestDTO>(request);
 
                 requestDTO.PolicyName= (await _policyRepository.Get(request.PolicyId)).PolicyName;
@@ -175,7 +173,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
                 List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(filter_request);
-               
+
                 foreach(var request in requestDTOs)
                 {
                     request.Items = await GetItemsByRequestId(request.Id);
@@ -209,7 +207,7 @@ namespace ReimbursementTrackingApplication.Services
             return itemsDTO;
         }
 
-  
+
         public async Task<List<ResponseReimbursementRequestDTO> > MappingReimbursementRequest(List<ReimbursementRequest> requests)
         {
             List<ResponseReimbursementRequestDTO> requestDTOs = new List<ResponseReimbursementRequestDTO>();
@@ -223,7 +221,9 @@ namespace ReimbursementTrackingApplication.Services
                     User = await GetUser(request.UserId),
                     PolicyId = request.PolicyId,
                     PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName,
-                    Items = await GetItemsByRequestId(request.Id)
+                    Items = await GetItemsByRequestId(request.Id),
+                    Comments = request.Comments
+
                 };
 
                 requestDTOs.Add(newDTO);
@@ -248,7 +248,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
                 List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(filter_request);
-            
+
                 foreach (var request in requestDTOs)
                 {
 
@@ -288,10 +288,10 @@ namespace ReimbursementTrackingApplication.Services
 
                 //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
                 List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(pagedItems);
-          
+
                 foreach (var request in requestDTOs)
                 {
-                
+
                     request.Items = await GetItemsByRequestId(request.Id);
 
 
@@ -336,7 +336,7 @@ namespace ReimbursementTrackingApplication.Services
                 }
 
                 var update = await _repository.Update(requestId, request);
-                return new SuccessResponseDTO<int> { 
+                return new SuccessResponseDTO<int> {
                     IsSuccess = true,
                     Message="Deleted",
                     Data=update.Id
@@ -390,7 +390,7 @@ namespace ReimbursementTrackingApplication.Services
                                 requestEmployee.Add(request);
                             }
                     }
-                  
+
                 }
                 var total = requestEmployee.Count;
                 var pagedItems = requestEmployee
@@ -399,7 +399,7 @@ namespace ReimbursementTrackingApplication.Services
                     .ToList();
 
                 //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
-              
+
 
                 return new PaginatedResultDTO<ResponseReimbursementRequestDTO>
                 {
@@ -443,7 +443,7 @@ namespace ReimbursementTrackingApplication.Services
         }
         public async Task<string> SaveFileAsync(IFormFile file)
         {
-        
+
 
             var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
             var filePath = Path.Combine(_uploadFolder, uniqueFileName);
@@ -461,7 +461,7 @@ namespace ReimbursementTrackingApplication.Services
             try
             {
 
-            
+
             var requests = await _repository.GetAll();
             var filter_request = requests.Where(r=>r.IsDeleted == false).ToList();
 

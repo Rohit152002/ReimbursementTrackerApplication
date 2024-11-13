@@ -178,7 +178,7 @@
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.ApprovalController",
     "Method": "GetApprovalByReviewId",
-    "RelativePath": "api/Approval/request/{reviewId}",
+    "RelativePath": "api/Approval/request/review/{reviewId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -697,7 +697,7 @@
     "ContainingType": "ReimbursementTrackingApplication.Controllers.PaymentController",
     "Method": "ProcessPayment",
     "RelativePath": "api/Payment",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [

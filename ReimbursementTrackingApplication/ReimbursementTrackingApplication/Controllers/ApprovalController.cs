@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReimbursementTrackingApplication.Interfaces;
+using ReimbursementTrackingApplication.Models;
 using ReimbursementTrackingApplication.Models.DTOs;
 using ReimbursementTrackingApplication.Services;
 
@@ -20,6 +21,7 @@ namespace ReimbursementTrackingApplication.Controllers
         //Task<SuccessResponseDTO<ResponseApprovalStageDTO>> GetApprovalByIdAsync(int approvalId);
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Finance,HR")]
         public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalById(int id)
         {
             try
@@ -37,6 +39,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetApprovalsByRequestIdAsync(int requestId, int pageNumber, int pageSize);
         [HttpGet("request/{requestId}")]
+        [Authorize(Roles = "Finance,HR")]
         public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalByRequestId(int requestId,int pageNumber =1 , int pageSize =10)
         {
             try
@@ -55,6 +58,7 @@ namespace ReimbursementTrackingApplication.Controllers
         //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetApprovalsByReviewerIdAsync(int reviewerId, int pageNumber, int pageSize);
 
         [HttpGet("request/review/{reviewId}")]
+        [Authorize(Roles = "Finance,HR")]
         public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalByReviewId(int reviewId, int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -73,7 +77,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetHrPendingApprovalsAsync(int pageNumber, int pageSize);
         [HttpGet("hr")]
-        
+        [Authorize(Roles = "HR")]
         public async Task<ActionResult<PaginatedResultDTO<ResponseApprovalStageDTO>>> GetHrPendingApproval(int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -92,7 +96,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetFinancePendingApprovalsAsync(int pageNumber, int pageSize);
         [HttpGet("finace")]
-        
+        [Authorize(Roles = "Finance")]
         public async Task<ActionResult<PaginatedResultDTO<ResponseApprovalStageDTO>>> GetFinacePendingApproval(int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -110,17 +114,24 @@ namespace ReimbursementTrackingApplication.Controllers
 
         //Task<SuccessResponseDTO<int>> ApproveRequestAsync(ApprovalStageDTO approval);
         [HttpPost("approve")]
+        [Authorize]
         public async Task<ActionResult<PaginatedResultDTO<ResponseApprovalStageDTO>>> ApproveRequest(ApprovalStageDTO approval)
         {
             try
             {
                 var result = await _approvalService.ApproveRequestAsync(approval);
+
+
                 return Ok(result);
 
             }
+            catch(UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new ErrorResponseDTO(){  ErrorMessage = ex.Message, ErrorNumber=StatusCodes.Status401Unauthorized});
+            }
             catch (Exception ex)
             {
-                return BadRequest(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
+                return NotFound(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
 
             }
         }

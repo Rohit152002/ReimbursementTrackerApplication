@@ -63,7 +63,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         // POST: api/payment
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult<SuccessResponseDTO<ResponsePayment>>> ProcessPayment(PaymentDTO paymentDTO)
         {
             try

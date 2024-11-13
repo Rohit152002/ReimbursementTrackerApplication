@@ -53,7 +53,7 @@ namespace ReimbursementTrackingApplication.Repositories
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == key);
                 if (user==null)
                 {
-                    throw new Exception();
+                    throw new NotFoundException("User");
                 }
                 return user;
             }

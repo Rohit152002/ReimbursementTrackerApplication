@@ -13,20 +13,23 @@ namespace ReimbursementTrackingApplication.Services
         private readonly IRepository<int, User> _userRepository;
         private readonly IRepository<int,ReimbursementRequest> _requestRepository;
         private readonly IRepository<int,Policy> _policyRepository;
+        private readonly IRepository<int, Employee> _employeeRepository;
         //private readonly IReimbursementItemService _itemService;
         private readonly IRepository<int ,Payment> _paymentRepository;
         private readonly IRepository<int, ReimbursementItem> _itemRepository;
         private readonly IRepository<int,ExpenseCategory> _expenseCategoryRepository;
         private readonly IMapper _mapper;
+        private readonly IMailSender _mailSender;
 
         public ApprovalService(
             IRepository<int,ApprovalStage> repository, IRepository<int, User> userRepository,
-            IRepository<int, ReimbursementRequest> requestRepository, 
+            IRepository<int, ReimbursementRequest> requestRepository,
+            IRepository<int,Employee> employeeRepository,
             //IReimbursementItemService itemService,
             IRepository<int,Policy> policyRepository,
             IRepository<int,Payment> paymentRepository,
-            IRepository<int,ReimbursementItem> itemRepository, 
-IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
+            IRepository<int,ReimbursementItem> itemRepository,
+IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper,IMailSender mailSender)
         {
             _repository = repository;
             _mapper = mapper;
@@ -37,27 +40,41 @@ IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
             //_itemService = itemService;
             _itemRepository= itemRepository;
             _expenseCategoryRepository= expenseCategoryRepository;
+            _mailSender = mailSender;
+            _employeeRepository = employeeRepository;
         }
         public async Task<SuccessResponseDTO<int>> ApproveRequestAsync(ApprovalStageDTO approval)
         {
             try
             {
                 var reviewer = await _userRepository.Get(approval.ReviewId);
-                
+
                 Departments department = reviewer.Department;
                 var request = await _requestRepository.Get(approval.RequestId);
+                string passedBy;
+
+                bool isAuthorizedDepartment = department== Departments.HR || department==Departments.Finance;
+
+                var employees = (await _employeeRepository.GetAll()).FirstOrDefault(r=>r.EmployeeId==request.UserId && r.ManagerId==reviewer.Id);
+
+                if(!isAuthorizedDepartment && employees==null)
+                {
+                    throw new UnauthorizedAccessException("Unauthorize");
+                }
 
                 ApprovalStage approvalStage = _mapper.Map<ApprovalStage>(approval);
 
                 if(department==Departments.HR && request.Stage==Stage.Manager)
                 {
                     approvalStage.Stage = Stage.Hr;
-         
+
                     request.Stage = Stage.Hr;
+                    passedBy = "HR";
 
                 }else if(department==Departments.Finance && request.Stage==Stage.Hr)
                 {
                     approvalStage.Stage = Stage.Financial;
+                    passedBy = "Finance";
                     request.Stage = Stage.Financial;
                     request.Status = RequestStatus.Passed;
                     Payment payment = new Payment()
@@ -72,9 +89,16 @@ IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
                 {
                     approvalStage.Stage = Stage.Manager;
                     request.Stage = Stage.Manager;
+                    passedBy = "Manager";
                 }
                 await _requestRepository.Update(approval.RequestId, request);
                 var addApproval = await _repository.Add(approvalStage);
+
+                var user = await _userRepository.Get(request.UserId);
+
+
+                var message = new Message(new string[] { user.Email }, "Request Approved", $"Request approved by {passedBy} {reviewer.UserName}  .");
+                _mailSender.SendEmail(message);
 
                 return new SuccessResponseDTO<int>
                 {
@@ -83,6 +107,10 @@ IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
                     Data = addApproval.Id,
                 };
 
+            }
+            catch(UnauthorizedAccessException ex)
+            {
+                throw new UnauthorizedAccessException(ex.Message);
             }
             catch (Exception ex)
             {
@@ -97,6 +125,16 @@ IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
 
                 Departments department = reviewer.Department;
                 var request = await _requestRepository.Get(approval.RequestId);
+                bool isAuthorizedDepartment = department== Departments.HR || department==Departments.Finance;
+
+                var employees = (await _employeeRepository.GetAll()).FirstOrDefault(r=>r.EmployeeId==request.UserId && r.ManagerId==reviewer.Id);
+
+                if(!isAuthorizedDepartment && employees==null)
+                {
+                    throw new UnauthorizedAccessException("Unauthorize");
+                }
+
+
                 ApprovalStage approvalStage = _mapper.Map<ApprovalStage>(approval);
                 if (department == Departments.HR)
                 {
@@ -147,7 +185,7 @@ IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
             var requestUser= await _userRepository.Get(request.UserId);
             var items = (await _itemRepository.GetAll()).Where(r => r.RequestId == approval.RequestId && r.IsDeleted == false).ToList();
             var total = items.Count();
-             
+
             var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
                 foreach (var item in itemsDTO)
                 {
@@ -169,7 +207,7 @@ IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
                 Items = itemsDTO
 
             };
-           
+
             ResponseApprovalStageDTO responseApproval = new ResponseApprovalStageDTO()
             {
                 Id= approval.Id,
@@ -268,7 +306,7 @@ IRepository<int,ExpenseCategory> expenseCategoryRepository, IMapper mapper)
                 var request = await _requestRepository.Get(approval.RequestId);
                 var requestUser = await _userRepository.Get(request.UserId);
                 var items = (await _itemRepository.GetAll()).Where(r => r.RequestId == approval.RequestId && r.IsDeleted == false).ToList();
-                
+
                 var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
                 foreach (var item in itemsDTO)
                 {
