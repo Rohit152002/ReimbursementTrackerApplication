@@ -32,16 +32,18 @@ namespace ReimbursementUnitProjectTest.Services
         Mock<ILogger<CategoryRepositories>> categoryLogger;
         Mock<ILogger<PolicyRepository>> policyLogger;
         Mock<ILogger<PaymentRepository>> paymentLogger;
+        Mock<ILogger<EmployeeRepository>> employeeLogger;
 
         ApprovalStageRepository repository;
        UserRepository userRepository;
         ReimbursementRequestRepository requestRepository;
         CategoryRepositories categoryRepositories;
         ReimbursementItemRepositories itemRepositories;
+        EmployeeRepository employeeRepository;
         PolicyRepository policyRepository;
         PaymentRepository paymentRepository;
         Mock<IMapper> mapper;
-
+        Mock<IMailSender> _mockMailSender;
         ApprovalService service;
         ReimbursementItemService itemService;
 
@@ -59,6 +61,7 @@ namespace ReimbursementUnitProjectTest.Services
             categoryLogger = new Mock<ILogger<CategoryRepositories>>();
             policyLogger = new Mock<ILogger<PolicyRepository>> ();
             paymentLogger= new Mock<ILogger<PaymentRepository>>();
+            employeeLogger= new Mock<ILogger<EmployeeRepository>>();
 
             repository = new ApprovalStageRepository(context, approvalLogger.Object);
             userRepository= new UserRepository(context, userLogger.Object);
@@ -67,11 +70,12 @@ namespace ReimbursementUnitProjectTest.Services
             categoryRepositories= new CategoryRepositories(context, categoryLogger.Object);
             policyRepository = new PolicyRepository(context, policyLogger.Object);
             paymentRepository = new PaymentRepository(context, paymentLogger.Object);
-           
+            employeeRepository = new EmployeeRepository(context, employeeLogger.Object);
 
+            _mockMailSender = new Mock<IMailSender>();
             mapper = new Mock<IMapper>();
             itemService = new ReimbursementItemService(itemRepositories, categoryRepositories, "Files", mapper.Object);
-            service = new ApprovalService(repository,userRepository,requestRepository,policyRepository,paymentRepository,itemRepositories,categoryRepositories,mapper.Object);
+            service = new ApprovalService(repository,userRepository,requestRepository,employeeRepository,policyRepository,paymentRepository,itemRepositories,categoryRepositories,mapper.Object,_mockMailSender.Object);
 
         }
 
@@ -184,6 +188,14 @@ namespace ReimbursementUnitProjectTest.Services
 
             };
             mapper.Setup(m => m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
+            Employee employee = new Employee()
+            {
+                EmployeeId = 1,
+                ManagerId = 2,
+
+            };
+            var addedEmployee = await employeeRepository.Add(employee);
+            Assert.IsTrue(addedEmployee.ManagerId == employee.ManagerId);
 
             var result = await service.ApproveRequestAsync(stageDTO);
             Assert.NotNull(result);

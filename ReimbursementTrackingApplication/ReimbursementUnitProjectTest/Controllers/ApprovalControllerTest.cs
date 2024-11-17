@@ -136,7 +136,7 @@ namespace ReimbursementUnitProjectTest.Controllers
             var result = await _approvalController.ApproveRequest(approval);
 
             // Assert
-            var badRequestResult = result.Result as BadRequestObjectResult;
+            var badRequestResult = result.Result as NotFoundObjectResult;
             var errorResponse = badRequestResult.Value as ErrorResponseDTO;
             Assert.AreEqual(404, errorResponse.ErrorNumber); ;
         }

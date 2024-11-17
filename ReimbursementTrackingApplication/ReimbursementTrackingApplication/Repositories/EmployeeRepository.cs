@@ -74,7 +74,7 @@ namespace ReimbursementTrackingApplication.Repositories
             var employees = await _context.Employees.ToListAsync();
             if (employees.Count == 0)
             {
-                throw new CollectionEmptyException("Request");
+                throw new CollectionEmptyException("Employee");
             }
             return employees;
         }

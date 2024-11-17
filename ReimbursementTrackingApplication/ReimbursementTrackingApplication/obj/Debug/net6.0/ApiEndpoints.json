@@ -54,7 +54,7 @@
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.ApprovalController",
     "Method": "GetFinacePendingApproval",
-    "RelativePath": "api/Approval/finace",
+    "RelativePath": "api/Approval/finance",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1059,11 +1059,6 @@
         "IsRequired": false
       },
       {
-        "Name": "TotalAmount",
-        "Type": "System.Double",
-        "IsRequired": false
-      },
-      {
         "Name": "Comments",
         "Type": "System.String",
         "IsRequired": false
@@ -1180,78 +1175,6 @@
       {
         "Name": "managerId",
         "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ReimbursementTrackingApplication.Models.DTOs.PaginatedResultDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseReimbursementRequestDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementRequestController",
-    "Method": "GetRequestsByPolicy",
-    "RelativePath": "api/ReimbursementRequest/policy/{policyId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "policyId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ReimbursementTrackingApplication.Models.DTOs.PaginatedResultDTO\u00601[[ReimbursementTrackingApplication.Models.DTOs.ResponseReimbursementRequestDTO, ReimbursementTrackingApplication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementRequestController",
-    "Method": "GetRequestsByStatusAsync",
-    "RelativePath": "api/ReimbursementRequest/status/{statusId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "statusId",
-        "Type": "ReimbursementTrackingApplication.Models.RequestStatus",
         "IsRequired": true
       },
       {

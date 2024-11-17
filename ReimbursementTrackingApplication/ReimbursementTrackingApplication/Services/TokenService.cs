@@ -19,13 +19,15 @@ namespace ReimbursementTrackingApplication.Services
         public virtual async Task<string> GenerateToken(UserTokenDTO user)
         {
             string _token = string.Empty;
+            Console.WriteLine(user.Id);
             var _claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.GivenName, user.Username),
                     new Claim(ClaimTypes.Role, user.Department),
+                    new Claim("Id", user.Id.ToString()),
 
                 };
-            
+
 
             var _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
 

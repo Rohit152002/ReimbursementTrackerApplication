@@ -65,7 +65,7 @@ namespace ReimbursementTrackingApplication.Services
             return userDTO;
         }
 
-      
+
 
         public async Task<LoginResponseDTO> Login(LoginDTO login)
         {
@@ -76,7 +76,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 var user = users.FirstOrDefault(u =>
          string.Equals(u.Email, login.Email, StringComparison.OrdinalIgnoreCase));
-
+         Console.WriteLine(user.Department);
 
 
                 if (user == null)
@@ -99,6 +99,7 @@ namespace ReimbursementTrackingApplication.Services
                     Email = user.Email,
                     Token = await _tokenService.GenerateToken(new UserTokenDTO()
                     {
+                        Id=user.Id,
                         Username = user.UserName,
                         Department = user.Department.ToString()
                     })
@@ -137,6 +138,7 @@ namespace ReimbursementTrackingApplication.Services
                     Email = user.Email,
                      Token = await _tokenService.GenerateToken(new UserTokenDTO()
                      {
+                        Id=addedUser.Id,
                          Username = user.UserName,
                          Department = user.Department.ToString()
                      })
@@ -187,8 +189,36 @@ namespace ReimbursementTrackingApplication.Services
                 TotalCount = total,
                 TotalPages= (int)Math.Ceiling(total / (double)pageSize),
                 Data=userDTOs
-                
+
             };
+        }
+
+        public async Task<SuccessResponseDTO<int>> AssignDepartment(UserCreateDTO userDTO,int id)
+        {
+            try
+            {
+
+            var getUser = await _repository.Get(id);
+            var updateUser = new User()
+            {
+                UserName=userDTO.UserName,
+                Email=userDTO.Email,
+                Password=getUser.Password,
+                HashKey=getUser.HashKey,
+                Department = userDTO.Department,
+            };
+            var updated = await _repository.Update(id,updateUser);
+            return new SuccessResponseDTO<int>
+            {
+                IsSuccess=true,
+                Message="Assign Department Successfull",
+                Data=updated.Id
+
+            };
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -2,11 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+     [EnableCors("AllowAll")]
     public class EmployeeController:ControllerBase
     {
         private readonly IEmployeeService _employeeService;
@@ -15,6 +18,7 @@ namespace ReimbursementTrackingApplication.Controllers
             _employeeService = employeeService;
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> AssignEmployeeManager(EmployeeDTO employeeDTO)
         {
             try
@@ -30,7 +34,9 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpDelete("{employeeId}")]
-        public async Task<ActionResult<SuccessResponseDTO<int>>> DeleteAssignEmployee(int employeeId)
+        [Authorize(Roles = "Admin")]
+         public async Task<ActionResult<SuccessResponseDTO<int>>> DeleteAssignEmployee(int employeeId)
+
         {
             try
             {
@@ -46,6 +52,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpGet("employees")]
+        [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseEmployeeDTO>>> GetAllEmployee(int pageNumber, int pageSize)
         {
             try
@@ -62,6 +69,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpGet("{employeeId}")]
+        [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseEmployeeDTO>>> GetEmployeeById(int employeeId)
         {
             try
@@ -78,6 +86,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpGet("manager/{managerId}")]
+        [Authorize]
         public async Task<ActionResult<PaginatedResultDTO<ResponseEmployeeDTO>>> GetEmployeeByManagerId(int managerId,
                     [FromQuery] int pageNumber = 1,
                     [FromQuery] int pageSize = 10)
@@ -96,6 +105,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpPut("{employeeId}")]
+        [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseEmployeeDTO>>> UpdateEmployeeById(int employeeId,EmployeeDTO employeeDTO)
         {
             try

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
@@ -8,6 +10,7 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+     [EnableCors("AllowAll")]
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
@@ -19,6 +22,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         // GET: api/payment/{requestId}
         [HttpGet("{requestId}")]
+        [Authorize(Roles = "Finance")]
         public async Task<ActionResult<SuccessResponseDTO<ResponsePayment>>> GetPaymentByRequestId(int requestId)
         {
             try
@@ -34,6 +38,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         // GET: api/payment/user/{userId}?pageNumber=1&pageSize=10
         [HttpGet("user/{userId}")]
+        [Authorize(Roles = "Finance")]
         public async Task<ActionResult<PaginatedResultDTO<ResponsePayment>>> GetPaymentsByUserId(int userId, int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -49,6 +54,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         // GET: api/payment/all?pageNumber=1&pageSize=10
         [HttpGet("all")]
+        [Authorize(Roles = "Finance,Admin,HR")]
         public async Task<ActionResult<PaginatedResultDTO<ResponsePayment>>> GetAllPayments(int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -64,6 +70,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         // POST: api/payment
         [HttpPut]
+        [Authorize(Roles = "Finance")]
         public async Task<ActionResult<SuccessResponseDTO<ResponsePayment>>> ProcessPayment(PaymentDTO paymentDTO)
         {
             try
@@ -79,6 +86,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         // DELETE: api/payment/{paymentId}
         [HttpDelete("{paymentId}")]
+        [Authorize(Roles = "Finance")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> DeletePayment(int paymentId)
         {
             try

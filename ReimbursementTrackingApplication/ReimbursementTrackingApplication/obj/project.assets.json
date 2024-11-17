@@ -3157,11 +3157,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj",
+      "projectUniqueName": "c:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj",
       "projectName": "ReimbursementTrackingApplication",
-      "projectPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj",
+      "projectPath": "c:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication.csproj",
       "packagesPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\obj\\",
+      "outputPath": "c:\\Users\\rohit.laishram.PYRAMIDINDIA\\Documents\\ApiProject\\ReimbursementTrackingApplication\\ReimbursementTrackingApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\rohit.laishram.PYRAMIDINDIA\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3237,19 +3237,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.36, 6.0.36]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.36, 6.0.36]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.36, 6.0.36]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.35, 6.0.35]"
+            "version": "[6.0.36, 6.0.36]"
           }
         ],
         "frameworkReferences": {
@@ -3260,7 +3260,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

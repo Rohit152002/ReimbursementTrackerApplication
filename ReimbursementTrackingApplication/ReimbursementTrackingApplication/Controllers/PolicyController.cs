@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
@@ -7,6 +9,7 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAll")]
     public class PolicyController : ControllerBase
     {
         private readonly IPolicyService _policyService;
@@ -16,6 +19,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<SuccessResponseDTO<ResponsePolicyDTO>> GetPolicyByIdAsync(int policyId);
         [HttpGet("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<SuccessResponseDTO<ResponsePolicyDTO>>> GetPolicyByid(int id)
         {
             try
@@ -34,6 +38,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<PaginatedResultDTO<ResponsePolicyDTO>> GetAllPolicesAsync(int pageNumber, int pageSize);
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<PaginatedResultDTO<ResponsePolicyDTO>>> GetAllPolicies(int pageNumber=1, int pageSize =10)
         {
             try
@@ -52,6 +57,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<SuccessResponseDTO<int>> AddPolicyAsync(CreatePolicyDTO policyDTO);
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> AddPolicies(CreatePolicyDTO policyDTO)
         {
             try
@@ -62,12 +68,13 @@ namespace ReimbursementTrackingApplication.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
+                return BadRequest(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
 
             }
         }
         //Task<SuccessResponseDTO<int>> UpdatePolicyAsync(int categoryId, CreatePolicyDTO policyDTO);
         [HttpPut("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> UpdatePolicy(int id, CreatePolicyDTO policyDTO)
         {
             try
@@ -86,6 +93,7 @@ namespace ReimbursementTrackingApplication.Controllers
         //Task<SuccessResponseDTO<int>> DeletePolicyAsync(int policyId);
 
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> Delete(int id)
         {
             try

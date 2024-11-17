@@ -306,3 +306,7 @@ C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingA
 C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingApplication\ReimbursementUnitProjectTest\obj\Debug\net6.0\ReimbursementUnitProjectTest.pdb
 C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingApplication\ReimbursementUnitProjectTest\obj\Debug\net6.0\ReimbursementUnitProjectTest.genruntimeconfig.cache
 C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingApplication\ReimbursementUnitProjectTest\obj\Debug\net6.0\ref\ReimbursementUnitProjectTest.dll
+C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingApplication\ReimbursementUnitProjectTest\bin\Debug\net6.0\MailKit.dll
+C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingApplication\ReimbursementUnitProjectTest\bin\Debug\net6.0\MimeKit.dll
+C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingApplication\ReimbursementUnitProjectTest\bin\Debug\net6.0\NETCore.MailKit.dll
+C:\Users\rohit.laishram.PYRAMIDINDIA\Documents\ApiProject\ReimbursementTrackingApplication\ReimbursementUnitProjectTest\bin\Debug\net6.0\BouncyCastle.Crypto.dll

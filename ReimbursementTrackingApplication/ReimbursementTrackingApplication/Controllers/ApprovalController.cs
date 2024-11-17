@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReimbursementTrackingApplication.Interfaces;
@@ -10,6 +11,7 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+     [EnableCors("AllowAll")]
     public class ApprovalController : ControllerBase
     {
         private readonly IApprovalService _approvalService;
@@ -18,10 +20,9 @@ namespace ReimbursementTrackingApplication.Controllers
             _approvalService = approvalService;
         }
 
-        //Task<SuccessResponseDTO<ResponseApprovalStageDTO>> GetApprovalByIdAsync(int approvalId);
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Finance,HR")]
+        [Authorize(Roles = "Finance,HR,Admin")]
         public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalById(int id)
         {
             try
@@ -37,9 +38,8 @@ namespace ReimbursementTrackingApplication.Controllers
             }
         }
 
-        //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetApprovalsByRequestIdAsync(int requestId, int pageNumber, int pageSize);
         [HttpGet("request/{requestId}")]
-        [Authorize(Roles = "Finance,HR")]
+        [Authorize(Roles = "Finance,HR,Admin")]
         public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalByRequestId(int requestId,int pageNumber =1 , int pageSize =10)
         {
             try
@@ -55,10 +55,9 @@ namespace ReimbursementTrackingApplication.Controllers
             }
         }
 
-        //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetApprovalsByReviewerIdAsync(int reviewerId, int pageNumber, int pageSize);
 
         [HttpGet("request/review/{reviewId}")]
-        [Authorize(Roles = "Finance,HR")]
+        [Authorize(Roles = "Fance,HR,Admin")]
         public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalByReviewId(int reviewId, int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -75,9 +74,8 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
 
-        //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetHrPendingApprovalsAsync(int pageNumber, int pageSize);
         [HttpGet("hr")]
-        [Authorize(Roles = "HR")]
+        [Authorize(Roles = "HR,Admin")]
         public async Task<ActionResult<PaginatedResultDTO<ResponseApprovalStageDTO>>> GetHrPendingApproval(int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -94,9 +92,9 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
 
-        //Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetFinancePendingApprovalsAsync(int pageNumber, int pageSize);
-        [HttpGet("finace")]
-        [Authorize(Roles = "Finance")]
+
+        [HttpGet("finance")]
+        [Authorize(Roles = "Finance,Admin")]
         public async Task<ActionResult<PaginatedResultDTO<ResponseApprovalStageDTO>>> GetFinacePendingApproval(int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -112,7 +110,6 @@ namespace ReimbursementTrackingApplication.Controllers
             }
         }
 
-        //Task<SuccessResponseDTO<int>> ApproveRequestAsync(ApprovalStageDTO approval);
         [HttpPost("approve")]
         [Authorize]
         public async Task<ActionResult<PaginatedResultDTO<ResponseApprovalStageDTO>>> ApproveRequest(ApprovalStageDTO approval)
@@ -120,8 +117,6 @@ namespace ReimbursementTrackingApplication.Controllers
             try
             {
                 var result = await _approvalService.ApproveRequestAsync(approval);
-
-
                 return Ok(result);
 
             }
@@ -135,8 +130,8 @@ namespace ReimbursementTrackingApplication.Controllers
 
             }
         }
-        //Task<SuccessResponseDTO<int>> RejectRequestAsync(ApprovalStageDTO approval);
         [HttpPost("reject")]
+        [Authorize]
         public async Task<ActionResult<PaginatedResultDTO<ResponseApprovalStageDTO>>> RejectRequest(ApprovalStageDTO approval)
         {
             try

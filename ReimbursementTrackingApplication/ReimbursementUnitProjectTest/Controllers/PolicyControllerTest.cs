@@ -124,7 +124,7 @@ namespace ReimbursementUnitProjectTest.Controllers
         public async Task AddPolicies_ShouldReturnBadObjectResult_WhenPolicyIsAdded()
         {
             // Arrange
-            var policyDTO = new CreatePolicyDTO { PolicyName = "New Policy", MaxAmount = 1000, PolicyDescription = "Description" };
+            var policyDTO = new CreatePolicyDTO { PolicyName = "New Policy", MaxAmount = 1000, PolicyDescription = null };
             var successResponse = new SuccessResponseDTO<int> { Data = 1 };
             _mockPolicyService.Setup(service => service.AddPolicyAsync(policyDTO))
                 .Throws(new Exception("error"));

@@ -28,9 +28,10 @@ namespace ReimbursementUnitProjectTest.Controllers
         Mock<IMapper> mapper;
         Mock<TokenService> mockTokenService;
         Mock<IConfiguration> mockConfiguration;
+        Mock<IMailSender> _mockMailSender;
 
         //private Mock<IUserServices> _userServiceMock;
-    
+
 
 
 
@@ -45,13 +46,13 @@ namespace ReimbursementUnitProjectTest.Controllers
             repoLogger = new Mock<ILogger<UserRepository>>();
             userServiceLogger = new Mock<ILogger<UserService>>();
             //_userServiceMock = new Mock<IUserServices>();
-
+            _mockMailSender = new Mock<IMailSender>();
             mapper = new Mock<IMapper>();
             mockConfiguration = new Mock<IConfiguration>();
             mockTokenService = new Mock<TokenService>(mockConfiguration.Object);
             repository = new UserRepository(context, repoLogger.Object);
             userServices = new UserService(repository, mapper.Object, userServiceLogger.Object, mockTokenService.Object);
-            userController = new UserController(userServices);
+            userController = new UserController(userServices,_mockMailSender.Object);
         }
         [Test]
         [TestCase("TestUser2", "TestPassword2", "laishramrohit15@gmail.com", "TestHashKey", Departments.Admin)]

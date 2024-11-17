@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
@@ -8,6 +10,7 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+     [EnableCors("AllowAll")]
     public class CategoryController : ControllerBase
     {
         private readonly IExpenseCategoryService _expenseCategoryService;
@@ -17,6 +20,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpGet("{id}")]
+    [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ExpenseCategoryDTO>>> GetCategoryByid(int id)
         {
             try
@@ -35,6 +39,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<PaginatedResultDTO<ResponsePolicyDTO>> GetAllPolicesAsync(int pageNumber, int pageSize);
         [HttpGet("all")]
+    [Authorize]
         public async Task<ActionResult<PaginatedResultDTO<ExpenseCategoryDTO>>> GetAllCategories(int pageNumber = 1, int pageSize = 10)
         {
             try
@@ -54,6 +59,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<SuccessResponseDTO<int>> AddPolicyAsync(CreatePolicyDTO policyDTO);
         [HttpPost]
+    [Authorize(Roles ="Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> AddCategories(CreateCategoryDTO categoryDTO)
         {
             try
@@ -70,6 +76,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<SuccessResponseDTO<int>> UpdatePolicyAsync(int categoryId, CreatePolicyDTO policyDTO);
         [HttpPut("{id}")]
+    [Authorize(Roles ="Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> UpdateCategory(int id, CreateCategoryDTO categoryDTO)
         {
             try
@@ -88,6 +95,7 @@ namespace ReimbursementTrackingApplication.Controllers
         //Task<SuccessResponseDTO<int>> DeletePolicyAsync(int policyId);
 
         [HttpDelete("{id}")]
+    [Authorize(Roles ="Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> Delete(int id)
         {
             try

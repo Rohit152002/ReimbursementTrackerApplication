@@ -31,7 +31,6 @@ namespace ReimbursementUnitProjectTest.Controllers
             {
                 UserId = 1,
                 PolicyId = 1,
-                TotalAmount = 100.0,
                 Comments = "Test reimbursement",
                 Items = new List<RequestITemDTO>
                 {
@@ -65,7 +64,6 @@ namespace ReimbursementUnitProjectTest.Controllers
             {
                 UserId = 1,
                 PolicyId = 1,
-                TotalAmount = 100.0,
                 Items = new List<RequestITemDTO> { }
             };
 

@@ -104,6 +104,17 @@ namespace ReimbursementUnitProjectTest.Services
 
         }
 
+        public async Task CreateEmployee()
+        {
+            Employee employee = new Employee()
+            {
+                EmployeeId = 1,
+                ManagerId = 2,
+
+            };
+            var addedEmployee = await employeeRepository.Add(employee);
+            Assert.IsTrue(addedEmployee.ManagerId == employee.ManagerId);
+        }
         //public async Task<SuccessResponseDTO<ResponseReimbursementRequestDTO>> SubmitRequestAsync(CreateReimbursementRequestDTO requestDto)
 
         private async Task CreatePolicy()
@@ -125,7 +136,6 @@ namespace ReimbursementUnitProjectTest.Services
             {
                 UserId = 1,
                 PolicyId = 1,
-                TotalAmount = 9000,
                 Comments = "Request for Businees ",
                 Items=items
             };
@@ -164,6 +174,7 @@ namespace ReimbursementUnitProjectTest.Services
         {
            await CreateUser();
             await CreatePolicy();
+            await CreateEmployee();
             CreateReimbursementRequestDTO request = await CreateRequest();
 
             ReimbursementItem item = new ReimbursementItem

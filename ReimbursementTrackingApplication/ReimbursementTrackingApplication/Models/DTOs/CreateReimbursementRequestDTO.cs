@@ -6,9 +6,14 @@ namespace ReimbursementTrackingApplication.Models.DTOs
     {
         public int UserId { get; set; }
         public int PolicyId { get; set; }
-        public double TotalAmount { get; set; }
+        // public double TotalAmount { get; set; }
         public string Comments { get; set; } = string.Empty;
-        
+
         public List<RequestITemDTO> Items { get; set; }
+
+        public CreateReimbursementRequestDTO()
+        {
+            Items = new List<RequestITemDTO>();
+        }
     }
 }

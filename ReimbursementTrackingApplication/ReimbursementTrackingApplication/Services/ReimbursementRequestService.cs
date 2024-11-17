@@ -50,6 +50,11 @@ namespace ReimbursementTrackingApplication.Services
                 var request = MapRequest(requestDto);
 
                 var requestAdded = await _repository.Add(request);
+                var employee= (await _employeeRepository.GetAll()).FirstOrDefault(e=>e.EmployeeId==requestDto.UserId);
+                if(employee == null)
+                {
+                    throw new UnauthorizedException();
+                }
 
                 var items = (await AddItemsAsync(requestDto.Items,requestAdded.Id)).ToList();
 
@@ -67,6 +72,14 @@ namespace ReimbursementTrackingApplication.Services
                     Data = responseRequest
                 };
 
+            }
+            catch(UnauthorizedException )
+            {
+                throw new UnauthorizedException();
+            }
+            catch(CollectionEmptyException)
+            {
+                throw new UnauthorizedException();
             }
             catch (Exception ex)
             {
@@ -171,14 +184,14 @@ namespace ReimbursementTrackingApplication.Services
                     .Take(pageSize)
                     .ToList();
 
-                //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
+
                 List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(filter_request);
 
-                foreach(var request in requestDTOs)
-                {
-                    request.Items = await GetItemsByRequestId(request.Id);
+                // foreach(var request in requestDTOs)
+                // {
+                //     request.Items = await GetItemsByRequestId(request.Id);
 
-                }
+                // }
 
                 return new PaginatedResultDTO<ResponseReimbursementRequestDTO>
                 {
@@ -219,6 +232,7 @@ namespace ReimbursementTrackingApplication.Services
                     Id = request.Id,
                     UserId = request.UserId,
                     User = await GetUser(request.UserId),
+                    TotalAmount= request.TotalAmount,
                     PolicyId = request.PolicyId,
                     PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName,
                     Items = await GetItemsByRequestId(request.Id),
@@ -466,18 +480,18 @@ namespace ReimbursementTrackingApplication.Services
             var filter_request = requests.Where(r=>r.IsDeleted == false).ToList();
 
             var total = filter_request.Count;
-            var pagedItems = filter_request
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
             //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
             List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(filter_request);
 
-            foreach (var request in requestDTOs)
-            {
-                request.Items = await GetItemsByRequestId(request.Id);
-            }
+            // foreach (var request in requestDTOs)
+            // {
+            //     request.Items = await GetItemsByRequestId(request.Id);
+            // }
+
+            var pagedItems = requestDTOs
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
 
             return new PaginatedResultDTO<ResponseReimbursementRequestDTO>
             {
@@ -485,7 +499,7 @@ namespace ReimbursementTrackingApplication.Services
                 PageSize = pageSize,
                 TotalCount = total,
                 TotalPages = (int)Math.Ceiling(total / (double)pageSize),
-                Data = requestDTOs
+                Data = pagedItems
 
             };
         }

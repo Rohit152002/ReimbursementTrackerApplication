@@ -20,14 +20,14 @@ namespace ReimbursementTrackingApplication.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            
+
 
             modelBuilder.Entity<Employee>()
                 .HasOne(u => u.Manager)
                 .WithMany(o => o.ManageEmployee)
                 .HasForeignKey(u => u.ManagerId)
                 .HasConstraintName("FK_Employee_Manager")
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Employee>()
                 .HasOne(u => u.User)
@@ -36,7 +36,7 @@ namespace ReimbursementTrackingApplication.Context
                 .HasConstraintName("FK_Employee_User")
                 .OnDelete(DeleteBehavior.Cascade);
 
-        
+
             modelBuilder.Entity<BankAccount>()
                 .HasOne(u => u.User)
                 .WithOne(u => u.Bank)
@@ -92,7 +92,7 @@ namespace ReimbursementTrackingApplication.Context
             modelBuilder.Entity<ApprovalStage>()
                 .Property(a => a.Stage)
                 .HasConversion(a => a.ToString(),
-                a => (Stage)Enum.Parse(typeof(Stage), a)    
+                a => (Stage)Enum.Parse(typeof(Stage), a)
              );
 
             modelBuilder.Entity<ApprovalStage>()
@@ -125,6 +125,10 @@ namespace ReimbursementTrackingApplication.Context
                            .HasConversion(a => a.ToString(),
                            a => (Departments)Enum.Parse(typeof(Departments), a)
                         );
+
+            modelBuilder.Entity<User>()
+                            .HasIndex(a=>a.Email)
+                            .IsUnique();
 
 
 

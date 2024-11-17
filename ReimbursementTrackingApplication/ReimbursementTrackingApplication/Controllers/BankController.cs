@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models.DTOs;
@@ -8,6 +10,7 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+     [EnableCors("AllowAll")]
     public class BankController : ControllerBase
     {
         private readonly IBankService _bankService;
@@ -17,6 +20,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseBankDTO>>> AddBankAccount(BankDTO bankAccount)
         {
             try
@@ -35,6 +39,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseBankDTO>>> UpdateBankAccount(int id, BankDTO bankAccount)
         {
             try
@@ -50,9 +55,10 @@ namespace ReimbursementTrackingApplication.Controllers
             }
 
 
-        } 
-        
+        }
+
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<int>>> DeleteBankAccount(int id)
         {
             try
@@ -71,6 +77,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseBankDTO>>> GetBankAccountById(int id)
         {
             try
@@ -87,8 +94,9 @@ namespace ReimbursementTrackingApplication.Controllers
 
 
         }
-        
+
         [HttpGet("user/{id}")]
+                [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseBankDTO>>> GetBankAccountByUserId(int id)
         {
             try
@@ -106,6 +114,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         }
         [HttpGet("all")]
+        [Authorize]
         public async Task<ActionResult<PaginatedResultDTO<ResponseBankDTO>>> GetAllBankAccounts(int pageNumber, int pageSize)
         {
             try
