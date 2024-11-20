@@ -12,8 +12,11 @@ namespace ReimbursementTrackingApplication.Interfaces
         Task<PaginatedResultDTO<ResponseReimbursementRequestDTO>> GetRequestsByStatusAsync(RequestStatus status, int pageNumber, int pageSize);
         Task<PaginatedResultDTO<ResponseReimbursementRequestDTO>> GetRequestsByPolicyAsync(int policyId, int pageNumber, int pageSize);
         Task<SuccessResponseDTO<ResponseReimbursementRequestDTO>> SubmitRequestAsync(CreateReimbursementRequestDTO requestDto);
-        Task<PaginatedResultDTO<ResponseReimbursementRequestDTO>> GetAllRequest( int pageNumber, int pageSize);
+        Task<PaginatedResultDTO<ResponseReimbursementRequestDTO>> GetAllRequest(int pageNumber, int pageSize);
 
         Task<SuccessResponseDTO<int>> DeleteRequestAsync(int requestId);
+
+        Task<DashboardResponseDTO> GetDashboard();
+
     }
 }

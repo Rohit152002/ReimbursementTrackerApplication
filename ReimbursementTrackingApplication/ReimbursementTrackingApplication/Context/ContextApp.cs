@@ -127,7 +127,12 @@ namespace ReimbursementTrackingApplication.Context
                         );
 
             modelBuilder.Entity<User>()
-                            .HasIndex(a=>a.Email)
+            .Property(u => u.Gender)
+            .HasConversion(u => u.ToString(),
+            u => (Gender)Enum.Parse(typeof(Gender), u));
+
+            modelBuilder.Entity<User>()
+                            .HasIndex(a => a.Email)
                             .IsUnique();
 
 

@@ -1,40 +1,37 @@
 <template>
-
-  <RouterView v-if="isLoggedIn"/>
-  <LoginRegister v-else/>
+  <!-- <HomePage /> -->
+  <!-- <LoginRegister /> -->
+  <RouterView />
 </template>
 
 <script>
 
-import LoginRegister from   './components/LoginRegister.vue';
+// import HomePage from './components/HomePage.vue';
+// import LoginRegister from './components/LoginRegister.vue';
 // import router from './scripts/Route';
 export default {
   name: 'App',
   components: {
 
-    LoginRegister
+    // LoginRegister
+    // HomePage
   },
-  data()
-  {
+  data() {
     return {
-      isLoggedIn:false
+      isLoggedIn: false
     }
   },
-  created()
-  {
+  created() {
     const token = sessionStorage.getItem('token');
-    if(token)
-  {
-    this.isLoggedIn=true;
+    if (token) {
+      this.isLoggedIn = true;
 
-  }
-  else{
-    this.isLoggedIn=false
-  }
+    }
+    else {
+      this.isLoggedIn = false
+    }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

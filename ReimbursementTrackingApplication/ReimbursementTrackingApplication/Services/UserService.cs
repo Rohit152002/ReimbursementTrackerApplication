@@ -61,7 +61,7 @@ namespace ReimbursementTrackingApplication.Services
         public async Task<UserDTO> GetUserProfile(int id)
         {
             var user = await _repository.Get(id);
-             var userDTO = _mapper.Map<UserDTO>(user);
+            var userDTO = _mapper.Map<UserDTO>(user);
             return userDTO;
         }
 
@@ -76,7 +76,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 var user = users.FirstOrDefault(u =>
          string.Equals(u.Email, login.Email, StringComparison.OrdinalIgnoreCase));
-         Console.WriteLine(user.Department);
+                Console.WriteLine(user.Department);
 
 
                 if (user == null)
@@ -95,11 +95,13 @@ namespace ReimbursementTrackingApplication.Services
                 }
                 return new LoginResponseDTO()
                 {
+                    Id = user.Id,
                     UserName = user.UserName,
                     Email = user.Email,
+                    Department = (Departments)user.Department,
                     Token = await _tokenService.GenerateToken(new UserTokenDTO()
                     {
-                        Id=user.Id,
+                        Id = user.Id,
                         Username = user.UserName,
                         Department = user.Department.ToString()
                     })
@@ -119,14 +121,21 @@ namespace ReimbursementTrackingApplication.Services
         public async Task<LoginResponseDTO> Register(UserCreateDTO registerUser)
         {
             HMACSHA256 hmac = new HMACSHA256();
+            if (registerUser.Password.Length == 0)
+            {
+                registerUser.Password = $"{registerUser.UserName}123";
+            }
             byte[] passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerUser.Password));
             User user = new User()
             {
                 UserName = registerUser.UserName,
                 Password = passwordHash,
                 HashKey = hmac.Key,
-                Department = registerUser.Department,
+                Department = registerUser.Department ?? null,
                 Email = registerUser.Email,
+                DateOfBirth = registerUser.DateOfBirth,
+                Gender = registerUser.Gender,
+                Address = registerUser.Address
             };
             try
             {
@@ -136,12 +145,13 @@ namespace ReimbursementTrackingApplication.Services
                     Id = addedUser.Id,
                     UserName = user.UserName,
                     Email = user.Email,
-                     Token = await _tokenService.GenerateToken(new UserTokenDTO()
-                     {
-                        Id=addedUser.Id,
-                         Username = user.UserName,
-                         Department = user.Department.ToString()
-                     })
+                    Department = (Departments)user.Department,
+                    Token = await _tokenService.GenerateToken(new UserTokenDTO()
+                    {
+                        Id = addedUser.Id,
+                        Username = user.UserName,
+                        Department = user.Department.ToString()
+                    })
                 };
                 return response;
             }
@@ -176,49 +186,55 @@ namespace ReimbursementTrackingApplication.Services
             }; ;
         }
 
-        public async Task<PaginatedResultDTO<UserDTO>> GetAllUsers(int pageno, int pageSize)
+        public async Task<PaginatedResultDTO<UserDTO>> GetAllUsers(int pageno, int pageSize)//1,10
         {
-            var users = await _repository.GetAll();
+            var users = await _repository.GetAll();//21
             var total = users.Count();
-            var request= users.Skip((pageno-1)*pageSize).Take(pageSize).ToList();
+            var request = users.Skip((pageno - 1) * pageSize).Take(pageSize).ToList();//10//20
             var userDTOs = _mapper.Map<List<UserDTO>>(request);
             return new PaginatedResultDTO<UserDTO>
             {
                 CurrentPage = pageno,
                 PageSize = pageSize,
                 TotalCount = total,
-                TotalPages= (int)Math.Ceiling(total / (double)pageSize),
-                Data=userDTOs
+                TotalPages = (int)Math.Ceiling(total / (double)pageSize),
+                Data = userDTOs
 
             };
         }
 
-        public async Task<SuccessResponseDTO<int>> AssignDepartment(UserCreateDTO userDTO,int id)
+        public async Task<SuccessResponseDTO<int>> AssignDepartment(UserCreateDTO userDTO, int id)
         {
             try
             {
 
-            var getUser = await _repository.Get(id);
-            var updateUser = new User()
-            {
-                UserName=userDTO.UserName,
-                Email=userDTO.Email,
-                Password=getUser.Password,
-                HashKey=getUser.HashKey,
-                Department = userDTO.Department,
-            };
-            var updated = await _repository.Update(id,updateUser);
-            return new SuccessResponseDTO<int>
-            {
-                IsSuccess=true,
-                Message="Assign Department Successfull",
-                Data=updated.Id
+                var getUser = await _repository.Get(id);
+                var updateUser = new User()
+                {
+                    UserName = userDTO.UserName,
+                    Email = userDTO.Email,
+                    Password = getUser.Password,
+                    HashKey = getUser.HashKey,
+                    Department = userDTO.Department,
+                    DateOfBirth = getUser.DateOfBirth,
+                    Address = getUser.Address,
+                    Gender = getUser.Gender,
+                };
+                var updated = await _repository.Update(id, updateUser);
+                return new SuccessResponseDTO<int>
+                {
+                    IsSuccess = true,
+                    Message = "Assign Department Successfull",
+                    Data = updated.Id
 
-            };
-            }catch(Exception ex)
+                };
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+
     }
 }

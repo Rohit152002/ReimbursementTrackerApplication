@@ -1,138 +1,153 @@
 <template>
-    <div class="body">
+  <div class="body">
 
-        <div class="container xl:w-[50rem]">
-            <input type="checkbox" id="flip">
-            <div class="cover">
-                <div class="front">
-                    <img src="/frontImg.jpg" alt="">
-                    <div class="text">
-                        <span class="text-1">Every new friend is a <br> new adventure</span>
-                        <span class="text-2">Transcation Reimbursement</span>
-                    </div>
-                </div>
-                <div class="back">
-                    <img class="backImg" src="/backImg.jpg" alt="">
-                    <div class="text">
-                        <span class="text-1">Complete miles of journey <br> with one step</span>
-                        <span class="text-2">Let's get started</span>
-                    </div>
-                </div>
-            </div>
-            <div class="forms">
-                <div class="form-content">
-                    <div class="login-form">
-                        <div class="title">Login</div>
-                        <form action="#">
-                            <div class="input-boxes">
-                                <div class="input-box">
-                                    <i class="fas fa-envelope"></i>
-                                    <input type="text" v-model="email" placeholder="Enter your email" required>
-                                </div>
-                                <div class="input-box">
-                                    <i class="fas fa-lock"></i>
-                                    <input type="password" v-model="password" placeholder="Enter your password" required>
-                                </div>
-                                <div class="text"><a href="#">Forgot password?</a></div>
-                                <div class="button input-box">
-                                    <input @click="loginMethod" type="submit" value="Submit">
-                                </div>
-                                <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="signup-form">
-                        <div class="title">Signup</div>
-                        <form action="#">
-                            <div class="input-boxes">
-                                <div class="input-box">
-                                    <i class="fas fa-user"></i>
-                                    <input type="text" v-model="username" placeholder="Enter your name" required>
-                                </div>
-                                <div class="input-box">
-                                    <i class="fas fa-envelope"></i>
-                                    <input type="text" v-model="email" placeholder="Enter your email" required>
-                                </div>
-                                <div class="input-box">
-                                    <i class="fas fa-lock"></i>
-                                    <input type="password" v-model="password" placeholder="Enter your password" required>
-                                </div>
-                                <div class="input-box flex ">
-                                    <i class="fas fa-lock"></i>
-                                    <span class="ml-9">Department</span>
-                                    <select v-model="department" class="px-4 ml-10" name="" id="">
-                                        <option value=7>Admin</option>
-                                        <option value=2>IT</option>
-                                        <option value=0>HR</option>
-                                        <option value=1>Finance</option>
-                                        <option value=3>Sales</option>
-                                        <option value=4>Marketing</option>
-                                    </select>
-                                    <!-- <input type="password" placeholder="Enter your password" required> -->
-                                </div>
-                                <div class="button input-box">
-                                    <input type="submit" v-on:click="registerMethod" value="Submit">
-                                </div>
-                                <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <div class="container xl:w-[50rem]">
+      <input type="checkbox" id="flip">
+      <div class="cover">
+        <div class="front">
+          <img src="/frontImg.jpg" alt="">
+          <div class="text">
+            <span class="text-1">Every new friend is a <br> new adventure</span>
+            <span class="text-2">Transcation Reimbursement</span>
+          </div>
         </div>
-
+        <div class="back">
+          <img class="backImg" src="/backImg.jpg" alt="">
+          <div class="text">
+            <span class="text-1">Complete miles of journey <br> with one step</span>
+            <span class="text-2">Let's get started</span>
+          </div>
+        </div>
+      </div>
+      <div class="forms">
+        <div class="form-content">
+          <div class="login-form">
+            <div class="title">Login</div>
+            <form action="#">
+              <div class="input-boxes">
+                <div class="input-box">
+                  <i class="fas fa-envelope"></i>
+                  <input type="text" v-model="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" v-model="password" placeholder="Enter your password" required>
+                </div>
+                <div class="text"><a href="#">Forgot password?</a></div>
+                <div class="button input-box">
+                  <input @click="loginMethod" type="submit" value="Submit">
+                </div>
+                <div class="text sign-up-text">Don't have an account? <RouterLink to="userform" for="flip">Sigup now
+                  </RouterLink>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="signup-form">
+            <div class="title">Signup</div>
+            <form action="#">
+              <div class="input-boxes">
+                <div class="input-box">
+                  <i class="fas fa-user"></i>
+                  <input type="text" v-model="username" placeholder="Enter your name" required>
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-envelope"></i>
+                  <input type="text" v-model="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" v-model="password" placeholder="Enter your password" required>
+                </div>
+                <div class="input-box flex ">
+                  <i class="fas fa-lock"></i>
+                  <span class="ml-9">Department</span>
+                  <select v-model="department" class="px-4 ml-10" name="" id="">
+                    <option value=0>HR</option>
+                    <option value=1>Finance</option>
+                    <option value=2>IT</option>
+                    <option value=3>Sales</option>
+                    <option value=4>Marketing</option>
+                    <option value=7>Admin</option>
+                  </select>
+                  <!-- <input type="password" placeholder="Enter your password" required> -->
+                </div>
+                <div class="button input-box">
+                  <input type="submit" v-on:click="registerMethod" value="Submit">
+                </div>
+                <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+
+  </div>
 </template>
 
 <script>
 import router from '@/scripts/Route';
 import { login, register } from '@/scripts/User';
 
-    export default {
-        name:"LoginRegister",
-        data(){
-            return {
-                username:'',
-                email:'',
-                password:'',
-                department:'',
+export default {
+  name: "LoginRegister",
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: '',
+      department: '',
 
-            }
-
-        },
-        methods:
-        {
-            registerMethod() {
-                event.preventDefault();
-                register(this.username,this.email,this.password,this.department)
-                .then((res)=>{
-                    alert("registration successfull");
-                    sessionStorage.setItem("token",res.data.token)
-                    // router.push('/')
-                    window.location.reload();
-                },err=>{
-                    console.log(err)
-                    alert(err);
-                })
-            },
-            async loginMethod(){
-                try{
-
-                    event.preventDefault();
-                    const res = await login(this.email,this.password)
-                    sessionStorage.clear();
-                    sessionStorage.setItem("token",res.data.token)
-                    window.location.reload();
-                    router.push('/')
-                }catch(err)
-                {
-                    console.log(err.message);
-                }
-
-
-            }
-        }
     }
+
+  },
+  methods:
+  {
+    registerMethod() {
+      event.preventDefault();
+      register(this.username, this.email, this.password, this.department)
+        .then((res) => {
+          alert("registration successfull");
+          sessionStorage.setItem("token", res.data.token)
+          // router.push('/')
+          window.location.reload();
+        }, err => {
+          console.log(err)
+          alert(err);
+        })
+    },
+    async loginMethod() {
+      try {
+
+        event.preventDefault();
+        const res = await login(this.email, this.password)
+        sessionStorage.clear();
+        sessionStorage.setItem("token", res.data.token)
+        localStorage.setItem("department", res.data.department)
+        if (res.data.department == 0) {
+
+          router.push('/hr')
+        } else if (res.data.department == 1) {
+
+          router.push('/finance')
+        }
+        else if (res.data.department == 7) {
+
+          router.push('/admin')
+        }
+        else {
+
+          router.push('/')
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+
+
+    }
+  }
+}
 </script>
 
 <style>
@@ -178,11 +193,11 @@ import { login, register } from '@/scripts/User';
   backface-visibility: hidden;
 }
 
-.container #flip:checked ~ .cover {
+.container #flip:checked~.cover {
   transform: rotateY(-180deg);
 }
 
-.container #flip:checked ~ .forms .login-form {
+.container #flip:checked~.forms .login-form {
   pointer-events: none;
 }
 
@@ -380,13 +395,12 @@ import { login, register } from '@/scripts/User';
     display: none;
   }
 
-  .container #flip:checked ~ .forms .signup-form {
+  .container #flip:checked~.forms .signup-form {
     display: block;
   }
 
-  .container #flip:checked ~ .forms .login-form {
+  .container #flip:checked~.forms .login-form {
     display: none;
   }
 }
-
 </style>

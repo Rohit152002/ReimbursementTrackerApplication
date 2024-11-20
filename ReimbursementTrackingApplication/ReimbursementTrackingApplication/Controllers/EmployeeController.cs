@@ -9,8 +9,8 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-     [EnableCors("AllowAll")]
-    public class EmployeeController:ControllerBase
+    [EnableCors("AllowAll")]
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
         public EmployeeController(IEmployeeService employeeService)
@@ -23,10 +23,11 @@ namespace ReimbursementTrackingApplication.Controllers
         {
             try
             {
-            var result = await _employeeService.AddEmployeeAsync(employeeDTO);
+                var result = await _employeeService.AddEmployeeAsync(employeeDTO);
                 return Ok(result);
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
 
@@ -35,14 +36,14 @@ namespace ReimbursementTrackingApplication.Controllers
 
         [HttpDelete("{employeeId}")]
         [Authorize(Roles = "Admin")]
-         public async Task<ActionResult<SuccessResponseDTO<int>>> DeleteAssignEmployee(int employeeId)
+        public async Task<ActionResult<SuccessResponseDTO<int>>> DeleteAssignEmployee(int employeeId)
 
         {
             try
             {
 
-            var result = await _employeeService.DeleteEmployeeAsync(employeeId);
-            return Ok(result);
+                var result = await _employeeService.DeleteEmployeeAsync(employeeId);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -58,8 +59,8 @@ namespace ReimbursementTrackingApplication.Controllers
             try
             {
 
-            var result = await _employeeService.GetAllEmployeesAsync(pageNumber, pageSize);
-            return Ok(result);
+                var result = await _employeeService.GetAllEmployeesAsync(pageNumber, pageSize);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -75,8 +76,8 @@ namespace ReimbursementTrackingApplication.Controllers
             try
             {
 
-            var result= await _employeeService.GetEmployeeByIdAsync(employeeId);
-            return Ok(result);
+                var result = await _employeeService.GetEmployeeByIdAsync(employeeId);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -94,8 +95,8 @@ namespace ReimbursementTrackingApplication.Controllers
             try
             {
 
-            var result = await _employeeService.GetEmployeesByManagerIdAsync(managerId,pageNumber,pageSize);
-            return Ok(result);
+                var result = await _employeeService.GetEmployeesByManagerIdAsync(managerId, pageNumber, pageSize);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -106,19 +107,38 @@ namespace ReimbursementTrackingApplication.Controllers
 
         [HttpPut("{employeeId}")]
         [Authorize]
-        public async Task<ActionResult<SuccessResponseDTO<ResponseEmployeeDTO>>> UpdateEmployeeById(int employeeId,EmployeeDTO employeeDTO)
+        public async Task<ActionResult<SuccessResponseDTO<ResponseEmployeeDTO>>> UpdateEmployeeById(int employeeId, EmployeeDTO employeeDTO)
         {
             try
             {
 
-            var result = await _employeeService.UpdateEmployeeAsync(employeeId,employeeDTO);
-            return Ok(result);
+                var result = await _employeeService.UpdateEmployeeAsync(employeeId, employeeDTO);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 return BadRequest(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
 
             }
+        }
+
+        [HttpGet("withoutmanager")]
+        public async Task<ActionResult> GetUserWithNoManager(int pageNumber, int pageSize)
+        {
+            try
+            {
+                var result = await _employeeService.GetUsersWithoutAssignedManagerAsync(pageNumber, pageSize);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorResponseDTO()
+                {
+                    ErrorMessage = ex.Message,
+                    ErrorNumber = StatusCodes.Status400BadRequest
+                });
+            }
+
         }
 
 

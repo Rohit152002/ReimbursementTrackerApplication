@@ -10,13 +10,13 @@ namespace ReimbursementTrackingApplication.Services
 {
     public class ReimbursementRequestService : IReimbursementRequestService
     {
-        private readonly IRepository<int,ReimbursementRequest> _repository;
-        private readonly IRepository<int,Policy> _policyRepository;
+        private readonly IRepository<int, ReimbursementRequest> _repository;
+        private readonly IRepository<int, Policy> _policyRepository;
 
         private readonly string _uploadFolder;
         private readonly IRepository<int, ReimbursementItem> _itemRepository;
 
-        private readonly IRepository<int,Employee> _employeeRepository;
+        private readonly IRepository<int, Employee> _employeeRepository;
         private readonly IRepository<int, ExpenseCategory> _categoryRepository;
         private readonly IRepository<int, User> _userRepository;
 
@@ -35,7 +35,7 @@ namespace ReimbursementTrackingApplication.Services
             _repository = repository;
             _policyRepository = policyRepository;
 
-            _mapper=mapper;
+            _mapper = mapper;
             _uploadFolder = uploadFolder;
 
             _itemRepository = itemRepository;
@@ -50,13 +50,13 @@ namespace ReimbursementTrackingApplication.Services
                 var request = MapRequest(requestDto);
 
                 var requestAdded = await _repository.Add(request);
-                var employee= (await _employeeRepository.GetAll()).FirstOrDefault(e=>e.EmployeeId==requestDto.UserId);
-                if(employee == null)
+                var employee = (await _employeeRepository.GetAll()).FirstOrDefault(e => e.EmployeeId == requestDto.UserId);
+                if (employee == null)
                 {
                     throw new UnauthorizedException();
                 }
 
-                var items = (await AddItemsAsync(requestDto.Items,requestAdded.Id)).ToList();
+                var items = (await AddItemsAsync(requestDto.Items, requestAdded.Id)).ToList();
 
 
                 request.Items = _mapper.Map<List<ReimbursementItem>>(items);
@@ -73,11 +73,11 @@ namespace ReimbursementTrackingApplication.Services
                 };
 
             }
-            catch(UnauthorizedException )
+            catch (UnauthorizedException)
             {
                 throw new UnauthorizedException();
             }
-            catch(CollectionEmptyException)
+            catch (CollectionEmptyException)
             {
                 throw new UnauthorizedException();
             }
@@ -90,10 +90,10 @@ namespace ReimbursementTrackingApplication.Services
 
         private async Task<List<ResponseReimbursementItemDTO>> AddItemsAsync(IEnumerable<RequestITemDTO> itemDTOs, int id)
         {
-            List<ResponseReimbursementItemDTO> responseItemDTOs= new List<ResponseReimbursementItemDTO>();
+            List<ResponseReimbursementItemDTO> responseItemDTOs = new List<ResponseReimbursementItemDTO>();
 
             List<ReimbursementItemDTO> items = new List<ReimbursementItemDTO>();
-            foreach(var item in itemDTOs)
+            foreach (var item in itemDTOs)
             {
                 var new_item = new ReimbursementItemDTO()
                 {
@@ -114,15 +114,16 @@ namespace ReimbursementTrackingApplication.Services
         private ReimbursementRequest MapRequest(CreateReimbursementRequestDTO requestDto)
         {
             double totalsum = 0;
-            foreach(var item in requestDto.Items)
+            foreach (var item in requestDto.Items)
             {
                 totalsum += item.Amount;
             }
-            return new ReimbursementRequest {
-                UserId= requestDto.UserId,
-                PolicyId= requestDto.PolicyId,
-                TotalAmount= totalsum,
-                Comments= requestDto.Comments,
+            return new ReimbursementRequest
+            {
+                UserId = requestDto.UserId,
+                PolicyId = requestDto.PolicyId,
+                TotalAmount = totalsum,
+                Comments = requestDto.Comments,
             };
 
         }
@@ -146,20 +147,20 @@ namespace ReimbursementTrackingApplication.Services
 
         public async Task<SuccessResponseDTO<ResponseReimbursementRequestDTO>> GetRequestByIdAsync(int requestId)
         {
-           try
+            try
             {
                 ReimbursementRequest request = await _repository.Get(requestId);
 
                 ResponseReimbursementRequestDTO requestDTO = _mapper.Map<ResponseReimbursementRequestDTO>(request);
 
-                requestDTO.PolicyName= (await _policyRepository.Get(request.PolicyId)).PolicyName;
+                requestDTO.PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName;
                 requestDTO.Items = await GetItemsByRequestId(requestDTO.Id);
-                requestDTO.User=  await GetUser(request.UserId);
+                requestDTO.User = await GetUser(request.UserId);
                 return new SuccessResponseDTO<ResponseReimbursementRequestDTO>()
                 {
-                    IsSuccess=true,
-                    Message="Data Fetch Successfully",
-                    Data=requestDTO
+                    IsSuccess = true,
+                    Message = "Data Fetch Successfully",
+                    Data = requestDTO
 
                 };
 
@@ -176,7 +177,7 @@ namespace ReimbursementTrackingApplication.Services
             try
             {
                 var requests = await _repository.GetAll();
-                var filter_request = requests.Where(r => r.UserId == userId && r.IsDeleted==false).ToList();
+                var filter_request = requests.Where(r => r.UserId == userId && r.IsDeleted == false).ToList();
 
                 var total = filter_request.Count();
                 var pagedItems = filter_request
@@ -203,7 +204,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -213,7 +214,7 @@ namespace ReimbursementTrackingApplication.Services
         {
             var items = (await _itemRepository.GetAll()).Where(r => r.RequestId == requestId && r.IsDeleted == false).ToList();
             var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
-            foreach(var item in itemsDTO)
+            foreach (var item in itemsDTO)
             {
                 item.CategoryName = (await _categoryRepository.Get(item.CategoryId)).Name;
             }
@@ -221,7 +222,7 @@ namespace ReimbursementTrackingApplication.Services
         }
 
 
-        public async Task<List<ResponseReimbursementRequestDTO> > MappingReimbursementRequest(List<ReimbursementRequest> requests)
+        public async Task<List<ResponseReimbursementRequestDTO>> MappingReimbursementRequest(List<ReimbursementRequest> requests)
         {
             List<ResponseReimbursementRequestDTO> requestDTOs = new List<ResponseReimbursementRequestDTO>();
 
@@ -232,7 +233,7 @@ namespace ReimbursementTrackingApplication.Services
                     Id = request.Id,
                     UserId = request.UserId,
                     User = await GetUser(request.UserId),
-                    TotalAmount= request.TotalAmount,
+                    TotalAmount = request.TotalAmount,
                     PolicyId = request.PolicyId,
                     PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName,
                     Items = await GetItemsByRequestId(request.Id),
@@ -249,7 +250,7 @@ namespace ReimbursementTrackingApplication.Services
 
         public async Task<PaginatedResultDTO<ResponseReimbursementRequestDTO>> GetRequestsByStatusAsync(RequestStatus status, int pageNumber, int pageSize)
         {
-           try
+            try
             {
                 var requests = await _repository.GetAll();
                 var filter_request = requests.Where(r => r.Status == status && r.IsDeleted == false).ToList();
@@ -281,7 +282,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -327,7 +328,7 @@ namespace ReimbursementTrackingApplication.Services
             }
         }
 
-        public async  Task<ResponseReimbursementItemDTO> DeleteItem(int itemId)
+        public async Task<ResponseReimbursementItemDTO> DeleteItem(int itemId)
         {
             var item = await _itemRepository.Get(itemId);
             var itemDTO = _mapper.Map<ResponseReimbursementItemDTO>(item);
@@ -350,12 +351,14 @@ namespace ReimbursementTrackingApplication.Services
                 }
 
                 var update = await _repository.Update(requestId, request);
-                return new SuccessResponseDTO<int> {
+                return new SuccessResponseDTO<int>
+                {
                     IsSuccess = true,
-                    Message="Deleted",
-                    Data=update.Id
+                    Message = "Deleted",
+                    Data = update.Id
                 };
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -396,13 +399,13 @@ namespace ReimbursementTrackingApplication.Services
                     var requests = allrequests.Where(r => r.UserId == employee.EmployeeId && r.IsDeleted == false).ToList();
 
                     List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(requests);
-                    if(requestDTOs.Count > 0)
+                    if (requestDTOs.Count > 0)
                     {
-                            foreach (var request in requestDTOs)
-                            {
-                                request.Items = await GetItemsByRequestId(request.Id);
-                                requestEmployee.Add(request);
-                            }
+                        foreach (var request in requestDTOs)
+                        {
+                            request.Items = await GetItemsByRequestId(request.Id);
+                            requestEmployee.Add(request);
+                        }
                     }
 
                 }
@@ -434,7 +437,7 @@ namespace ReimbursementTrackingApplication.Services
 
         public async Task<ResponseReimbursementItemDTO> AddItemService(ReimbursementItemDTO itemDTO)
         {
-            var reimbursementItems =  await MappingItems(itemDTO);
+            var reimbursementItems = await MappingItems(itemDTO);
             var item = await _itemRepository.Add(reimbursementItems);
             var responseItem = _mapper.Map<ResponseReimbursementItemDTO>(item);
             responseItem.CategoryName = (await _categoryRepository.Get(responseItem.CategoryId)).Name;
@@ -476,37 +479,87 @@ namespace ReimbursementTrackingApplication.Services
             {
 
 
-            var requests = await _repository.GetAll();
-            var filter_request = requests.Where(r=>r.IsDeleted == false).ToList();
+                var requests = await _repository.GetAll();
+                var filter_request = requests.Where(r => r.IsDeleted == false).ToList();
 
-            var total = filter_request.Count;
-            //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
-            List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(filter_request);
+                var total = filter_request.Count;
+                //List<ResponseReimbursementRequestDTO> requestDTOs = _mapper.Map<List<ResponseReimbursementRequestDTO>>(filter_request);
+                List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(filter_request);
 
-            // foreach (var request in requestDTOs)
-            // {
-            //     request.Items = await GetItemsByRequestId(request.Id);
-            // }
+                // foreach (var request in requestDTOs)
+                // {
+                //     request.Items = await GetItemsByRequestId(request.Id);
+                // }
 
-            var pagedItems = requestDTOs
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+                var pagedItems = requestDTOs
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
 
-            return new PaginatedResultDTO<ResponseReimbursementRequestDTO>
-            {
-                CurrentPage = pageNumber,
-                PageSize = pageSize,
-                TotalCount = total,
-                TotalPages = (int)Math.Ceiling(total / (double)pageSize),
-                Data = pagedItems
+                return new PaginatedResultDTO<ResponseReimbursementRequestDTO>
+                {
+                    CurrentPage = pageNumber,
+                    PageSize = pageSize,
+                    TotalCount = total,
+                    TotalPages = (int)Math.Ceiling(total / (double)pageSize),
+                    Data = pagedItems
 
-            };
-        }
-            catch(Exception ex)
+                };
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-    }
-}
+            }
+        }
+
+        public async Task<DashboardResponseDTO> GetDashboard()
+        {
+            try
+            {
+                var approved = (await _repository.GetAll()).Where(r => r.Status == RequestStatus.Passed && r.IsDeleted == false).Count();
+
+                var pending = (await _repository.GetAll()).Where(r => r.Status == RequestStatus.Pending && r.IsDeleted == false).Count();
+
+                var employee = (await _employeeRepository.GetAll()).Where(e => e.IsDeleted == false).Count();
+
+                var rejected = (await _repository.GetAll()).Where(r => r.Status == RequestStatus.Rejected && r.IsDeleted == false).Count();
+
+                var recents = (await _repository.GetAll()).Where(r => r.IsDeleted == false).OrderByDescending(r => r.UpdatedAt);
+
+                List<RecentActivityDTO> recentActivity = new List<RecentActivityDTO>();
+
+                foreach (var recent in recents)
+                {
+                    RecentActivityDTO recentActivityDTO = new RecentActivityDTO()
+                    {
+                        Amount = recent.TotalAmount,
+                        Date = recent.UpdatedAt,
+                        EmployeeName = (await _userRepository.Get(recent.UserId)).UserName,
+                        Status = recent.Status.ToString(),
+                        Id = recent.Id
+
+                    };
+                    recentActivity.Add(recentActivityDTO);
+                }
+
+                DashboardResponseDTO reposnseDTO = new DashboardResponseDTO()
+                {
+                    ApprovedRequests = approved,
+                    EmployeesCount = employee,
+                    PendingRequests = pending,
+                    RejectedRequests = rejected,
+                    RecentActivities = recentActivity,
+                    TotalRequests = (await _repository.GetAll()).Where(r => r.IsDeleted == false).Count()
+
+                };
+
+                return reposnseDTO;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace ReimbursementTrackingApplication.Services
             var _tokenDescriptor = new JwtSecurityToken(
 
                 claims: _claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddDays(30),
                 signingCredentials: _credentials
             );
 

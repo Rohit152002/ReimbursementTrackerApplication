@@ -102,7 +102,13 @@ namespace ReimbursementUnitProjectTest.Services
 
             var adddedUser2= await userRepository.Add(hr);
             var addedUser = await userRepository.Add(user);
+             Employee employee = new Employee()
+            {
+                EmployeeId = 1,
+                ManagerId = 2,
 
+            };
+            var addedEmployee = await employeeRepository.Add(employee);
             ReimbursementRequest request = new ReimbursementRequest()
             {
                 UserId = 1,
@@ -126,9 +132,9 @@ namespace ReimbursementUnitProjectTest.Services
             {
                 RequestId = 1,
                 ReviewId = 1,
-               
+
                 Comments = "All fine",
-              
+
             };
             mapper.Setup(m=>m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
 
@@ -174,15 +180,15 @@ namespace ReimbursementUnitProjectTest.Services
 
             ApprovalStageDTO stageDTO = new ApprovalStageDTO()
             {
-                ReviewId = 1,
                 RequestId = 1,
+                ReviewId = 2,
                 Comments = "All fine"
             };
 
             ApprovalStage approval = new ApprovalStage()
             {
                 RequestId = 1,
-                ReviewId = 1,
+                ReviewId = 2,
 
                 Comments = "All fine",
 
@@ -260,7 +266,7 @@ namespace ReimbursementUnitProjectTest.Services
             mapper.Setup(m => m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
 
             Assert.ThrowsAsync<Exception>(async()=> await service.ApproveRequestAsync(stageDTO));
-            
+
         }
 
         [Test]
