@@ -1,7 +1,9 @@
 <template>
     <section class="flex">
         <AdminNavbar />
-        <RouterView />
+        <div class="router-view-container w-full overflow-y-auto max-h-screen">
+            <RouterView />
+        </div>
 
     </section>
 </template>
@@ -14,4 +16,10 @@ export default {
     name: " AdminDashboard", components: { AdminNavbar, },
 } </script>
 
-<style></style>
+<style>
+.router-view-container {
+    height: calc(100vh);
+    /* Adjust height considering the nav height */
+    overflow-y: auto;
+}
+</style>

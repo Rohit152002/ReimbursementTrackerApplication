@@ -21,6 +21,8 @@ namespace ReimbursementTrackingApplication.Services
         private readonly IRepository<int, User> _userRepository;
 
         private readonly IMapper _mapper;
+        private readonly IRepository<int, BankAccount> _bankAccountRepository;
+        private readonly IRepository<int, ApprovalStage> _approvalStageRepository;
         public ReimbursementRequestService(
             IRepository<int, ReimbursementRequest> repository,
             IRepository<int, Policy> policyRepository,
@@ -29,7 +31,9 @@ namespace ReimbursementTrackingApplication.Services
         IRepository<int, ReimbursementItem> itemRepository,
             IRepository<int, Employee> employeeRepository,
             IRepository<int, ExpenseCategory> categoryRepository,
-            IRepository<int, User> userRepository)
+            IRepository<int, User> userRepository,
+            IRepository<int, BankAccount> bankAccRepository,
+            IRepository<int, ApprovalStage> approvalStageRepository)
         {
             _userRepository = userRepository;
             _repository = repository;
@@ -41,6 +45,8 @@ namespace ReimbursementTrackingApplication.Services
             _itemRepository = itemRepository;
             _employeeRepository = employeeRepository;
             _categoryRepository = categoryRepository;
+            _bankAccountRepository = bankAccRepository;
+            _approvalStageRepository = approvalStageRepository;
         }
 
         public async Task<SuccessResponseDTO<ResponseReimbursementRequestDTO>> SubmitRequestAsync(CreateReimbursementRequestDTO requestDto)
@@ -48,13 +54,22 @@ namespace ReimbursementTrackingApplication.Services
             try
             {
                 var request = MapRequest(requestDto);
-
-                var requestAdded = await _repository.Add(request);
+                var currentYear = DateTime.Now.Year;
+                var existingRequest = (await _repository.GetAll()).Where(r => r.UserId == requestDto.UserId && r.PolicyId == requestDto.PolicyId && r.CreatedAt.Year == currentYear && r.Status == RequestStatus.Passed).ToList();
                 var employee = (await _employeeRepository.GetAll()).FirstOrDefault(e => e.EmployeeId == requestDto.UserId);
                 if (employee == null)
                 {
-                    throw new UnauthorizedException();
+                    throw new UnauthorizedException("Assign a Manager First");
                 }
+
+                if (existingRequest.Any())
+                {
+                    throw new Exception("You have already submitted a request for this policy this year.");
+                }
+
+                var banks = await _bankAccountRepository.GetAll();
+                var bank = banks.FirstOrDefault(b => b.UserId == requestDto.UserId) ?? throw new NotFoundException("Bank");
+                var requestAdded = await _repository.Add(request);
 
                 var items = (await AddItemsAsync(requestDto.Items, requestAdded.Id)).ToList();
 
@@ -73,13 +88,17 @@ namespace ReimbursementTrackingApplication.Services
                 };
 
             }
-            catch (UnauthorizedException)
+            catch (UnauthorizedException ex)
             {
-                throw new UnauthorizedException();
+                throw new UnauthorizedException(ex.Message);
             }
-            catch (CollectionEmptyException)
+            catch (CollectionEmptyException ex)
             {
-                throw new UnauthorizedException();
+                throw new UnauthorizedException(ex.Message);
+            }
+            catch (NotFoundException)
+            {
+                throw new Exception("Bank details not found. Please add your bank information to submit the reimbursement request.");
             }
             catch (Exception ex)
             {
@@ -237,7 +256,10 @@ namespace ReimbursementTrackingApplication.Services
                     PolicyId = request.PolicyId,
                     PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName,
                     Items = await GetItemsByRequestId(request.Id),
-                    Comments = request.Comments
+                    Comments = request.Comments,
+                    Stage = request.Stage,
+                    Status = request.Status,
+
 
                 };
 
@@ -371,6 +393,8 @@ namespace ReimbursementTrackingApplication.Services
             {
                 var employess = (await _employeeRepository.GetAll()).Where(e => e.ManagerId == managerId).ToList();
 
+                var approvals = await _approvalStageRepository.GetAll();
+
                 List<ResponseEmployeeDTO> result = new List<ResponseEmployeeDTO>();
                 foreach (var employee in employess)
                 {
@@ -397,6 +421,7 @@ namespace ReimbursementTrackingApplication.Services
                     var allrequests = await _repository.GetAll();
 
                     var requests = allrequests.Where(r => r.UserId == employee.EmployeeId && r.IsDeleted == false).ToList();
+                    //  && r.Stage == Stage.Processing
 
                     List<ResponseReimbursementRequestDTO> requestDTOs = await MappingReimbursementRequest(requests);
                     if (requestDTOs.Count > 0)
@@ -404,6 +429,8 @@ namespace ReimbursementTrackingApplication.Services
                         foreach (var request in requestDTOs)
                         {
                             request.Items = await GetItemsByRequestId(request.Id);
+                            var approval = approvals.FirstOrDefault(a => a.RequestId == request.Id && a.ReviewId == managerId && a.Status == Status.Approved);
+                            request.IsApprovedByManager = approval != null;
                             requestEmployee.Add(request);
                         }
                     }
@@ -520,11 +547,13 @@ namespace ReimbursementTrackingApplication.Services
 
                 var pending = (await _repository.GetAll()).Where(r => r.Status == RequestStatus.Pending && r.IsDeleted == false).Count();
 
-                var employee = (await _employeeRepository.GetAll()).Where(e => e.IsDeleted == false).Count();
+                var employee = (await _userRepository.GetAll()).Where(e => e.IsDeleted == false).Count();
 
                 var rejected = (await _repository.GetAll()).Where(r => r.Status == RequestStatus.Rejected && r.IsDeleted == false).Count();
 
                 var recents = (await _repository.GetAll()).Where(r => r.IsDeleted == false).OrderByDescending(r => r.UpdatedAt);
+
+                // var manager = (await _userRepository.GetAll()).Where(r => r.IsManager == true && r.IsDeleted == false).Count();
 
                 List<RecentActivityDTO> recentActivity = new List<RecentActivityDTO>();
 

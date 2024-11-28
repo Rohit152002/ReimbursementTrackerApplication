@@ -10,5 +10,10 @@ namespace ReimbursementTrackingApplication.Models.DTOs
         public UserDTO Review { get; set; }
 
         public string Comments { get; set; } = string.Empty;
+        public DateTime ReviewDate { get; set; }
+        public Status RequestStage { get; set; }
+        public string RequestStageName => RequestStage.ToString();
+        public Stage Stage { get; set; }
+        public string StageName => Stage.ToString();
     }
 }

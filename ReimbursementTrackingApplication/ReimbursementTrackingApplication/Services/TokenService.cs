@@ -25,6 +25,7 @@ namespace ReimbursementTrackingApplication.Services
                     new Claim(JwtRegisteredClaimNames.GivenName, user.Username),
                     new Claim(ClaimTypes.Role, user.Department),
                     new Claim("Id", user.Id.ToString()),
+                    new Claim("Manager",user.IsManager.ToString())
 
                 };
 

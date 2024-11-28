@@ -37,7 +37,7 @@
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2"
                         required v-model="department" name="" id="">
                         <option value="" disabled selected>Select Your Option</option>
-                        <!-- <option value=0>HR</option> -->
+                        <option value=0>HR</option>
                         <option value=1>Finance</option>
                         <option value=2>IT</option>
                         <option value=3>Sales</option>

@@ -1,10 +1,11 @@
-namespace ReimbursementTrackingApplication.Exceptions{
-    public class UnauthorizedException:Exception
+namespace ReimbursementTrackingApplication.Exceptions
+{
+    public class UnauthorizedException : Exception
     {
         string _message;
-        public UnauthorizedException()
+        public UnauthorizedException(string message)
         {
-            _message = $"Unauthorized";
+            _message = message;
         }
         override public string Message => _message;
     }

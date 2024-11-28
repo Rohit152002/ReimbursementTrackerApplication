@@ -1,7 +1,6 @@
 <template>
     <div class="w-full flex items-center justify-center">
         <div class="w-3/4">
-
             <h2>User Details</h2>
             <table>
                 <thead>
@@ -12,7 +11,6 @@
                         <th>Department</th>
                         <th>Gender</th>
                         <th>Edit</th>
-
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -24,7 +22,6 @@
                         <td>{{ item.departmentName }}</td>
                         <td>{{ item.genderName }}</td>
                         <td><i class='bx bxs-edit-alt'></i></td>
-
                         <td><i class='bx bxs-x-circle'></i></td>
                     </tr>
                 </tbody>

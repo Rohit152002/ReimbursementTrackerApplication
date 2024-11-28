@@ -6,13 +6,13 @@
 
 <script>
 
+
 // import HomePage from './components/HomePage.vue';
 // import LoginRegister from './components/LoginRegister.vue';
 // import router from './scripts/Route';
 export default {
   name: 'App',
   components: {
-
     // LoginRegister
     // HomePage
   },

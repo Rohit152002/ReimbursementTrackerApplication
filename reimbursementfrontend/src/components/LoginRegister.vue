@@ -1,14 +1,15 @@
 <template>
   <div class="body">
 
+
     <div class="container xl:w-[50rem]">
       <input type="checkbox" id="flip">
       <div class="cover">
         <div class="front">
           <img src="/frontImg.jpg" alt="">
           <div class="text">
-            <span class="text-1">Every new friend is a <br> new adventure</span>
-            <span class="text-2">Transcation Reimbursement</span>
+            <span class="text-1">Streamlining Employee Reimbursement </span>
+            <span class="text-2">Transaction Reimbursement</span>
           </div>
         </div>
         <div class="back">
@@ -89,6 +90,8 @@
 <script>
 import router from '@/scripts/Route';
 import { login, register } from '@/scripts/User';
+import { useToast } from 'vue-toastification';
+
 
 export default {
   name: "LoginRegister",
@@ -98,6 +101,7 @@ export default {
       email: '',
       password: '',
       department: '',
+      toast: useToast()
 
     }
 
@@ -105,12 +109,14 @@ export default {
   methods:
   {
     registerMethod() {
+      const toast = useToast();
       event.preventDefault();
       register(this.username, this.email, this.password, this.department)
         .then((res) => {
           alert("registration successfull");
           sessionStorage.setItem("token", res.data.token)
           // router.push('/')
+          toast.success("registration successfull")
           window.location.reload();
         }, err => {
           console.log(err)
@@ -118,34 +124,46 @@ export default {
         })
     },
     async loginMethod() {
+      const toastId = this.toast("Loading...",);
       try {
 
         event.preventDefault();
+        // const toast = useToast();
+
+
         const res = await login(this.email, this.password)
         sessionStorage.clear();
         sessionStorage.setItem("token", res.data.token)
+        sessionStorage.setItem("name", res.data.userName);
         localStorage.setItem("department", res.data.department)
-        if (res.data.department == 0) {
+        this.toast.update(toastId, {
+          content: "Login Successull!", options: {
+            type: "success"
+          }
+        });
 
-          router.push('/hr')
-        } else if (res.data.department == 1) {
 
-          router.push('/finance')
-        }
-        else if (res.data.department == 7) {
-
+        if (res.data.department == 7) {
           router.push('/admin')
+
         }
         else {
 
           router.push('/')
         }
+
       } catch (err) {
-        console.log(err.message);
+        console.log(err);
+        this.toast.update(toastId, {
+          content: "Login Failed!", options: {
+            type: "error"
+          }
+        });
+
       }
 
 
-    }
+    },
   }
 }
 </script>

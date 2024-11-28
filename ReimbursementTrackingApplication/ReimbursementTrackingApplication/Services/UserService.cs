@@ -103,7 +103,9 @@ namespace ReimbursementTrackingApplication.Services
                     {
                         Id = user.Id,
                         Username = user.UserName,
-                        Department = user.Department.ToString()
+                        Department = user.Department.ToString(),
+                        IsManager = user.IsManager.ToString(),
+
                     })
 
                 };

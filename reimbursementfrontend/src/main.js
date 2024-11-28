@@ -1,9 +1,12 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./scripts/Route";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+import { createPinia } from "pinia";
+
 import axiosInstance from "./scripts/Interceptor";
 import "./index.css";
-
 router.beforeEach(async (to, from, next) => {
   try {
     const result = await axiosInstance.get("/api/User/users", {
@@ -28,4 +31,11 @@ router.beforeEach(async (to, from, next) => {
   }
 });
 
-createApp(App).use(router).mount("#app");
+const options = {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 20,
+  newestOnTop: true,
+};
+
+const pinia = createPinia();
+createApp(App).use(pinia).use(Toast, options).use(router).mount("#app");

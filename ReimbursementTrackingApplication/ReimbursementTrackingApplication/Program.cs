@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NETCore.MailKit.Core;
@@ -44,15 +45,15 @@ namespace ReimbursementTrackingApplication
             #endregion
 
             #region Repositories
-            builder.Services.AddScoped<IRepository<int,User>, UserRepository>();
-            builder.Services.AddScoped<IRepository<int,ReimbursementRequest>, ReimbursementRequestRepository>();    
-            builder.Services.AddScoped<IRepository<int,ReimbursementItem>,ReimbursementItemRepositories>();
-            builder.Services.AddScoped<IRepository<int,ApprovalStage>, ApprovalStageRepository>();
-            builder.Services.AddScoped<IRepository<int,BankAccount>,BankAccountRepository>();
-            builder.Services.AddScoped<IRepository<int,Employee>,EmployeeRepository>();
-            builder.Services.AddScoped<IRepository<int,ExpenseCategory>,CategoryRepositories>();
-            builder.Services.AddScoped<IRepository<int,Policy>,PolicyRepository>();
-            builder.Services.AddScoped<IRepository<int,Payment>,PaymentRepository>();
+            builder.Services.AddScoped<IRepository<int, User>, UserRepository>();
+            builder.Services.AddScoped<IRepository<int, ReimbursementRequest>, ReimbursementRequestRepository>();
+            builder.Services.AddScoped<IRepository<int, ReimbursementItem>, ReimbursementItemRepositories>();
+            builder.Services.AddScoped<IRepository<int, ApprovalStage>, ApprovalStageRepository>();
+            builder.Services.AddScoped<IRepository<int, BankAccount>, BankAccountRepository>();
+            builder.Services.AddScoped<IRepository<int, Employee>, EmployeeRepository>();
+            builder.Services.AddScoped<IRepository<int, ExpenseCategory>, CategoryRepositories>();
+            builder.Services.AddScoped<IRepository<int, Policy>, PolicyRepository>();
+            builder.Services.AddScoped<IRepository<int, Payment>, PaymentRepository>();
 
             #endregion
             var uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "File");
@@ -79,7 +80,9 @@ namespace ReimbursementTrackingApplication
                     provider.GetRequiredService<IRepository<int, ReimbursementItem>>(),
                     provider.GetRequiredService<IRepository<int, Employee>>(),
                     provider.GetRequiredService<IRepository<int, ExpenseCategory>>(),
-                    provider.GetRequiredService<IRepository<int, User>>()
+                    provider.GetRequiredService<IRepository<int, User>>(),
+                    provider.GetRequiredService<IRepository<int, BankAccount>>(),
+                    provider.GetRequiredService<IRepository<int, ApprovalStage>>()
                 )
             );
             //builder.Services.AddScoped<IReimbursementRequestService, ReimbursementRequestService>();
@@ -127,7 +130,7 @@ namespace ReimbursementTrackingApplication
                 });
             });
             #endregion
-          
+
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -164,6 +167,16 @@ namespace ReimbursementTrackingApplication
 
 
             var app = builder.Build();
+            //   app.UseStaticFiles(); for www root
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                  Path.Combine(Directory.GetCurrentDirectory(), "File")
+
+              ),
+                RequestPath = "/File"
+            });
 
             app.UseCors("AllowAll");
 

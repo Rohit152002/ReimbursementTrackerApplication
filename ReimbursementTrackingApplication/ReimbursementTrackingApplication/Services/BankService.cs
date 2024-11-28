@@ -44,7 +44,8 @@ namespace ReimbursementTrackingApplication.Services
                     IsSuccess = true,
                     Message = "Added Succesfull"
                 };
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -63,7 +64,8 @@ namespace ReimbursementTrackingApplication.Services
                     IsSuccess = true,
                     Message = "Delete Successfully"
                 };
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -79,7 +81,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 List<ResponseBankDTO> banksDTO = new List<ResponseBankDTO>();
 
-               foreach(var bank in banks)
+                foreach (var bank in banks)
                 {
                     var user = await _userRepository.Get(bank.UserId);
                     var userDTO = _mapper.Map<UserDTO>(user);
@@ -93,7 +95,7 @@ namespace ReimbursementTrackingApplication.Services
                         Id = bank.Id,
                         IFSCCode = bank.IFSCCode,
                         UserId = bank.UserId,
-                        
+
                     };
                     banksDTO.Add(responseBankDTO);
                 }
@@ -120,7 +122,8 @@ namespace ReimbursementTrackingApplication.Services
 
         public async Task<SuccessResponseDTO<ResponseBankDTO>> GetBankAccountByIdAsync(int id)
         {
-            try { 
+            try
+            {
                 var addedBank = await _repository.Get(id);
                 var user = await _userRepository.Get(addedBank.UserId);
                 var userDTO = _mapper.Map<UserDTO>(user);
@@ -142,11 +145,12 @@ namespace ReimbursementTrackingApplication.Services
                     IsSuccess = true,
                     Message = "Fetch Succesfull"
                 };
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                    throw new Exception(ex.Message);
-            }   
-    
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public async Task<SuccessResponseDTO<ResponseBankDTO>> GetBankAccountByUserIdAsync(int userId)
@@ -155,8 +159,12 @@ namespace ReimbursementTrackingApplication.Services
             {
                 var banks = await _repository.GetAll();
                 var bank = banks.FirstOrDefault(x => x.UserId == userId);
+                if (bank == null)
+                {
+                    throw new Exception("Bank Not Found for this user");
+                }
                 var bankDTO = _mapper.Map<BankDTO>(bank);
-                var user = await _userRepository.Get(bank.Id);
+                var user = await _userRepository.Get(bank.UserId);
                 var userDTO = _mapper.Map<UserDTO>(user);
                 ResponseBankDTO bankResponse = new ResponseBankDTO()
                 {
@@ -185,7 +193,7 @@ namespace ReimbursementTrackingApplication.Services
         {
             try
             {
-             
+
                 var bank = _mapper.Map<BankAccount>(bankAccount);
                 var updatebank = await _repository.Update(id, bank);
                 var user = await _userRepository.Get(updatebank.UserId);

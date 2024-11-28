@@ -19,7 +19,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<SuccessResponseDTO<ResponsePolicyDTO>> GetPolicyByIdAsync(int policyId);
         [HttpGet("{id}")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<SuccessResponseDTO<ResponsePolicyDTO>>> GetPolicyByid(int id)
         {
             try
@@ -37,14 +37,14 @@ namespace ReimbursementTrackingApplication.Controllers
 
         }
         //Task<PaginatedResultDTO<ResponsePolicyDTO>> GetAllPolicesAsync(int pageNumber, int pageSize);
+        // [Authorize]
         [HttpGet]
-        [Authorize(Roles ="Admin")]
-        public async Task<ActionResult<PaginatedResultDTO<ResponsePolicyDTO>>> GetAllPolicies(int pageNumber=1, int pageSize =10)
+        public async Task<ActionResult<PaginatedResultDTO<ResponsePolicyDTO>>> GetAllPolicies(int pageNumber = 1, int pageSize = 10)
         {
             try
             {
 
-                var policies = await _policyService.GetAllPolicesAsync(pageNumber,pageSize);
+                var policies = await _policyService.GetAllPolicesAsync(pageNumber, pageSize);
                 return Ok(policies);
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<SuccessResponseDTO<int>> AddPolicyAsync(CreatePolicyDTO policyDTO);
         [HttpPost]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> AddPolicies(CreatePolicyDTO policyDTO)
         {
             try
@@ -74,13 +74,13 @@ namespace ReimbursementTrackingApplication.Controllers
         }
         //Task<SuccessResponseDTO<int>> UpdatePolicyAsync(int categoryId, CreatePolicyDTO policyDTO);
         [HttpPut("{id}")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> UpdatePolicy(int id, CreatePolicyDTO policyDTO)
         {
             try
             {
 
-                var policies = await _policyService.UpdatePolicyAsync(id,policyDTO);
+                var policies = await _policyService.UpdatePolicyAsync(id, policyDTO);
                 return Ok(policies);
             }
             catch (Exception ex)
@@ -93,7 +93,7 @@ namespace ReimbursementTrackingApplication.Controllers
         //Task<SuccessResponseDTO<int>> DeletePolicyAsync(int policyId);
 
         [HttpDelete("{id}")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<SuccessResponseDTO<int>>> Delete(int id)
         {
             try

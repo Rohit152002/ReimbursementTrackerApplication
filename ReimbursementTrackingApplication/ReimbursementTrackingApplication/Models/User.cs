@@ -28,6 +28,7 @@
         public byte[]? Password { get; set; }
         public byte[]? HashKey { get; set; }
         public Departments? Department { get; set; }
+        public bool IsManager { get; set; } = false;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public IEnumerable<ApprovalStage> Approvals { get; set; }

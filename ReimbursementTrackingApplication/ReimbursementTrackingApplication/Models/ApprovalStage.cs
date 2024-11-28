@@ -2,11 +2,12 @@
 {
     public enum Stage
     {
+        Processing,
         Manager,
         Hr,
-        Financial
+        Financial,
     }
-    public enum Status 
+    public enum Status
     {
         Approved,
         Rejected,
@@ -17,7 +18,7 @@
     public class ApprovalStage
     {
         public int Id { get; set; }
-        public int RequestId {  get; set; }
+        public int RequestId { get; set; }
         public ReimbursementRequest Request { get; set; }
         public int ReviewId { get; set; }
         public User Review { get; set; }

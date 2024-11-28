@@ -6,11 +6,7 @@
             <i class="bx bx-menu" :class="menuIconClass" id="btn" @click="toggleSideBar"></i>
         </div>
         <ul class="nav-list">
-            <!-- <li>
-                <i class="bx bx-search" @click="toggleSideBar"></i>
-                <input type="text" placeholder="Search...">
-                <span class="tooltip">Search</span>
-            </li> -->
+
             <li>
                 <RouterLink to="/admin">
                     <i class="bx bx-grid-alt"></i>
@@ -19,63 +15,66 @@
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <RouterLink to="/employees">
+                <RouterLink to="/admin/employees">
                     <i class="bx bx-user"></i>
                     <span class="link_name">Employees</span>
                 </RouterLink>
                 <span class="tooltip">Employees</span>
             </li>
             <li>
-                <RouterLink to="/requests">
+                <RouterLink to="/admin/requests">
                     <i class="bx bx-file"></i>
                     <span class="link_name">Request</span>
                 </RouterLink>
                 <span class="tooltip">Request</span>
             </li>
             <li>
-                <RouterLink to="/banks">
+                <RouterLink to="/admin/banks">
                     <i class="bx bxs-bank"></i>
                     <span class="link_name">Banks</span>
                 </RouterLink>
                 <span class="tooltip">Banks</span>
             </li>
             <li>
-                <RouterLink to="approvals">
+                <RouterLink to="/admin/approvals">
                     <i class="bx  bx-list-check"></i>
                     <span class="link_name">Approvals</span>
                 </RouterLink>
                 <span class="tooltip">Approvals</span>
             </li>
             <li>
-                <RouterLink to="/category">
+                <RouterLink to="/admin/category">
                     <i class="bx bx-category"></i>
                     <span class="link_name">Category</span>
                 </RouterLink>
                 <span class="tooltip">Category</span>
             </li>
             <li>
-                <RouterLink to="/policy">
+                <RouterLink to="/admin/policy">
                     <i class="bx bx-info-circle"></i>
                     <span class="link_name">Policy</span>
                 </RouterLink>
                 <span class="tooltip">Policy</span>
             </li>
-            <!-- <li class="profile">
-                <div class="profile_details">
-                    <img src="profile.jpeg" alt="profile image">
-                    <div class="profile_content">
-                        <div class="name">Anna Jhon</div>
-                        <div class="designation">Admin</div>
-                    </div>
-                </div>
-                <i class="bx bx-log-out" id="log_out"></i>
-            </li> -->
+            <li>
+
+                <a @click="logout">
+                    <i class="bx bx-log-out" id="log_out"></i>
+                    <span class="link_name">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+
+
+
+            </li>
+
         </ul>
     </div>
 </template>
 
 <script>
-// import { RouterLink } from 'vue-router';
+import router from '@/scripts/Route';
+
 
 export default {
     name: "AdminNavbar",
@@ -92,6 +91,10 @@ export default {
     methods: {
         toggleSideBar() {
             this.isSideBarOpen = !this.isSideBarOpen;
+        },
+        logout() {
+            sessionStorage.clear();
+            router.push('/')
         }
     }
 }

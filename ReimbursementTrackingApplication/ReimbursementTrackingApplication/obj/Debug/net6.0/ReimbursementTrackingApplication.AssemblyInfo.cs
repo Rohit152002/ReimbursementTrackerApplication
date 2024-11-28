@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReimbursementTrackingApplication")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b048eb1a365bf003e5038fd854b5bed9991d0de2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fa5d2a01b6ff8641159d4beda1dc77a91e23291")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReimbursementTrackingApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReimbursementTrackingApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

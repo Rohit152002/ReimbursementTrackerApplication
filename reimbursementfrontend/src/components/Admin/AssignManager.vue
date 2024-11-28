@@ -1,48 +1,57 @@
 <template>
+    <div class="w-full flex items-center justify-center p-6 bg-gray-100 min-h-screen">
+        <div class="w-3/4 bg-white p-6 shadow-md rounded-lg">
+            <h2 class="text-xl font-bold mb-4">User Details Without a Manager</h2>
 
-    <div class="w-full flex items-center justify-center">
-        <div class="w-3/4">
-
-            <h2>User Details Who have no manager</h2>
-            <table>
+            <!-- Table -->
+            <table class="w-full border-collapse border border-gray-300 text-left">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Department</th>
-                        <th>Gender</th>
-                        <th>Assign Manager</th>
-                        <th>Delete</th>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-4 py-2">ID</th>
+                        <th class="border border-gray-300 px-4 py-2">Name</th>
+                        <th class="border border-gray-300 px-4 py-2">Email</th>
+                        <th class="border border-gray-300 px-4 py-2">Department</th>
+                        <th class="border border-gray-300 px-4 py-2">Gender</th>
+                        <th class="border border-gray-300 px-4 py-2 text-center">Assign Manager</th>
+                        <th class="border border-gray-300 px-4 py-2 text-center">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for=" item in employeeData" :key="item.id">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.userName }}</td>
-                        <td>{{ item.email }}</td>
-                        <td>{{ item.departmentName }}</td>
-                        <td>{{ item.genderName }}</td>
-
-                        <td class="flex items-center justify-center">
-                            <RouterLink :to="`/user/${item.id}`">
-                                <i class='bx bxs-edit-alt'></i>
+                    <tr v-for="item in employeeData" :key="item.id" class="hover:bg-gray-50 transition-all">
+                        <td class="border border-gray-300 px-4 py-2">{{ item.id }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ item.userName }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ item.email }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ item.departmentName }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ item.genderName }}</td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">
+                            <RouterLink :to="`/admin/user/${item.id}`" class="text-indigo-600 hover:text-indigo-500">
+                                <i class="bx bxs-edit-alt text-lg"></i>
                             </RouterLink>
                         </td>
-
-                        <td><i class='bx bxs-x-circle'></i></td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">
+                            <i class="bx bxs-x-circle text-lg text-red-600 hover:text-red-500 cursor-pointer"
+                                @click="deleteUser(item.id)"></i>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            <div class="pagination">
-                <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-                <span>Page {{ currentPage }} of {{ totalPages }}</span>
-                <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-4">
+                <button @click="previousPage" :disabled="currentPage === 1"
+                    class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-md hover:bg-gray-200 disabled:opacity-50">
+                    Previous
+                </button>
+                <span class="text-gray-700">Page {{ currentPage }} of {{ totalPages }}</span>
+                <button @click="nextPage" :disabled="currentPage === totalPages"
+                    class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-md hover:bg-gray-200 disabled:opacity-50">
+                    Next
+                </button>
             </div>
         </div>
     </div>
-
 </template>
+
 
 <script>
 import { getUserWithNoManager } from '@/scripts/Employee';

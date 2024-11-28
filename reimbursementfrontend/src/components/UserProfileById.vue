@@ -1,6 +1,6 @@
 <template>
-    <div class="p-6 bg-gray-100 min-h-screen w-full">
-        <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
+    <div class="p-6 bg-gray-100 min-h-screen w-full ">
+        <div class=" max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">User Profile</h2>
 
             <!-- User Profile Details -->
@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import { assignManagerRequest, getEmployee } from '@/scripts/Employee';
-import { getUserProfileById, searchUser } from '@/scripts/User';
+import { assignManagerRequest, } from '@/scripts/Employee';
+import { getAllUser, getUserProfileById, } from '@/scripts/User';
 // import { useDebounceFn } from "@vueuse/core"
 import VueSelect from 'vue-select';
 
@@ -77,7 +77,7 @@ export default {
             managers: [], // List of available managers
             selectedManagerId: null, // Selected manager ID
             statusMessage: "", // Message for status updates
-            limit: 1,
+            limit: 10,
             page: 1,
             isSuccess: false, // Flag for success or error state
         }
@@ -103,10 +103,10 @@ export default {
             }
         },
 
-        async getManager(search = "A", page = this.page, limit = this.limit) {
+        async getManager(page = this.page, limit = this.limit) {
             try {
-                const result = await searchUser(search, page, limit);
-                const employee= await getEmployee(page,limit)
+                const result = await getAllUser(page, limit);
+                // const employee= await getEmployee(page,limit)
 
                 // Filter out the current user and sort the results
                 this.managers = result.data.data

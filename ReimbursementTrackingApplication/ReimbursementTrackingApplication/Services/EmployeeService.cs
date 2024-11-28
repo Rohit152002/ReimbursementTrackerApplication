@@ -29,6 +29,9 @@ namespace ReimbursementTrackingApplication.Services
             {
                 var employee = _mapper.Map<Employee>(employeeDto);
                 var addedEmployee = await _repository.Add(employee);
+                var user = await _userRepository.Get(employeeDto.ManagerId);
+                user.IsManager = true;
+                var update = await _userRepository.Update(user.Id, user);
 
                 return new SuccessResponseDTO<int>()
                 {

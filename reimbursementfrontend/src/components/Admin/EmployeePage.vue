@@ -1,39 +1,75 @@
 <template>
-    <div class="mt-20 w-full px-28">
-        <div class="flex gap-12 pb-28">
-
-            <RouterLink to="assign" class="border-black border border-solid rounded-md px-8 py-4 w-fit">Assign Manager
+    <div class="mt-20 w-full px-10">
+        <!-- Navigation Buttons -->
+        <div class="flex gap-12 pb-10">
+            <RouterLink to="assign"
+                class="border border-blue-500 rounded-md px-8 py-4 bg-blue-500 text-white hover:bg-blue-600 transition">
+                Assign Manager
             </RouterLink>
-            <RouterLink to="users" class="border-black border border-solid rounded-md px-8 py-4 w-fit">User List
+            <RouterLink to="users"
+                class="border border-blue-500 rounded-md px-8 py-4 bg-blue-500 text-white hover:bg-blue-600 transition">
+                User List
+            </RouterLink>
+            <RouterLink to="/setup"
+                class="border border-blue-500 rounded-md px-8 py-4 bg-blue-500 text-white hover:bg-blue-600 transition">
+                Add Admin
             </RouterLink>
         </div>
-        <h2>Employee and Manager Details</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Employee Name</th>
-                    <th>Employee Email</th>
-                    <th>Employee Department</th>
-                    <th>Manager Name</th>
-                    <th>Manager Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in employeeData" :key="item.id">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.employee.userName }}</td>
-                    <td>{{ item.employee.email }}</td>
-                    <td>{{ item.employee.departmentName }}</td>
-                    <td>{{ item.manager.userName }}</td>
-                    <td>{{ item.manager.email }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="pagination">
-            <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-            <span>Page {{ currentPage }} of {{ totalPages }}</span>
-            <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+
+        <!-- Table Heading -->
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Employee and Manager Details</h2>
+
+        <!-- Employee Table -->
+        <div class="overflow-x-auto bg-white shadow-md rounded-md">
+            <table class="min-w-full border border-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 border border-gray-200">ID</th>
+                        <th class="px-4 py-2 border border-gray-200">Employee Name</th>
+                        <th class="px-4 py-2 border border-gray-200">Employee Email</th>
+                        <th class="px-4 py-2 border border-gray-200">Employee Department</th>
+                        <th class="px-4 py-2 border border-gray-200">Manager Name</th>
+                        <th class="px-4 py-2 border border-gray-200">Manager Email</th>
+                        <!-- <th class="px-4 py-2 border border-gray-200">Reimbursement</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in employeeData" :key="item.id" class="hover:bg-gray-50">
+                        <td class="px-4 py-2 border border-gray-200">{{ item.id }}</td>
+                        <td class="px-4 py-2 border border-gray-200 font-medium text-gray-800">
+                            {{ item.employee.userName }}
+                        </td>
+                        <td class="px-4 py-2 border border-gray-200">{{ item.employee.email }}</td>
+                        <td class="px-4 py-2 border border-gray-200">{{ item.employee.departmentName }}</td>
+                        <td class="px-4 py-2 border border-gray-200">{{ item.manager.userName }}</td>
+                        <td class="px-4 py-2 border border-gray-200">{{ item.manager.email }}</td>
+                        <!-- <td class="px-4 py-2 border border-gray-200 text-center">
+                            <button class="px-3 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
+                                @click="viewReimbursement(item.id)">
+                                View Requests
+                            </button>
+                        </td> -->
+                    </tr>
+                    <tr v-if="employeeData.length === 0">
+                        <td colspan="7" class="px-4 py-2 text-center text-gray-500 italic">
+                            No employee data available.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination flex justify-between items-center mt-6">
+            <button class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
+                @click="previousPage" :disabled="currentPage === 1">
+                Previous
+            </button>
+            <span class="text-gray-700 font-medium">Page {{ currentPage }} of {{ totalPages }}</span>
+            <button class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition" @click="nextPage"
+                :disabled="currentPage === totalPages">
+                Next
+            </button>
         </div>
     </div>
 </template>
@@ -84,6 +120,9 @@ export default {
                 this.currentPage--;
                 await this.fetchEmployeeData();
             }
+        }, viewReimbursement(employeeId) {
+            alert(`Viewing reimbursement requests for employee ID: ${employeeId}`);
+            // Logic to navigate or fetch reimbursement requests can be added here
         },
     },
 };

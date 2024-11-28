@@ -11,7 +11,7 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-     [EnableCors("AllowAll")]
+    [EnableCors("AllowAll")]
     public class ApprovalController : ControllerBase
     {
         private readonly IApprovalService _approvalService;
@@ -40,11 +40,11 @@ namespace ReimbursementTrackingApplication.Controllers
 
         [HttpGet("request/{requestId}")]
         [Authorize(Roles = "Finance,HR,Admin")]
-        public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalByRequestId(int requestId,int pageNumber =1 , int pageSize =10)
+        public async Task<ActionResult<SuccessResponseDTO<ResponseApprovalStageDTO>>> GetApprovalByRequestId(int requestId, int pageNumber = 1, int pageSize = 10)
         {
             try
             {
-                var result = await _approvalService.GetApprovalsByRequestIdAsync(requestId,pageNumber,pageSize);
+                var result = await _approvalService.GetApprovalsByRequestIdAsync(requestId, pageNumber, pageSize);
                 return Ok(result);
 
             }
@@ -80,7 +80,7 @@ namespace ReimbursementTrackingApplication.Controllers
         {
             try
             {
-                var result = await _approvalService.GetHrPendingApprovalsAsync( pageNumber, pageSize);
+                var result = await _approvalService.GetHrPendingApprovalsAsync(pageNumber, pageSize);
                 return Ok(result);
 
             }
@@ -120,9 +120,9 @@ namespace ReimbursementTrackingApplication.Controllers
                 return Ok(result);
 
             }
-            catch(UnauthorizedAccessException ex)
+            catch (UnauthorizedAccessException ex)
             {
-                return Unauthorized(new ErrorResponseDTO(){  ErrorMessage = ex.Message, ErrorNumber=StatusCodes.Status401Unauthorized});
+                return Unauthorized(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = StatusCodes.Status401Unauthorized });
             }
             catch (Exception ex)
             {
@@ -144,6 +144,19 @@ namespace ReimbursementTrackingApplication.Controllers
             {
                 return BadRequest(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
 
+            }
+        }
+        [HttpGet("approvals")]
+        public async Task<ActionResult> GetAllRequest(int pageNumber = 1, int pageSize = 10)
+        {
+            try
+            {
+                var result = await _approvalService.GetAllApprovalsAsync(pageNumber, pageSize);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorResponseDTO() { ErrorMessage = ex.Message, ErrorNumber = 404 });
             }
         }
     }

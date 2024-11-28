@@ -1,5 +1,10 @@
 <template>
-    <div class="dashboard">
+    <div class="px-4 py-8">
+        <div class="flex w-full justify-between">
+
+            <h1 class="text-3xl font-extrabold text-blue-600 pb-20">Hi!!! {{ name }}</h1>
+            <p v-if="Department" class="text-3xl font-extrabold text-blue-600 pb-20">{{ Department }}</p>
+        </div>
         <div class="stats">
             <div class="stat-card" v-for="(value, key) in stats" :key="key">
                 <h3>{{ key }}</h3>
@@ -35,12 +40,15 @@
 
 <script>
 import { getDashboard } from '@/scripts/Request';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
     name: "DashboardData",
     data() {
         return {
-            data: {}
+            data: {},
+            name: "",
+            Department: ""
         }
     }
     ,
@@ -71,6 +79,16 @@ export default {
             const res = await getDashboard()
             console.log(res.data)
             this.data = res.data;
+            this.name = sessionStorage.getItem('name')
+
+
+            const token = sessionStorage.getItem("token")
+            const decoded = jwtDecode(token);
+            console.log(decoded)
+            this.Department = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+
+
+
         } catch (err) {
             console.log(err)
         }

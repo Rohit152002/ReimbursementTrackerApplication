@@ -49,9 +49,15 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
             {
                 var reviewer = await _userRepository.Get(approval.ReviewId);
 
-                if(reviewer.Department==null && reviewer==null)
+                if (reviewer.Department == null && reviewer == null)
                 {
                     throw new Exception($"{approval.ReviewId}");
+                }
+                var approvals = await _repository.GetAll();
+                var existApproval = approvals.FirstOrDefault(r => r.RequestId == approval.RequestId && r.ReviewId == approval.ReviewId);
+                if (existApproval != null && existApproval.Status == Status.Approved)
+                {
+                    throw new Exception("Already Approved");
                 }
 
                 Departments department = (Departments)reviewer.Department;
@@ -104,7 +110,7 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
 
                 var paymentPendingMessage = request.Stage == Stage.Financial ? "<p><strong>Payment is pending:</strong> Your reimbursement request has been approved by Finance. Please wait for the payment to be processed.</p>" : "";
 
-                var StagePassed=request.Stage==Stage.Manager ? "HR": request.Stage == Stage.Hr ? "Finance" : "Payment";
+                var StagePassed = request.Stage == Stage.Manager ? "HR" : request.Stage == Stage.Hr ? "Finance" : "Payment";
 
                 var htmlContent = $@"
 <!DOCTYPE html>
@@ -219,7 +225,7 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
             try
             {
                 var reviewer = await _userRepository.Get(approval.ReviewId);
-                if(reviewer.Department==null && reviewer==null)
+                if (reviewer.Department == null && reviewer == null)
                 {
                     throw new Exception($"{approval.ReviewId}");
                 }
@@ -410,6 +416,7 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
                     ReviewId = reviewUser.Id,
                     Review = reviewUserDTO,
                     Comments = approval.Comments,
+                    RequestStage = approval.Status,
                 };
 
                 return new SuccessResponseDTO<ResponseApprovalStageDTO>()
@@ -479,6 +486,24 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
             {
                 var approvals = (await _repository.GetAll()).Where(a => a.IsDeleted == false && a.Stage == Stage.Manager && a.Status == Status.Approved).ToList();
 
+                // var hrApprovals = (await _repository.GetAll()).Where(a => a.IsDeleted == false && a.Stage == Stage.Hr && a.Status == Status.Approved).ToList();
+
+                // approvals = approvals.Where(a => !hrApprovals.Any(hr => hr.RequestId == a.RequestId)).ToList();
+
+                return await GetResponses(approvals, pageNumber, pageSize);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<PaginatedResultDTO<ResponseApprovalStageDTO>> GetAllApprovalsAsync(int pageNumber, int pageSize)
+        {
+            try
+            {
+                var approvals = (await _repository.GetAll()).Where(a => a.IsDeleted == false).ToList();
+
                 return await GetResponses(approvals, pageNumber, pageSize);
 
 
@@ -510,14 +535,22 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
 
                 UserDTO reviewUserDTO = _mapper.Map<UserDTO>(reviewUser);
                 UserDTO requestUserDTO = _mapper.Map<UserDTO>(requestUser);
+                Console.WriteLine(request.TotalAmount);
                 ResponseReimbursementRequestDTO requestDTO = new ResponseReimbursementRequestDTO()
                 {
                     Id = request.Id,
                     UserId = request.UserId,
+                    Comments = request.Comments,
+                    Stage = request.Stage,
+                    Status = request.Status,
                     User = requestUserDTO,
+                    TotalAmount = request.TotalAmount,
                     PolicyId = request.PolicyId,
                     PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName,
-                    Items = itemsDTO
+                    Items = itemsDTO,
+                    IsApprovedByManager = request.Stage > Stage.Processing ? true : false,
+                    IsApprovedByHr = request.Stage > Stage.Manager ? true : false,
+                    IsApprovedByFinance = request.Stage > Stage.Hr ? true : false,
 
                 };
 
@@ -529,6 +562,11 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
                     ReviewId = reviewUser.Id,
                     Review = reviewUserDTO,
                     Comments = approval.Comments,
+                    ReviewDate = approval.ReviewDate,
+                    RequestStage = approval.Status,
+                    Stage = approval.Stage
+
+
                 };
 
                 responseApprovalStageDTOs.Add(responseApproval);

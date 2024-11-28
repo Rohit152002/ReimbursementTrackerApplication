@@ -11,15 +11,15 @@
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }  
-        public int PolicyId {  get; set; }
+        public User User { get; set; }
+        public int PolicyId { get; set; }
         public Policy Policy { get; set; }
         public double TotalAmount { get; set; }
         public string Comments { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public Stage Stage { get; set; } = Stage.Manager;
-        public RequestStatus Status { get; set; }=RequestStatus.Pending;
+        public Stage Stage { get; set; } = Stage.Processing;
+        public RequestStatus Status { get; set; } = RequestStatus.Pending;
         public IEnumerable<ReimbursementItem> Items { get; set; }
         public IEnumerable<ApprovalStage> Approvals { get; set; }
         public Payment Payment { get; set; }

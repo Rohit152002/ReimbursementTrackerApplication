@@ -8,7 +8,7 @@ import HRDashboard from "@/components/HRDashboard.vue";
 import AdminDashboard from "@/components/AdminDashboard.vue";
 import FinanceDashboard from "@/components/FinanceDashboard.vue";
 import DashboardData from "@/components/Admin/DashboardData.vue";
-import EmployeePage from "@/components/Admin/EmployeePage.vue";
+// import EmployeePage from "@/components/Admin/EmployeePage.vue";
 import RequestPage from "@/components/Admin/RequestPage.vue";
 import BankDetails from "@/components/Admin/BankDetails.vue";
 import ApprovalsPage from "@/components/Admin/ApprovalsPage.vue";
@@ -20,12 +20,39 @@ import UserFormFillUp from "@/components/Form/UserFormFillUp.vue";
 import UserList from "@/components/Admin/UserList.vue";
 import AssignManager from "@/components/Admin/AssignManager.vue";
 import UserProfileById from "@/components/UserProfileById.vue";
+import EmployeeRequest from "@/components/EmployeeRequest.vue";
+import EmployeePage from "@/components/Admin/EmployeePage.vue";
+import ReimbursementRequestById from "@/components/ReimbursementRequestById.vue";
+import PoliciesComponent from "@/components/PoliciesComponent.vue";
+import BankComponent from "@/components/BankComponent.vue";
 
 const routes = [
   { path: "/login", component: LoginRegister },
   {
     path: "/",
     component: HomePage,
+    children: [
+      {
+        path: "/",
+        component: ReimbursementRequest,
+      },
+      {
+        path: "/employee",
+        component: EmployeeRequest,
+      },
+      {
+        path: "/policies",
+        component: PoliciesComponent,
+      },
+      {
+        path: "/request/:id",
+        component: ReimbursementRequestById,
+      },
+      {
+        path: "/bank",
+        component: BankComponent,
+      },
+    ],
     beforeEnter: (to, from, next) => {
       if (sessionStorage.getItem("token")) {
         next();
@@ -72,44 +99,48 @@ const routes = [
     component: AdminDashboard,
     children: [
       {
-        path: "",
+        path: "/admin/",
         component: DashboardData,
       },
       {
-        path: "/employees",
+        path: "/admin/employees",
         component: EmployeePage,
       },
       {
-        path: "/requests",
+        path: "/admin/requests",
         component: RequestPage,
       },
       {
-        path: "/banks",
+        path: "/admin/banks",
         component: BankDetails,
       },
       {
-        path: "/approvals",
+        path: "/admin/approvals",
         component: ApprovalsPage,
       },
       {
-        path: "/category",
+        path: "/admin/category",
         component: CategoriesPage,
       },
       {
-        path: "/policy",
+        path: "/admin/policy",
         component: PoliciesPage,
       },
       {
-        path: "/users",
+        path: "/admin/users",
         component: UserList,
       },
       {
-        path: "/assign",
+        path: "/admin/assign",
         component: AssignManager,
       },
       {
-        path: "/user/:id",
+        path: "/admin/user/:id",
         component: UserProfileById,
+      },
+      {
+        path: "/admin/request/:id",
+        component: ReimbursementRequestById,
       },
     ],
     beforeEnter: (to, from, next) => {
