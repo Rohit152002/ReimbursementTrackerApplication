@@ -79,17 +79,45 @@ namespace ReimbursementTrackingApplication.Repositories
         {
             try
             {
-                var user = await Get(key);
-                _context.BankAccounts.Update(entity);
-                user.Update();
+                // Retrieve the entity from the database without tracking
+                var existingBank = await _context.BankAccounts.AsNoTracking()
+                    .FirstOrDefaultAsync(b => b.Id == key);
+
+                if (existingBank == null)
+                {
+                    throw new Exception("Bank account not found");
+                }
+
+                // Check for already tracked entities and detach if necessary
+                var trackedEntity = _context.ChangeTracker.Entries<BankAccount>()
+                    .FirstOrDefault(e => e.Entity.Id == key);
+
+                if (trackedEntity != null)
+                {
+                    _context.Entry(trackedEntity.Entity).State = EntityState.Detached;
+                }
+
+                // Update properties manually
+                existingBank.UserId = entity.UserId;
+                existingBank.AccNo = entity.AccNo;
+                existingBank.BranchName = entity.BranchName;
+                existingBank.IFSCCode = entity.IFSCCode;
+                existingBank.BranchAddress = entity.BranchAddress;
+
+                // Attach the modified entity
+                _context.BankAccounts.Update(existingBank);
+
+                // Save changes
                 await _context.SaveChangesAsync();
-                return entity;
+
+                return existingBank;
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Could not update bank details");
-                throw new Exception("Unable to modify bank object");
+                throw new Exception("Unable to modify bank object", e);
             }
         }
+
     }
 }

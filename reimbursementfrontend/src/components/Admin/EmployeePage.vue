@@ -1,6 +1,11 @@
 <template>
     <div class="mt-20 w-full px-10">
         <!-- Navigation Buttons -->
+        <div class="flex w- justify-between items-center pb-4">
+            <input type="text" v-model="searchQuery" @input="onSearchInput"
+                placeholder="Search by Employee Name or Manager Name"
+                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" />
+        </div>
         <div class="flex gap-12 pb-10">
             <RouterLink to="assign"
                 class="border border-blue-500 rounded-md px-8 py-4 bg-blue-500 text-white hover:bg-blue-600 transition">
@@ -34,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in employeeData" :key="item.id" class="hover:bg-gray-50">
+                    <tr v-for="item in filteredEmployeeData" :key="item.id" class="hover:bg-gray-50">
                         <td class="px-4 py-2 border border-gray-200">{{ item.id }}</td>
                         <td class="px-4 py-2 border border-gray-200 font-medium text-gray-800">
                             {{ item.employee.userName }}
@@ -82,10 +87,12 @@ export default {
     name: "EmployeePage",
     data() {
         return {
-            employeeData: [], // Employee and Manager details
+            employeeData: [],
+            filteredEmployeeData: [], // Employee and Manager details
             currentPage: 1, // Current page number
             pageSize: 10, // Number of items per page
-            totalPages: 1, // Total number of pages
+            totalPages: 1, // Total number of pages,
+            searchQuery: ""
         };
     },
     async mounted() {
@@ -103,7 +110,7 @@ export default {
             try {
                 const data = await getEmployee(this.currentPage, this.pageSize);
                 this.employeeData = data.data.data;
-                console.log(this.employeeData)
+                this.filteredEmployeeData = this.employeeData
                 this.totalPages = Math.ceil(data.data.totalCount / this.pageSize);
             } catch (error) {
                 console.error("Error fetching employee data:", error);
@@ -115,6 +122,24 @@ export default {
                 await this.fetchEmployeeData();
             }
         },
+        onSearchInput() {
+            // Triggered when the search input is changed. It filters employeeData directly in the method.
+            const query = this.searchQuery.toLowerCase();
+
+            if (query === "") {
+                // If search is empty, reset to all employees
+                this.filteredEmployeeData = this.employeeData;
+            } else {
+                // Filter employee data based on the search query
+                this.filteredEmployeeData = this.employeeData.filter(item => {
+                    return (
+                        item.employee.userName.toLowerCase().includes(query) ||
+                        item.manager.userName.toLowerCase().includes(query)
+                    );
+                });
+            }
+            this.currentPage = 1; // Reset to the first page when a new search is made
+        },
         async previousPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
@@ -122,7 +147,6 @@ export default {
             }
         }, viewReimbursement(employeeId) {
             alert(`Viewing reimbursement requests for employee ID: ${employeeId}`);
-            // Logic to navigate or fetch reimbursement requests can be added here
         },
     },
 };

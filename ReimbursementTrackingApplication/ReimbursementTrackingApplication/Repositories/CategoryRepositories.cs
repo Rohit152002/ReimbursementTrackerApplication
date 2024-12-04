@@ -80,7 +80,9 @@ namespace ReimbursementTrackingApplication.Repositories
             try
             {
                 var category = await Get(key);
-                _context.Expenses.Update(entity);
+                category.Name = entity.Name;
+                category.Description = entity.Description;
+                _context.Expenses.Update(category);
               
                 await _context.SaveChangesAsync();
                 return entity;

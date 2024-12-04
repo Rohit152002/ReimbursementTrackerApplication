@@ -57,6 +57,13 @@
                 <span class="tooltip">Policy</span>
             </li>
             <li>
+                <RouterLink to="/admin/payments">
+                    <i class='bx bxs-wallet'></i>
+                    <span class="link_name">Payments</span>
+                </RouterLink>
+                <span class="tooltip">Payments</span>
+            </li>
+            <li>
 
                 <a @click="logout">
                     <i class="bx bx-log-out" id="log_out"></i>

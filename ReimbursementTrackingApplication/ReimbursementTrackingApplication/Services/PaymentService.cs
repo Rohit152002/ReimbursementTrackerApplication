@@ -11,15 +11,15 @@ namespace ReimbursementTrackingApplication.Services
         private readonly IRepository<int, Payment> _repository;
 
         //private readonly ReimbursementRequestService _requestService;
-       
-        private readonly IRepository<int,ReimbursementRequest> _reimbursementRequestRepository;
+
+        private readonly IRepository<int, ReimbursementRequest> _reimbursementRequestRepository;
         private readonly IRepository<int, Policy> _policyRepository;
-        private readonly IRepository<int,User> _userRepository;
+        private readonly IRepository<int, User> _userRepository;
         private readonly IRepository<int, ExpenseCategory> _categoryRepository;
         private readonly IRepository<int, ReimbursementItem> _itemRepository;
         private readonly IMapper _mapper;
 
-       
+
         public PaymentService(
             IRepository<int, Payment> repository,
             //ReimbursementRequestService requestService,
@@ -27,8 +27,8 @@ namespace ReimbursementTrackingApplication.Services
             IMapper mapper,
             IRepository<int, Policy> policyRepository,
             IRepository<int, User> userRepository,
-            IRepository<int,ReimbursementItem> itemRepository,
-            IRepository<int,ExpenseCategory> categoryRepository
+            IRepository<int, ReimbursementItem> itemRepository,
+            IRepository<int, ExpenseCategory> categoryRepository
             )
         {
             _repository = repository;
@@ -37,15 +37,15 @@ namespace ReimbursementTrackingApplication.Services
             _mapper = mapper;
             _policyRepository = policyRepository;
             _userRepository = userRepository;
-            _itemRepository= itemRepository;
+            _itemRepository = itemRepository;
             _categoryRepository = categoryRepository;
 
         }
         public async Task<SuccessResponseDTO<int>> DeletePaymentAsync(int paymentId)
         {
-           try
+            try
             {
-                var payment =await _repository.Get(paymentId);
+                var payment = await _repository.Get(paymentId);
                 payment.IsDeleted = true;
                 var updatePayment = await _repository.Update(paymentId, payment);
                 return new SuccessResponseDTO<int>()
@@ -54,7 +54,8 @@ namespace ReimbursementTrackingApplication.Services
                     Message = "Deleted Successfully",
                     Data = updatePayment.Id
                 };
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -63,7 +64,7 @@ namespace ReimbursementTrackingApplication.Services
         {
             var items = (await _itemRepository.GetAll()).Where(r => r.RequestId == requestId && r.IsDeleted == false).ToList();
             var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
-            foreach(var item in itemsDTO)
+            foreach (var item in itemsDTO)
             {
                 item.CategoryName = (await _categoryRepository.Get(item.CategoryId)).Name;
             }
@@ -80,6 +81,10 @@ namespace ReimbursementTrackingApplication.Services
             requestDTO.PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName;
 
             requestDTO.User = await GetUser(request.UserId);
+            requestDTO.IsApprovedByFinance = true;
+            requestDTO.IsApprovedByManager = true;
+            requestDTO.IsApprovedByHr = true;
+
             return requestDTO;
         }
         public async Task<UserDTO> GetUser(int id)
@@ -94,22 +99,22 @@ namespace ReimbursementTrackingApplication.Services
         {
             try
             {
-                var payments = (await _repository.GetAll()).Where(p=>p.IsDeleted==false);
+                var payments = (await _repository.GetAll()).Where(p => p.IsDeleted == false);
 
-                
-                List<ResponsePayment>  responses = new List<ResponsePayment>();
 
-                foreach(var payment in payments)
+                List<ResponsePayment> responses = new List<ResponsePayment>();
+
+                foreach (var payment in payments)
                 {
                     ResponseReimbursementRequestDTO request = await GetRequestbyId(payment.RequestId);
-                    
+
                     ResponsePayment responsePayment = new ResponsePayment();
-                    responsePayment.Id=payment.Id;
+                    responsePayment.Id = payment.Id;
                     responsePayment.RequestId = request.Id;
                     responsePayment.Request = request;
-                    responsePayment.PaymentDate=payment.PaymentDate;
-                    responsePayment.PaymentStatus=payment.PaymentStatus;
-                  
+                    responsePayment.PaymentDate = payment.PaymentDate;
+                    responsePayment.PaymentStatus = payment.PaymentStatus;
+
                     responses.Add(responsePayment);
                 }
 
@@ -119,7 +124,7 @@ namespace ReimbursementTrackingApplication.Services
                .Take(pageSize)
                .ToList();
 
-               
+
                 return new PaginatedResultDTO<ResponsePayment>
                 {
                     CurrentPage = pageNumber,
@@ -143,7 +148,7 @@ namespace ReimbursementTrackingApplication.Services
             try
             {
 
-                var payment = (await _repository.GetAll()).FirstOrDefault(p=>p.RequestId==requestId);
+                var payment = (await _repository.GetAll()).FirstOrDefault(p => p.RequestId == requestId);
 
                 ResponseReimbursementRequestDTO request = await GetRequestbyId(payment.RequestId);
 
@@ -152,10 +157,12 @@ namespace ReimbursementTrackingApplication.Services
                     Id = payment.Id,
                     RequestId = request.Id,
                     Request = request,
+                    AmountPaid = request.TotalAmount,
+                    PaymentMethod = payment.PaymentMethod,
                     PaymentDate = payment.PaymentDate,
                     PaymentStatus = payment.PaymentStatus,
                 };
-                
+
 
 
                 return new SuccessResponseDTO<ResponsePayment>()
@@ -181,15 +188,19 @@ namespace ReimbursementTrackingApplication.Services
 
 
 
-                var allPayments = (await _repository.GetAll()).Where(p => p.IsDeleted == false);
+                var allPayments = (await _repository.GetAll()).Where(p => p.IsDeleted == false).ToList();
 
                 List<Payment> payments = new List<Payment>();
                 foreach (var request in filter_request)
                 {
-                    if(request.UserId == userId)
+                    if (request.UserId == userId)
                     {
-                        Payment payment = allPayments.FirstOrDefault(p=>p.RequestId == request.Id);
-                        payments.Add(payment);
+                        Payment payment = allPayments.FirstOrDefault(p => p.RequestId == request.Id);
+                        if (payment != null)
+                        {
+                            payments.Add(payment);
+
+                        }
                     }
 
                 }
@@ -207,6 +218,9 @@ namespace ReimbursementTrackingApplication.Services
                     responsePayment.Request = request;
                     responsePayment.PaymentDate = payment.PaymentDate;
                     responsePayment.PaymentStatus = payment.PaymentStatus;
+                    responsePayment.PaymentMethod = payment.PaymentMethod;
+                    responsePayment.AmountPaid = payment.AmountPaid;
+
                     responses.Add(responsePayment);
                 }
 
@@ -240,8 +254,8 @@ namespace ReimbursementTrackingApplication.Services
             try
             {
 
-               var getpayment = await _repository.Get(payment.Id);
-                getpayment.PaymentMethod=payment.PaymentMethod;
+                var getpayment = await _repository.Get(payment.Id);
+                getpayment.PaymentMethod = payment.PaymentMethod;
                 getpayment.PaymentStatus = PaymentStatus.Paid;
                 getpayment.PaymentDate = DateTime.Now;
                 var updatePayment = await _repository.Update(payment.Id, getpayment);
@@ -273,6 +287,6 @@ namespace ReimbursementTrackingApplication.Services
             }
         }
 
-     
+
     }
 }

@@ -27,6 +27,27 @@
   },
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.ApprovalController",
+    "Method": "GetAllRequest",
+    "RelativePath": "api/Approval/approvals",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.ApprovalController",
     "Method": "ApproveRequest",
     "RelativePath": "api/Approval/approve",
     "HttpMethod": "POST",
@@ -240,7 +261,7 @@
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.BankController",
     "Method": "UpdateBankAccount",
-    "RelativePath": "api/Bank",
+    "RelativePath": "api/Bank/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -248,7 +269,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "bankAccount",
@@ -692,6 +713,27 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.EmployeeController",
+    "Method": "GetUserWithNoManager",
+    "RelativePath": "api/Employee/withoutmanager",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.PaymentController",
@@ -1166,6 +1208,26 @@
   },
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementRequestController",
+    "Method": "GetDashboardData",
+    "RelativePath": "api/ReimbursementRequest/dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.DashboardResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.ReimbursementRequestController",
     "Method": "GetRequestsByManager",
     "RelativePath": "api/ReimbursementRequest/manager/{managerId}",
     "HttpMethod": "GET",
@@ -1316,6 +1378,26 @@
   },
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.UserController",
+    "Method": "GetUserProfileAsyncByToken",
+    "RelativePath": "api/User/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.UserDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.UserController",
     "Method": "Register",
     "RelativePath": "api/User/register",
     "HttpMethod": "POST",
@@ -1339,6 +1421,27 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ReimbursementTrackingApplication.Controllers.UserController",
+    "Method": "AssignDepartmentAsync",
+    "RelativePath": "api/User/roles/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ReimbursementTrackingApplication.Models.DTOs.UserCreateDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ReimbursementTrackingApplication.Controllers.UserController",

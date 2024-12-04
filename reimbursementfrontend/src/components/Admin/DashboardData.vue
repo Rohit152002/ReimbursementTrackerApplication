@@ -17,7 +17,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Employee Name</th>
                         <th>Status</th>
                         <th>Amount</th>
@@ -25,8 +25,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="activity in recentActivities" :key="activity.id">
-                        <td>{{ activity.id }}</td>
+                    <tr v-for="(activity, index) in recentActivities" :key="activity.id">
+                        <td>{{ index + 1 }}</td>
                         <td>{{ activity.employeeName }}</td>
                         <td>{{ activity.status }}</td>
                         <td>{{ activity.amount }}</td>
@@ -84,7 +84,6 @@ export default {
 
             const token = sessionStorage.getItem("token")
             const decoded = jwtDecode(token);
-            console.log(decoded)
             this.Department = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
 
 

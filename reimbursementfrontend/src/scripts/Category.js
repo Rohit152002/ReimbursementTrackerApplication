@@ -8,3 +8,17 @@ export function getAllCategories(pageNumber, pageSize) {
     },
   });
 }
+
+export function addCategory(name, description) {
+  return axiosIntance.post("/api/Category", {
+    name,
+    description,
+  });
+}
+
+export function editCategory(id, name, description) {
+  return axiosIntance.put(`/api/Category/${id}`, {
+    name,
+    description,
+  });
+}

@@ -12,7 +12,19 @@ export function getAllPolicy(pageNumber, pageSize) {
 export function AddPolicy(policyName, maxAmount, policyDescription) {
   return axiosIntance.post("/api/Policy", {
     policyName,
-    maxAmount,
+    maxAmount: +maxAmount,
     policyDescription,
   });
+}
+
+export function UpdatePolicy(id, policyName, maxAmount, policyDescription) {
+  return axiosIntance.put(`/api/Policy/${id}`, {
+    policyName,
+    maxAmount: +maxAmount,
+    policyDescription,
+  });
+}
+
+export function DeletePolicy(id) {
+  return axiosIntance.delete(`/api/Policy/${id}`);
 }

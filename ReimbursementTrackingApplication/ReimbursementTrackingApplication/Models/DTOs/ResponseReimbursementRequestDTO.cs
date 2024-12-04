@@ -16,6 +16,7 @@
         public bool IsApprovedByManager { get; set; } = false;
         public bool IsApprovedByHr { get; set; } = false;
         public bool IsApprovedByFinance { get; set; } = false;
+        public DateTime DateTime { get; set; }
 
         public List<ResponseReimbursementItemDTO> Items { get; set; }
     }

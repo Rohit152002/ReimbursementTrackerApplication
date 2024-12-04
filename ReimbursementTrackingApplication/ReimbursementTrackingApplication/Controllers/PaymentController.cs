@@ -10,13 +10,13 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-     [EnableCors("AllowAll")]
+    [EnableCors("AllowAll")]
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
         public PaymentController(IPaymentService paymentService)
         {
-            _paymentService=paymentService;
+            _paymentService = paymentService;
 
         }
 
@@ -38,7 +38,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         // GET: api/payment/user/{userId}?pageNumber=1&pageSize=10
         [HttpGet("user/{userId}")]
-        [Authorize(Roles = "Finance")]
+        [Authorize]
         public async Task<ActionResult<PaginatedResultDTO<ResponsePayment>>> GetPaymentsByUserId(int userId, int pageNumber = 1, int pageSize = 10)
         {
             try

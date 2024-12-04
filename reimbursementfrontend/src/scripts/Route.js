@@ -25,6 +25,9 @@ import EmployeePage from "@/components/Admin/EmployeePage.vue";
 import ReimbursementRequestById from "@/components/ReimbursementRequestById.vue";
 import PoliciesComponent from "@/components/PoliciesComponent.vue";
 import BankComponent from "@/components/BankComponent.vue";
+import PaymentPage from "@/components/Admin/PaymentPage.vue";
+import { jwtDecode } from "jwt-decode";
+import PaymentBank from "@/components/PaymentBank.vue";
 
 const routes = [
   { path: "/login", component: LoginRegister },
@@ -51,6 +54,10 @@ const routes = [
       {
         path: "/bank",
         component: BankComponent,
+      },
+      {
+        path: "/payment",
+        component: PaymentBank,
       },
     ],
     beforeEnter: (to, from, next) => {
@@ -87,7 +94,11 @@ const routes = [
     path: "/hr",
     component: HRDashboard,
     beforeEnter: (to, from, next) => {
-      if (sessionStorage.getItem("token")) {
+      if (
+        jwtDecode(sessionStorage.getItem("token"))[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        ] === "HR"
+      ) {
         next();
       } else {
         next("/login");
@@ -142,9 +153,18 @@ const routes = [
         path: "/admin/request/:id",
         component: ReimbursementRequestById,
       },
+      {
+        path: "/admin/payments",
+        component: PaymentPage,
+      },
     ],
     beforeEnter: (to, from, next) => {
-      if (sessionStorage.getItem("token")) {
+      // "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+      if (
+        jwtDecode(sessionStorage.getItem("token"))[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+        ] === "Admin"
+      ) {
         next();
       } else {
         next("/login");

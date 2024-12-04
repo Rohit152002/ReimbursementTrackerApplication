@@ -37,10 +37,10 @@
 
                             <p class="text-gray-600"><strong class="text-gray-800">Category:</strong> {{
                                 item.categoryName
-                                }}</p>
+                            }}</p>
                             <p class="text-gray-600"><strong class="text-gray-800">Description:</strong> {{
                                 item.description
-                                }}</p>
+                            }}</p>
                             <p class="text-gray-600"><strong class="text-gray-800">Amount:</strong> ₹{{ item.amount }}
                             </p>
                         </div>
@@ -50,19 +50,20 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6 flex space-x-4">
+            <!-- <div class="mt-6 flex space-x-4">
 
                 <button @click="deleteRequest" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
                     Delete Request
                 </button>
-            </div>
+            </div> -->
         </div>
         <div v-if="isModelOpen"
             class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-auto">
             <div class="bg-white rounded-lg shadow-lg p-6 relative w-3/4 max-w-4xl overflow-auto max-h-[90vh]">
-                <button class="absolute top-4 right-4 text-gray-600 hover:text-gray-800" @click="closeModal">
-                    ✖
+                <button class="absolute top-4 right-4 text-3xl text-gray-600 hover:text-gray-800" @click="closeModal">
+                    x
                 </button>
+
                 <img :src="'http://localhost:5286/File/' + selectedItem.receiptFile" alt="Receipt Preview"
                     class="w-full h-auto rounded" />
             </div>
@@ -134,7 +135,7 @@ export default {
         statusClass(status) {
             return {
                 Pending: "bg-yellow-200 text-yellow-800 px-2 py-1 rounded",
-                Accepted: "bg-green-200 text-green-800 px-2 py-1 rounded",
+                Passed: "bg-green-200 text-green-800 px-2 py-1 rounded",
                 Rejected: "bg-red-200 text-red-800 px-2 py-1 rounded",
             }[status] || "bg-gray-200 text-gray-800 px-2 py-1 rounded";
         },

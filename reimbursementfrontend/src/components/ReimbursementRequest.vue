@@ -11,12 +11,20 @@
         <div class="mt-4 flex justify-between items-center">
             <input v-model="searchQuery" @input="filterRequests" placeholder="Search requests..."
                 class="border border-gray-300 rounded-lg p-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <select v-model="sortKey" @change="sortRequests"
-                class="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="policyName">Policy Name</option>
-                <option value="totalAmount">Total Amount</option>
-                <option value="statusName">Status</option>
-            </select>
+            <div class="flex gap-4">
+
+                <button @click="toggleStatusFilter('Pending')" :class="getStatusButtonClass('Pending')">
+                    Pending
+                </button>
+                <button @click="toggleStatusFilter('Passed')" :class="getStatusButtonClass('Passed')">
+                    Passed
+                </button>
+                <button @click="toggleStatusFilter('Rejected')" :class="getStatusButtonClass('Rejected')">
+                    Rejected
+                </button>
+
+            </div>
+
         </div>
 
         <div class="overflow-x-auto mt-4 bg-white shadow rounded-lg">
@@ -25,9 +33,10 @@
                     <tr>
                         <th class="px-4 py-2 text-left">Policy Name</th>
                         <th class="px-4 py-2 text-left">Total Amount</th>
-                        <th class="px-4 py-2 text-left">Comments</th>
+                        <th class="px-4 py-2 text-left">Title</th>
                         <th class="px-4 py-2 text-left">Status</th>
                         <th class="px-4 py-2 text-left">Stage</th>
+                        <th class="px-4 py-2 text-left">Reqeusted At</th>
                         <th class="px-4 py-2 text-left">Actions</th>
                     </tr>
                 </thead>
@@ -47,6 +56,10 @@
                             </span>
                         </td>
                         <td class="px-4 py-2">{{ request.stageName }}</td>
+                        <td class="px-4 py-2">
+
+                            {{ new Date(request.dateTime).toLocaleDateString() }}
+                        </td>
                         <td class="px-4 py-2">
                             <button @click="viewDetails(request.id)"
                                 class="px-3 py-1 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
@@ -74,40 +87,27 @@
             </button>
         </div>
     </div>
-    <!-- <div v-if="isToggled"
-        class="absolute top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white w-3/4 max-w-lg p-6 rounded-lg shadow-lg relative">
-            <button @click="goToNewRequest" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
-                ✖
-            </button>
-            <ReimbursementRequestForm />
-        </div>
-    </div> -->
-
 </template>
 
 <script>
 import { getRequestByUserId } from "@/scripts/Request";
 import { jwtDecode } from "jwt-decode";
-// import ReimbursementRequestForm from "./Form/ReimbursementRequestForm.vue";
 import { useToggleStore } from "@/store/toggle";
 import router from "@/scripts/Route";
 
 export default {
     name: "ReimbursementRequest",
-    components: {
-        // ReimbursementRequestForm
-    },
     data() {
         return {
             requestData: [],
             filteredRequests: [],
             username: "",
             pageNumber: 1,
-            pageSize: 10,
+            pageSize: 2,
             searchQuery: "",
             sortKey: "policyName",
             totalPages: 1,
+            statusFilter: [],
             toggleSubmitForm: useToggleStore()
         };
     },
@@ -123,30 +123,65 @@ export default {
                 const result = await getRequestByUserId(id, this.pageNumber, this.pageSize);
                 console.log(result);
 
-                this.requestData = result.data.data;
+                this.requestData = result.data.data.sort((a, b) => {
+                    const dateA = new Date(a.dateTime);
+                    const dateB = new Date(b.dateTime);
+
+                    // Sorting in descending order
+                    return dateB - dateA;
+                });
                 this.filteredRequests = [...this.requestData];
                 this.totalPages = result.data.totalPages;
             } catch (err) {
                 console.error(err);
             }
         },
+        toggleStatusFilter(status) {
+            if (this.statusFilter.includes(status)) {
+                this.statusFilter = this.statusFilter.filter((s) => s !== status);
+            } else {
+                this.statusFilter.push(status);
+            }
+            this.filterRequests();
+        },
         filterRequests() {
             const query = this.searchQuery.toLowerCase();
-            this.filteredRequests = this.requestData.filter(
-                (req) =>
-                    req.policyName.toLowerCase().includes(query) ||
+            this.filteredRequests = this.requestData.filter((req) => {
+                const matchesSearch = req.policyName.toLowerCase().includes(query) ||
                     req.comments.toLowerCase().includes(query) ||
-                    req.statusName.toLowerCase().includes(query)
-            );
+                    req.statusName.toLowerCase().includes(query);
+
+                const matchesStatus =
+                    this.statusFilter.length === 0 || this.statusFilter.includes(req.statusName);
+
+                return matchesSearch && matchesStatus;
+            });
         },
-        sortRequests() {
+        getStatusButtonClass(status) {
+            const baseClass =
+                "px-4 py-2 font-medium rounded transition";
+            const activeClass =
+                "bg-opacity-100 text-white underline decoration-double";
+            const inactiveClass =
+                "bg-opacity-50 text-gray-700 hover:bg-opacity-75";
+
+            const colorClass = {
+                Pending: "bg-yellow-500",
+                Passed: "bg-green-500",
+                Rejected: "bg-red-500",
+            }[status];
+
+            return `${baseClass} ${colorClass} ${this.statusFilter.includes(status) ? activeClass : inactiveClass
+                }`;
+        },
+        sortRequests(key) {
             this.filteredRequests.sort((a, b) => {
 
-                if (this.sortKey === "totalAmount") {
+                if (key === "totalAmount") {
 
-                    return a[this.sortKey] > b[this.sortKey] ? -1 : 1
+                    return a[key] > b[key] ? -1 : 1
                 }
-                return a[this.sortKey] > b[this.sortKey] ? 1 : -1
+                return a[key] > b[key] ? 1 : -1
             }
             );
         },
@@ -159,9 +194,7 @@ export default {
 
         },
         goToNewRequest() {
-            // alert("Navigate to Add New Request Page");
             this.toggleSubmitForm.toggle();
-            // Implement navigation logic to the add request page
         },
     },
     computed: {
@@ -174,7 +207,3 @@ export default {
     },
 };
 </script>
-
-<style>
-/* No additional styles; everything is handled by Tailwind CSS */
-</style>

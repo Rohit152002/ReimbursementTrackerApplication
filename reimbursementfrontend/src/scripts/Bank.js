@@ -22,3 +22,19 @@ export function addBank(userId, accNo, branchName, ifscCode, branchAddress) {
     branchAddress,
   });
 }
+export function updateBank(
+  id,
+  userId,
+  accNo,
+  branchName,
+  ifscCode,
+  branchAddress
+) {
+  return axiosIntance.put(`/api/Bank/${id}`, {
+    userId,
+    accNo,
+    branchName,
+    ifscCode,
+    branchAddress,
+  });
+}

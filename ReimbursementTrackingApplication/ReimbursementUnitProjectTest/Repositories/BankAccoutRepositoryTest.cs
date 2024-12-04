@@ -111,7 +111,7 @@ namespace ReimbursementUnitProjectTest.Repositories
         {
             BankAccount account = new BankAccount()
             {
-                UserId = 1,
+                UserId = 2,
                 AccNo = "2293874242",
                 BranchName = "branchname",
                 IFSCCode = "23LK4LKJF ",
@@ -121,7 +121,7 @@ namespace ReimbursementUnitProjectTest.Repositories
 
             BankAccount updateAccount = new BankAccount()
             {
-                UserId = 1,
+                UserId = 3,
                 AccNo = "2293874242",
                 BranchName = "updatedbranchname",
                 IFSCCode = "23LK4LKJF ",

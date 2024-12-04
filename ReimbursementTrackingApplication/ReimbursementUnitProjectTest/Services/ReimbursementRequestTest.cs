@@ -32,20 +32,24 @@ namespace ReimbursementUnitProjectTest.Services
         PolicyRepository policyRepository;
         CategoryRepositories categoryRepository;
         UserRepository userRepository;
-      EmployeeRepository employeeRepository;
-        
+        BankAccountRepository bankRepository;
+        EmployeeRepository employeeRepository;
+        ApprovalStageRepository approvalStageRepository;
+
         Mock<ILogger<ReimbursementRequestRepository>> loggerRequest;
         Mock<ILogger<EmployeeRepository>> employeeLogger;
+        Mock<ILogger<BankAccountRepository>> bankLogger;
         Mock<ILogger<CategoryRepositories>> loggerCategory;
         Mock<ILogger<PolicyRepository>> loggerPolicy;
         Mock<ILogger<UserRepository>> loggerUser;
         Mock<ILogger<UserService>> loggerServiceUser;
         Mock<ILogger<ReimbursementItemRepositories>> loggerItemRepository;
+        Mock<ILogger<ApprovalStageRepository>> approvalLogger;
 
         Mock<IMapper> mapper;
         Mock<IConfiguration> mockConfiguration;
         Mock<TokenService> mockTokenService;
-        
+
         UserService userService;
         EmployeeService employeeService;
         ReimbursementItemService itemService;
@@ -69,6 +73,8 @@ namespace ReimbursementUnitProjectTest.Services
             loggerCategory = new Mock<ILogger<CategoryRepositories>>();
             loggerItemRepository = new Mock<ILogger<ReimbursementItemRepositories>>();
             employeeLogger = new Mock<ILogger<EmployeeRepository>>();
+            bankLogger = new Mock<ILogger<BankAccountRepository>>();
+            approvalLogger = new Mock<ILogger<ApprovalStageRepository>>();
 
             mockConfiguration = new Mock<IConfiguration>();
             mockTokenService = new Mock<TokenService>(mockConfiguration.Object);
@@ -77,18 +83,20 @@ namespace ReimbursementUnitProjectTest.Services
             uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "File");
 
             categoryRepository = new CategoryRepositories(context, loggerCategory.Object);
-            userRepository = new UserRepository(context,loggerUser.Object);
+            userRepository = new UserRepository(context, loggerUser.Object);
             requestRepository = new ReimbursementRequestRepository(context, loggerRequest.Object);
-            policyRepository= new PolicyRepository(context, loggerPolicy.Object);
+            policyRepository = new PolicyRepository(context, loggerPolicy.Object);
             itemRepository = new ReimbursementItemRepositories(context, loggerItemRepository.Object);
+            bankRepository = new BankAccountRepository(context, bankLogger.Object);
             employeeRepository = new EmployeeRepository(context, employeeLogger.Object);
+            approvalStageRepository = new ApprovalStageRepository(context, approvalLogger.Object);
 
 
             userService = new UserService(userRepository, mapper.Object, loggerServiceUser.Object, mockTokenService.Object);
             itemService = new ReimbursementItemService(itemRepository, categoryRepository, uploadFolder, mapper.Object);
-            employeeService = new EmployeeService(employeeRepository, mapper.Object,userRepository);
-            requestService = new ReimbursementRequestService(requestRepository, policyRepository, mapper.Object,uploadFolder,itemRepository,employeeRepository,categoryRepository,userRepository);
-            
+            employeeService = new EmployeeService(employeeRepository, mapper.Object, userRepository);
+            requestService = new ReimbursementRequestService(requestRepository, policyRepository, mapper.Object, uploadFolder, itemRepository, employeeRepository, categoryRepository, userRepository, bankRepository, approvalStageRepository);
+
         }
 
         private async Task CreateUser()
@@ -137,7 +145,7 @@ namespace ReimbursementUnitProjectTest.Services
                 UserId = 1,
                 PolicyId = 1,
                 Comments = "Request for Businees ",
-                Items=items
+                Items = items
             };
 
         }
@@ -159,7 +167,7 @@ namespace ReimbursementUnitProjectTest.Services
 
             RequestITemDTO item = new RequestITemDTO
             {
-              
+
                 Amount = 9000,
                 CategoryId = 1,
                 Description = "Travelling",
@@ -172,7 +180,7 @@ namespace ReimbursementUnitProjectTest.Services
         [Test]
         public async Task SubmitRequestTest()
         {
-           await CreateUser();
+            await CreateUser();
             await CreatePolicy();
             await CreateEmployee();
             CreateReimbursementRequestDTO request = await CreateRequest();
@@ -189,7 +197,7 @@ namespace ReimbursementUnitProjectTest.Services
             // Create an IEnumerable<ReimbursementItem> with a single element
             IList<ReimbursementItem> items = new List<ReimbursementItem> { item };
 
-            ReimbursementRequest requestTest =new ReimbursementRequest()
+            ReimbursementRequest requestTest = new ReimbursementRequest()
             {
                 UserId = 1,
                 PolicyId = 1,
@@ -224,7 +232,7 @@ namespace ReimbursementUnitProjectTest.Services
                 PolicyName = "Travel Policy",
                 TotalAmount = 9000,
                 Comments = "Request for Businees ",
-                Items= responseItems
+                Items = responseItems
             };
 
             //1. _mapper.Map<ReimbursementRequest>(requestDto);
@@ -242,7 +250,7 @@ namespace ReimbursementUnitProjectTest.Services
             mapper.Setup(m => m.Map<ResponseReimbursementRequestDTO>(It.IsAny<ReimbursementRequest>())).Returns(reimRequestDTO);
 
 
-            //action 
+            //action
             await AddCategory();
 
             var result = await requestService.SubmitRequestAsync(request);
@@ -287,7 +295,7 @@ namespace ReimbursementUnitProjectTest.Services
 
             ResponseReimbursementItemDTO requestDTO = new ResponseReimbursementItemDTO
             {
-                Id=1,
+                Id = 1,
                 RequestId = 1,
                 Amount = 9000,
                 CategoryId = 1,
@@ -324,7 +332,7 @@ namespace ReimbursementUnitProjectTest.Services
             mapper.Setup(m => m.Map<ResponseReimbursementRequestDTO>(It.IsAny<ReimbursementRequest>())).Returns(reimRequestDTO);
 
 
-            //action 
+            //action
 
             Assert.ThrowsAsync<Exception>(async () => await requestService.SubmitRequestAsync(request));
         }
@@ -355,7 +363,8 @@ namespace ReimbursementUnitProjectTest.Services
                 Department = Departments.IT
             };
             ResponseReimbursementItemDTO requestDTO = new ResponseReimbursementItemDTO
-            {Id = 1,
+            {
+                Id = 1,
 
                 RequestId = 1,
                 Amount = 9000,
@@ -367,7 +376,7 @@ namespace ReimbursementUnitProjectTest.Services
             List<ResponseReimbursementItemDTO> responseItems = new List<ResponseReimbursementItemDTO> { requestDTO };
             ResponseReimbursementRequestDTO reimRequestDTO = new ResponseReimbursementRequestDTO
             {
-                Id=1,
+                Id = 1,
                 UserId = 1,
                 User = userDTO,
                 PolicyId = 1,
@@ -387,7 +396,7 @@ namespace ReimbursementUnitProjectTest.Services
         [Test]
         public async Task GetRequestByRequestIdTestException()
         {
-           
+
 
             UserDTO userDTO = new UserDTO
             {
@@ -396,7 +405,8 @@ namespace ReimbursementUnitProjectTest.Services
                 Department = Departments.IT
             };
             ResponseReimbursementItemDTO requestDTO = new ResponseReimbursementItemDTO
-            {Id = 1,
+            {
+                Id = 1,
                 RequestId = 1,
                 Amount = 9000,
                 CategoryId = 1,
@@ -416,8 +426,8 @@ namespace ReimbursementUnitProjectTest.Services
                 Items = responseItems
             };
             mapper.Setup(m => m.Map<ResponseReimbursementRequestDTO>(It.IsAny<ReimbursementRequest>())).Returns(reimRequestDTO);
-           Assert.ThrowsAsync<NotFoundException>(async()=> await requestService.GetRequestByIdAsync(1));
-            
+            Assert.ThrowsAsync<NotFoundException>(async () => await requestService.GetRequestByIdAsync(1));
+
         }
 
         [Test]
@@ -427,7 +437,8 @@ namespace ReimbursementUnitProjectTest.Services
             await AddCategory();
 
             ResponseReimbursementItemDTO itemDTO = new ResponseReimbursementItemDTO
-            {Id = 1,
+            {
+                Id = 1,
                 RequestId = 1,
                 Amount = 9000,
                 CategoryId = 1,
@@ -476,10 +487,10 @@ namespace ReimbursementUnitProjectTest.Services
                         };
             mapper.Setup(m => m.Map<IList<ResponseReimbursementItemDTO>>(It.IsAny<IList<ReimbursementItem>>()))
                    .Returns(itemDTOList);
-            var request = await requestService.GetRequestsByUserIdAsync(1,1,100);
+            var request = await requestService.GetRequestsByUserIdAsync(1, 1, 100);
             Assert.NotNull(request.Data);
         }
-     
+
 
         [Test]
         public async Task GetRequestsByUserIdAsyncTestException()
@@ -488,7 +499,8 @@ namespace ReimbursementUnitProjectTest.Services
             await AddCategory();
 
             ResponseReimbursementItemDTO itemDTO = new ResponseReimbursementItemDTO
-            {Id = 1,
+            {
+                Id = 1,
                 RequestId = 1,
                 Amount = 9000,
                 CategoryId = 1,
@@ -536,8 +548,8 @@ namespace ReimbursementUnitProjectTest.Services
                         };
             mapper.Setup(m => m.Map<IList<ResponseReimbursementItemDTO>>(It.IsAny<IList<ReimbursementItem>>()))
                    .Returns(itemDTOList);
-            Assert.ThrowsAsync<Exception>(async()=> await requestService.GetRequestsByUserIdAsync(1, 1, 100));
-            
+            Assert.ThrowsAsync<Exception>(async () => await requestService.GetRequestsByUserIdAsync(1, 1, 100));
+
         }
 
 
@@ -548,7 +560,8 @@ namespace ReimbursementUnitProjectTest.Services
             await AddCategory();
 
             ResponseReimbursementItemDTO itemDTO = new ResponseReimbursementItemDTO
-            {Id = 1,
+            {
+                Id = 1,
                 RequestId = 1,
                 Amount = 9000,
                 CategoryId = 1,
@@ -607,7 +620,8 @@ namespace ReimbursementUnitProjectTest.Services
             await AddCategory();
 
             ResponseReimbursementItemDTO itemDTO = new ResponseReimbursementItemDTO
-            {Id = 1,
+            {
+                Id = 1,
                 RequestId = 1,
                 Amount = 9000,
                 CategoryId = 1,
@@ -655,9 +669,9 @@ namespace ReimbursementUnitProjectTest.Services
                         };
             mapper.Setup(m => m.Map<IList<ResponseReimbursementItemDTO>>(It.IsAny<IList<ReimbursementItem>>()))
                    .Returns(itemDTOList);
-            
+
             Assert.ThrowsAsync<Exception>(async () => await requestService.GetRequestsByStatusAsync(RequestStatus.Pending, 1, 100));
-        
+
         }
 
         [Test]
@@ -800,10 +814,11 @@ namespace ReimbursementUnitProjectTest.Services
                    .Returns(itemDTOList);
             //var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
             //var responseRequest = _mapper.Map<ResponseReimbursementRequestDTO>(requestAdded);
-            UserDTO user = new UserDTO { 
-                UserName="Rohit",
-                Department=Departments.IT,
-                Email="laishramrohit15@gmail.com"
+            UserDTO user = new UserDTO
+            {
+                UserName = "Rohit",
+                Department = Departments.IT,
+                Email = "laishramrohit15@gmail.com"
 
             };
 
@@ -839,7 +854,7 @@ namespace ReimbursementUnitProjectTest.Services
                    .Returns(itemDTOList);
 
 
-            Assert.ThrowsAsync<Exception>(async()=> await requestService.DeleteRequestAsync(1));
+            Assert.ThrowsAsync<Exception>(async () => await requestService.DeleteRequestAsync(1));
 
 
         }
@@ -951,7 +966,7 @@ namespace ReimbursementUnitProjectTest.Services
 
             await GetRequestsByUserIdAsyncTest();
 
-            var requestresult = await requestService.GetAllRequest( 1, 100);
+            var requestresult = await requestService.GetAllRequest(1, 100);
             Assert.IsNotNull(requestresult.Data);
         }
 
@@ -1007,8 +1022,8 @@ namespace ReimbursementUnitProjectTest.Services
 
             //await GetRequestsByUserIdAsyncTest();
 
-            Assert.ThrowsAsync<Exception>(async()=> await requestService.GetAllRequest(1, 100));
-       
+            Assert.ThrowsAsync<Exception>(async () => await requestService.GetAllRequest(1, 100));
+
         }
 
         [Test]
@@ -1026,7 +1041,7 @@ namespace ReimbursementUnitProjectTest.Services
                 ManagerId = 1,
             };
 
-            
+
 
             mapper.Setup(m => m.Map<Employee>(It.IsAny<EmployeeDTO>())).Returns(employee);
 
@@ -1057,13 +1072,8 @@ namespace ReimbursementUnitProjectTest.Services
 
             //await GetRequestsByUserIdAsyncTest();
 
-            Assert.ThrowsAsync<NotFoundException>(async()=> await requestService.GetRequestsByManagerIdAsync(1,1, 100));
-            
+            Assert.ThrowsAsync<NotFoundException>(async () => await requestService.GetRequestsByManagerIdAsync(1, 1, 100));
+
         }
     }
 }
-
-
-
-
-

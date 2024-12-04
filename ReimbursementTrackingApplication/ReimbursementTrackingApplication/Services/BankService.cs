@@ -195,6 +195,7 @@ namespace ReimbursementTrackingApplication.Services
             {
 
                 var bank = _mapper.Map<BankAccount>(bankAccount);
+                //bank.Id = id;
                 var updatebank = await _repository.Update(id, bank);
                 var user = await _userRepository.Get(updatebank.UserId);
                 var userDTO = _mapper.Map<UserDTO>(user);

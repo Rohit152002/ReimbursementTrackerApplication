@@ -10,7 +10,7 @@ namespace ReimbursementTrackingApplication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-     [EnableCors("AllowAll")]
+    [EnableCors("AllowAll")]
     public class BankController : ControllerBase
     {
         private readonly IBankService _bankService;
@@ -38,7 +38,7 @@ namespace ReimbursementTrackingApplication.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<SuccessResponseDTO<ResponseBankDTO>>> UpdateBankAccount(int id, BankDTO bankAccount)
         {

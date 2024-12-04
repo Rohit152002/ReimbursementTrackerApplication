@@ -147,6 +147,9 @@ export default {
           router.push('/admin')
 
         }
+        else if (res.data.department === 0 || res.data.department === 1) {
+          router.push('/employee')
+        }
         else {
 
           router.push('/')

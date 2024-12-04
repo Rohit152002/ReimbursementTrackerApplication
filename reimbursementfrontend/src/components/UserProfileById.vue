@@ -64,6 +64,7 @@ import { getAllUser, getUserProfileById, } from '@/scripts/User';
 import VueSelect from 'vue-select';
 
 import "vue-select/dist/vue-select.css";
+import { useToast } from 'vue-toastification';
 
 
 export default {
@@ -80,6 +81,7 @@ export default {
             limit: 10,
             page: 1,
             isSuccess: false, // Flag for success or error state
+            toast: useToast()
         }
     },
 
@@ -121,14 +123,29 @@ export default {
 
 
         async assignManager() {
+            const toast_id = this.toast("loading... ");
             try {
                 event.preventDefault();
                 var result = await assignManagerRequest(this.user.id, this.selectedManagerId.id)
                 console.log(this.user.id, this.selectedManagerId.id);
+                this.toast.update(toast_id, {
+                    content: "Manager Assign Successfull",
+                    options: {
+                        type: "success"
+                    }
+
+                })
                 this.isSuccess = result.data.isSuccess
+                this.$router.push('/admin/employees')
                 this.statusMessage = result.data.message
 
             } catch (err) {
+                this.toast.update(toast_id, {
+                    content: "Assign Manager Failed",
+                    options: {
+                        type: "error"
+                    }
+                })
                 console.log(err)
             }
         }

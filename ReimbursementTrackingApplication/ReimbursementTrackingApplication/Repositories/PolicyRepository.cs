@@ -81,7 +81,10 @@ namespace ReimbursementTrackingApplication.Repositories
             try
             {
                 var policy = await Get(key);
-                _context.Policy.Update(entity);
+                policy.PolicyName = entity.PolicyName;
+                policy.MaxAmount = entity.MaxAmount;
+                policy.PolicyDescription = entity.PolicyDescription;
+                _context.Policy.Update(policy);
                
                 await _context.SaveChangesAsync();
                 return entity;

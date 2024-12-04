@@ -20,9 +20,10 @@
                     <select id="stageFilter" v-model="filters.stage"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                         <option value="">All</option>
-                        <option value="0">Manager</option>
-                        <option value="1">HR</option>
-                        <option value="2">Financial</option>
+                        <option value="0">Processing</option>
+                        <option value="1">Manager</option>
+                        <option value="2">HR</option>
+                        <option value="3">Financial</option>
                     </select>
                 </div>
                 <button @click="applyFilters"
@@ -43,8 +44,15 @@
                     <div>
                         <p><strong>Policy:</strong> {{ request.policyName }}</p>
                         <p><strong>Total Amount:</strong> Rs {{ request.totalAmount }}</p>
-                        <p><strong>Status:</strong> {{ request.statusName }}</p>
-                        <p><strong>Stage:</strong> {{ request.stageName }}</p>
+                        <p><strong>Status:</strong>
+                            <span :class="statusClass(request?.statusName)" class="ml-2">
+
+                                {{ request.statusName }}
+                            </span>
+                        </p>
+                        <p><strong>Stage:</strong>
+                            {{ request.stageName }}
+                        </p>
                     </div>
 
                     <div v-if="activeRequest === request.id" class="mt-4">
@@ -120,6 +128,13 @@ export default {
         }
     },
     methods: {
+        statusClass(status) {
+            return {
+                Pending: "bg-yellow-200 text-yellow-800 px-2 py-1 rounded",
+                Passed: "bg-green-200 text-green-800 px-2 py-1 rounded",
+                Rejected: "bg-red-200 text-red-800 px-2 py-1 rounded",
+            }[status] || "bg-gray-200 text-gray-800 px-2 py-1 rounded";
+        },
         async fetchRequestData() {
             try {
                 const response = await getRequests(this.currentPage, this.pageSize);

@@ -55,7 +55,7 @@ namespace ReimbursementTrackingApplication.Services
             {
                 var request = MapRequest(requestDto);
                 var currentYear = DateTime.Now.Year;
-                var existingRequest = (await _repository.GetAll()).Where(r => r.UserId == requestDto.UserId && r.PolicyId == requestDto.PolicyId && r.CreatedAt.Year == currentYear && r.Status == RequestStatus.Passed).ToList();
+                var existingRequest = (await _repository.GetAll()).Where(r => r.UserId == requestDto.UserId && r.PolicyId == requestDto.PolicyId && r.CreatedAt.Year == currentYear &&( r.Status == RequestStatus.Passed || r.Status==RequestStatus.Pending)).ToList();
                 var employee = (await _employeeRepository.GetAll()).FirstOrDefault(e => e.EmployeeId == requestDto.UserId);
                 if (employee == null)
                 {
@@ -153,7 +153,6 @@ namespace ReimbursementTrackingApplication.Services
             responseRequest.Items = items;
             responseRequest.User = await GetUser(userId);
             responseRequest.PolicyName = (await _policyRepository.Get(policyId)).PolicyName;
-
             return responseRequest;
         }
         public async Task<UserDTO> GetUser(int id)
@@ -175,6 +174,7 @@ namespace ReimbursementTrackingApplication.Services
                 requestDTO.PolicyName = (await _policyRepository.Get(request.PolicyId)).PolicyName;
                 requestDTO.Items = await GetItemsByRequestId(requestDTO.Id);
                 requestDTO.User = await GetUser(request.UserId);
+                requestDTO.DateTime = request.CreatedAt;
                 return new SuccessResponseDTO<ResponseReimbursementRequestDTO>()
                 {
                     IsSuccess = true,
@@ -259,6 +259,7 @@ namespace ReimbursementTrackingApplication.Services
                     Comments = request.Comments,
                     Stage = request.Stage,
                     Status = request.Status,
+                    DateTime = request.CreatedAt,
 
 
                 };
