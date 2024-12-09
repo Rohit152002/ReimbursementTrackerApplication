@@ -35,7 +35,6 @@
                         <th class="px-4 py-2 border border-gray-200">Employee Department</th>
                         <th class="px-4 py-2 border border-gray-200">Manager Name</th>
                         <th class="px-4 py-2 border border-gray-200">Manager Email</th>
-                        <!-- <th class="px-4 py-2 border border-gray-200">Reimbursement</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -48,12 +47,7 @@
                         <td class="px-4 py-2 border border-gray-200">{{ item.employee.departmentName }}</td>
                         <td class="px-4 py-2 border border-gray-200">{{ item.manager.userName }}</td>
                         <td class="px-4 py-2 border border-gray-200">{{ item.manager.email }}</td>
-                        <!-- <td class="px-4 py-2 border border-gray-200 text-center">
-                            <button class="px-3 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-                                @click="viewReimbursement(item.id)">
-                                View Requests
-                            </button>
-                        </td> -->
+
                     </tr>
                     <tr v-if="employeeData.length === 0">
                         <td colspan="7" class="px-4 py-2 text-center text-gray-500 italic">
@@ -88,10 +82,10 @@ export default {
     data() {
         return {
             employeeData: [],
-            filteredEmployeeData: [], // Employee and Manager details
-            currentPage: 1, // Current page number
-            pageSize: 10, // Number of items per page
-            totalPages: 1, // Total number of pages,
+            filteredEmployeeData: [],
+            currentPage: 1,
+            pageSize: 10,
+            totalPages: 1,
             searchQuery: ""
         };
     },
@@ -123,14 +117,11 @@ export default {
             }
         },
         onSearchInput() {
-            // Triggered when the search input is changed. It filters employeeData directly in the method.
             const query = this.searchQuery.toLowerCase();
 
             if (query === "") {
-                // If search is empty, reset to all employees
                 this.filteredEmployeeData = this.employeeData;
             } else {
-                // Filter employee data based on the search query
                 this.filteredEmployeeData = this.employeeData.filter(item => {
                     return (
                         item.employee.userName.toLowerCase().includes(query) ||
@@ -138,7 +129,7 @@ export default {
                     );
                 });
             }
-            this.currentPage = 1; // Reset to the first page when a new search is made
+            this.currentPage = 1;
         },
         async previousPage() {
             if (this.currentPage > 1) {

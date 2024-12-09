@@ -450,7 +450,7 @@ export default {
                         if (req.request.status === 3) {
                             return 2; // Rejected
                         }
-                        return 3; // Catch-all for unexpected statuses
+                        return 3;
                     };
 
                     const priorityA = getPriority(a);
@@ -494,7 +494,7 @@ export default {
                         if (req.request.status === 3) {
                             return 2; // Rejected
                         }
-                        return 3; // Catch-all for unexpected statuses
+                        return 3;
                     };
 
                     const priorityA = getPriority(a);
@@ -524,7 +524,6 @@ export default {
                         type: 'success'
                     }
                 })
-                // alert("Request approved successfully.");
                 this.closeCommentModal();
                 if (this.department === 'Finance') {
                     this.showPaymentModel = true;
@@ -548,7 +547,6 @@ export default {
                 console.log(id, comment, managerId)
                 const result = await rejectRequest(+id, +managerId, comment);
                 console.log(result);
-                // alert("Request rejected successfully.");
                 this.toast.success("Request rejected successfully")
                 this.closeCommentModal();
                 this.
@@ -562,12 +560,11 @@ export default {
             this.modalRequestId = requestId;
             this.showCommentModel = true;
             console.log(this.showCommentModel);
-            this.comment = ""; // Reset comment input
+            this.comment = "";
         },
         closeCommentModal() {
             this.showCommentModel = false;
             this.modalAction = null;
-            // this.modalRequestId = null;
             this.comment = "";
         },
         handleModalAction() {
@@ -649,11 +646,8 @@ export default {
 <style scoped>
 .base-button {
     display: inline-block;
-    /* width: 120px; */
     width: 100%;
-    /* Set consistent width */
     padding: 8px 12px;
-    /* Adjust padding for a uniform look */
     text-align: center;
     border-radius: 4px;
     font-size: 14px;

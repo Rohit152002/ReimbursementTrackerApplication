@@ -15,8 +15,7 @@
                         <th class="py-3 px-4 text-left font-medium">Email</th>
                         <th class="py-3 px-4 text-left font-medium">Department</th>
                         <th class="py-3 px-4 text-left font-medium">Gender</th>
-                        <!-- <th class="py-3 px-4 text-left font-medium">Edit</th>
-                        <th class="py-3 px-4 text-left font-medium">Delete</th> -->
+
                     </tr>
                 </thead>
                 <tbody>
@@ -27,12 +26,7 @@
                         <td class="py-2 px-4">{{ item.email }}</td>
                         <td class="py-2 px-4">{{ item.departmentName }}</td>
                         <td class="py-2 px-4">{{ item.genderName }}</td>
-                        <!-- <td class="py-2 px-4 text-center text-blue-500 cursor-pointer">
-                            <i class='bx bxs-edit-alt'></i>
-                        </td>
-                        <td @click="deleteUser(item.id)" class="py-2 px-4 text-center text-red-500 cursor-pointer">
-                            <i class='bx bxs-x-circle'></i>
-                        </td> -->
+
                     </tr>
                 </tbody>
             </table>

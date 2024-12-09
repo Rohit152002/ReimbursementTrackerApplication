@@ -74,7 +74,6 @@
 import router from '@/scripts/Route';
 import { register } from '@/scripts/User';
 
-// import { register } from '@/scripts/User';
 
 export default {
     name: "RegistrationForm",

@@ -54,7 +54,6 @@ export default {
     ,
     computed: {
         stats() {
-            // Extract stats from data
             return {
                 "Total Requests": this.data.totalRequests ?? 0,
                 "Pending Requests": this.data.pendingRequests ?? 0,

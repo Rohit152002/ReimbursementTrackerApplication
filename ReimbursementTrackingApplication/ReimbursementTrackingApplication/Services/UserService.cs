@@ -76,7 +76,7 @@ namespace ReimbursementTrackingApplication.Services
 
                 var user = users.FirstOrDefault(u =>
          string.Equals(u.Email, login.Email, StringComparison.OrdinalIgnoreCase));
-                Console.WriteLine(user.Department);
+                //Console.WriteLine(user.Department);
 
 
                 if (user == null)

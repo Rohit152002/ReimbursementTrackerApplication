@@ -62,9 +62,9 @@ export default {
 
     data() {
         return {
-            employeeData: [], // All employee data
-            filteredEmployeeData: [], // Filtered data based on search query
-            searchQuery: "", // Search query input
+            employeeData: [],
+            filteredEmployeeData: [],
+            searchQuery: "",
             currentPage: 1,
             pageSize: 10,
             totalPages: 1,
@@ -79,7 +79,7 @@ export default {
                 const data = await getUserWithNoManager(this.currentPage, this.pageSize);
                 this.employeeData = data.data.data.filter((r) => r.department !== 7);
                 this.totalPages = Math.ceil(data.data.totalCount / this.pageSize);
-                this.filteredEmployeeData = this.employeeData; // Initialize with all data
+                this.filteredEmployeeData = this.employeeData;
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }

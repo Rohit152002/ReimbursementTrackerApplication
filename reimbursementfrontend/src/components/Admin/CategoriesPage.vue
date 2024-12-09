@@ -149,7 +149,6 @@ export default {
         async addCategory() {
             try {
 
-                // alert("Add category functionality not implemented yet.");
                 const response = await addCategory(this.newCategory.name, this.newCategory.description)
                 if (response.status === 200) {
                     this.toast.success("Add Category Successfull")
@@ -157,7 +156,6 @@ export default {
             } catch (err) {
                 this.toast.error("Add Category Failed")
             }
-            // Add logic to navigate to a category creation page or show a modal.
         },
         closeAddCategoryModal() {
             this.showAddCategoryModel = false;

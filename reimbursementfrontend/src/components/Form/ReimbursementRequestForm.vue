@@ -18,9 +18,6 @@
             </select>
         </div>
 
-        <!-- Add New Item -->
-
-        <!-- Dynamic Items -->
         <div v-for="(item, index) in itemsData" :key="item" class="p-4 bg-white rounded-lg shadow space-y-4">
             <!-- Description -->
             <div>
@@ -127,7 +124,6 @@ export default {
             });
         },
         async submit() {
-            // const toast = useToast();
             const toastId = this.toast("loading...");
 
             try {
@@ -137,12 +133,10 @@ export default {
                 const token = jwtDecode(sessionStorage.getItem('token'));
                 const id = token.Id;
 
-                // Add the basic form fields
                 formData.append("userId", Number(id))
                 formData.append("policyId", Number(this.policyId));
                 formData.append("comments", this.comments);
 
-                // Add dynamic items
                 this.itemsData.forEach((item, index) => {
                     formData.append(`Items[${index}].description`, item.description);
                     formData.append(`Items[${index}].categoryId`, +item.categoryId);
@@ -179,7 +173,6 @@ export default {
 
             }
 
-            // Log for debugging
 
         },
         handleFileChange(event, index) {

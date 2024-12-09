@@ -24,6 +24,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Scoped styles are not necessary here as Tailwind handles the design */
-</style>
+<style scoped></style>

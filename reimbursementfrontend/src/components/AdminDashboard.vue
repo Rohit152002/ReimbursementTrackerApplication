@@ -19,7 +19,6 @@ export default {
 <style>
 .router-view-container {
     height: calc(100vh);
-    /* Adjust height considering the nav height */
     overflow-y: auto;
 }
 </style>

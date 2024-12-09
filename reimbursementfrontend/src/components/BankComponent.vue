@@ -121,9 +121,7 @@ export default {
             try {
 
                 event.preventDefault()
-                // Logic to handle form submission
                 console.log("Bank details submitted:", this.form);
-                // Reset form
                 const formData = JSON.parse(JSON.stringify(this.form))
 
                 this.form = {
@@ -165,6 +163,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Add custom styles if needed */
-</style>
+<style scoped></style>

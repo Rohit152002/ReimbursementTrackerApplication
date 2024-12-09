@@ -74,8 +74,8 @@ namespace ReimbursementUnitProjectTest.Controllers
             var result = await _controller.AddRequestAsync(createRequestDTO);
 
             // Assert
-            Assert.IsInstanceOf<BadRequestObjectResult>(result.Result);
-            var badRequestResult = result.Result as BadRequestObjectResult;
+            Assert.IsInstanceOf<UnauthorizedObjectResult>(result.Result);
+            var badRequestResult = result.Result as UnauthorizedObjectResult;
             Assert.NotNull(badRequestResult);
             Assert.AreEqual("Error occurred", (badRequestResult.Value as ErrorResponseDTO).ErrorMessage);
         }

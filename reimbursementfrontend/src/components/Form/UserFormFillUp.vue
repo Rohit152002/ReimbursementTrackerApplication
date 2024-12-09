@@ -109,8 +109,7 @@ export default {
             dateOfBirth: "",
             address: "",
             department: "",
-            minDate: "", // 18 years ago in yyyy-mm-dd format
-            maxDate: "", //
+            minDate: "",
             toast: useToast()
 
 
@@ -120,7 +119,6 @@ export default {
         setStartYear() {
             const today = new Date();
             let year = today.getFullYear();
-            // If the user is under 18, set the starting year to 2002
             if (year - 18 < 2002) {
                 year = 2002;
             }
@@ -137,7 +135,6 @@ export default {
             const date = new Date(this.dateOfBirth).toISOString()
             register(this.username, this.email, this.password, this.gender, this.department, date, this.address)
                 .then((res) => {
-                    // alert("registration successfull");
                     this.toast.update(toast_id, {
                         content: "Registration Successfull",
                         options: {

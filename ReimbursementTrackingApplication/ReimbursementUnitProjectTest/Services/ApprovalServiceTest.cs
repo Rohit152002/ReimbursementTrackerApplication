@@ -2,20 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using Moq;
-using NUnit.Framework.Interfaces;
 using ReimbursementTrackingApplication.Context;
 using ReimbursementTrackingApplication.Interfaces;
 using ReimbursementTrackingApplication.Models;
 using ReimbursementTrackingApplication.Models.DTOs;
 using ReimbursementTrackingApplication.Repositories;
 using ReimbursementTrackingApplication.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ReimbursementUnitProjectTest.Services
 {
@@ -35,7 +29,7 @@ namespace ReimbursementUnitProjectTest.Services
         Mock<ILogger<EmployeeRepository>> employeeLogger;
 
         ApprovalStageRepository repository;
-       UserRepository userRepository;
+        UserRepository userRepository;
         ReimbursementRequestRepository requestRepository;
         CategoryRepositories categoryRepositories;
         ReimbursementItemRepositories itemRepositories;
@@ -54,20 +48,20 @@ namespace ReimbursementUnitProjectTest.Services
                   .UseInMemoryDatabase("database" + Guid.NewGuid())
                    .Options;
             context = new ContextApp(options);
-            approvalLogger = new Mock<ILogger<ApprovalStageRepository>> ();
-            userLogger= new Mock<ILogger<UserRepository>> ();
-            requestLogger= new Mock<ILogger<ReimbursementRequestRepository>> ();
-            itemLogger= new Mock<ILogger<ReimbursementItemRepositories>>();
+            approvalLogger = new Mock<ILogger<ApprovalStageRepository>>();
+            userLogger = new Mock<ILogger<UserRepository>>();
+            requestLogger = new Mock<ILogger<ReimbursementRequestRepository>>();
+            itemLogger = new Mock<ILogger<ReimbursementItemRepositories>>();
             categoryLogger = new Mock<ILogger<CategoryRepositories>>();
-            policyLogger = new Mock<ILogger<PolicyRepository>> ();
-            paymentLogger= new Mock<ILogger<PaymentRepository>>();
-            employeeLogger= new Mock<ILogger<EmployeeRepository>>();
+            policyLogger = new Mock<ILogger<PolicyRepository>>();
+            paymentLogger = new Mock<ILogger<PaymentRepository>>();
+            employeeLogger = new Mock<ILogger<EmployeeRepository>>();
 
             repository = new ApprovalStageRepository(context, approvalLogger.Object);
-            userRepository= new UserRepository(context, userLogger.Object);
-            requestRepository= new ReimbursementRequestRepository(context, requestLogger.Object);
-            itemRepositories= new ReimbursementItemRepositories(context, itemLogger.Object);
-            categoryRepositories= new CategoryRepositories(context, categoryLogger.Object);
+            userRepository = new UserRepository(context, userLogger.Object);
+            requestRepository = new ReimbursementRequestRepository(context, requestLogger.Object);
+            itemRepositories = new ReimbursementItemRepositories(context, itemLogger.Object);
+            categoryRepositories = new CategoryRepositories(context, categoryLogger.Object);
             policyRepository = new PolicyRepository(context, policyLogger.Object);
             paymentRepository = new PaymentRepository(context, paymentLogger.Object);
             employeeRepository = new EmployeeRepository(context, employeeLogger.Object);
@@ -75,13 +69,14 @@ namespace ReimbursementUnitProjectTest.Services
             _mockMailSender = new Mock<IMailSender>();
             mapper = new Mock<IMapper>();
             itemService = new ReimbursementItemService(itemRepositories, categoryRepositories, "Files", mapper.Object);
-            service = new ApprovalService(repository,userRepository,requestRepository,employeeRepository,policyRepository,paymentRepository,itemRepositories,categoryRepositories,mapper.Object,_mockMailSender.Object);
+            service = new ApprovalService(repository, userRepository, requestRepository, employeeRepository, policyRepository, paymentRepository, itemRepositories, categoryRepositories, mapper.Object, _mockMailSender.Object);
 
         }
 
         [Test]
         public async Task TestApproveRequestAsync()
         {
+            await TestApprovebyManagerRequestAsync();
             User user = new User
             {
                 UserName = "Rohit",
@@ -100,9 +95,9 @@ namespace ReimbursementUnitProjectTest.Services
                 Email = "admin@gmail.com",
             };
 
-            var adddedUser2= await userRepository.Add(hr);
+            var adddedUser2 = await userRepository.Add(hr);
             var addedUser = await userRepository.Add(user);
-             Employee employee = new Employee()
+            Employee employee = new Employee()
             {
                 EmployeeId = 1,
                 ManagerId = 2,
@@ -123,21 +118,20 @@ namespace ReimbursementUnitProjectTest.Services
 
             ApprovalStageDTO stageDTO = new ApprovalStageDTO()
             {
-                ReviewId=1,
-                RequestId=1,
-                Comments="All fine"
+                RequestId = 1,
+                ReviewId = 3,
+                Comments = "All fine"
             };
 
             ApprovalStage approval = new ApprovalStage()
             {
                 RequestId = 1,
-                ReviewId = 1,
+                ReviewId = 3,
 
                 Comments = "All fine",
 
             };
-            mapper.Setup(m=>m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
-
+            mapper.Setup(m => m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
             var result = await service.ApproveRequestAsync(stageDTO);
             Assert.NotNull(result);
         }
@@ -224,7 +218,7 @@ namespace ReimbursementUnitProjectTest.Services
             ApprovalStage approval = new ApprovalStage()
             {
                 RequestId = 1,
-                ReviewId = 3,
+                ReviewId = 5,
 
                 Comments = "All fine",
 
@@ -233,7 +227,7 @@ namespace ReimbursementUnitProjectTest.Services
             ApprovalStageDTO stageDTO = new ApprovalStageDTO()
             {
                 RequestId = 1,
-                ReviewId = 3,
+                ReviewId = 5,
                 Comments = "Passed"
             };
 
@@ -243,7 +237,14 @@ namespace ReimbursementUnitProjectTest.Services
             Assert.NotNull(result);
         }
 
+        [Test]
+        public async Task TestGetAllApproval()
+        {
+            await TestApproveRequestAsync();
+            var result = await service.GetAllApprovalsAsync(1, 10);
+            Assert.NotNull(result);
 
+        }
 
         [Test]
         public async Task TestApproveFinanceTestAsyncException()
@@ -265,7 +266,7 @@ namespace ReimbursementUnitProjectTest.Services
 
             mapper.Setup(m => m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
 
-            Assert.ThrowsAsync<Exception>(async()=> await service.ApproveRequestAsync(stageDTO));
+            Assert.ThrowsAsync<Exception>(async () => await service.ApproveRequestAsync(stageDTO));
 
         }
 
@@ -419,7 +420,7 @@ namespace ReimbursementUnitProjectTest.Services
         [Test]
         public async Task GetApprovalByIdAsyncTestException()
         {
-            Assert.ThrowsAsync<Exception>(async()=> await service.GetApprovalByIdAsync(1));
+            Assert.ThrowsAsync<Exception>(async () => await service.GetApprovalByIdAsync(1));
         }
         [Test]
         public async Task TestRejectRequestAsync()
@@ -472,6 +473,13 @@ namespace ReimbursementUnitProjectTest.Services
                 Comments = "All fine",
 
             };
+            Employee employee = new Employee()
+            {
+                EmployeeId = 1,
+                ManagerId = 2,
+
+            };
+            var addedEmployee = await employeeRepository.Add(employee);
             mapper.Setup(m => m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
 
             var result = await service.RejectRequestAsync(stageDTO);
@@ -516,21 +524,27 @@ namespace ReimbursementUnitProjectTest.Services
 
             ApprovalStageDTO stageDTO = new ApprovalStageDTO()
             {
-                ReviewId = 1,
                 RequestId = 1,
+                ReviewId = 2,
                 Comments = "All fine"
             };
 
             ApprovalStage approval = new ApprovalStage()
             {
                 RequestId = 1,
-                ReviewId = 1,
+                ReviewId = 2,
 
                 Comments = "All fine",
 
             };
             mapper.Setup(m => m.Map<ApprovalStage>(It.IsAny<ApprovalStageDTO>())).Returns(approval);
+            Employee employee = new Employee()
+            {
+                EmployeeId = 1,
+                ManagerId = 2,
 
+            };
+            var addedEmployee = await employeeRepository.Add(employee);
             var result = await service.RejectRequestAsync(stageDTO);
             Assert.NotNull(result);
         }
@@ -699,7 +713,7 @@ namespace ReimbursementUnitProjectTest.Services
             //var itemsDTO = _mapper.Map<List<ResponseReimbursementItemDTO>>(items);
 
 
-            var result = await service.GetApprovalsByRequestIdAsync(1,1,100);
+            var result = await service.GetApprovalsByRequestIdAsync(1, 1, 100);
             Assert.NotNull(result.Data);
 
         }
@@ -728,14 +742,14 @@ namespace ReimbursementUnitProjectTest.Services
         public async Task TestGetFinancePendingApprovalsAsync()
         {
             await GetApprovalByRequestIdAsyncTest();
-            var result = await service.GetFinancePendingApprovalsAsync( 1, 100);
+            var result = await service.GetFinancePendingApprovalsAsync(1, 100);
             Assert.NotNull(result.Data);
         }
 
         [Test]
         public async Task TestExceptionGetFinancePendingApprovalsAsync()
         {
-            Assert.ThrowsAsync<Exception>(async () => await service.GetFinancePendingApprovalsAsync( 1, 100));
+            Assert.ThrowsAsync<Exception>(async () => await service.GetFinancePendingApprovalsAsync(1, 100));
         }
         [Test]
         public async Task TestGetHrPendingApprovalsAsync()
@@ -839,7 +853,7 @@ namespace ReimbursementUnitProjectTest.Services
         [Test]
         public async Task TestExceptionGetHrPendingApprovalsAsync()
         {
-            Assert.ThrowsAsync<Exception>(async () => await service.GetHrPendingApprovalsAsync( 1, 100));
+            Assert.ThrowsAsync<Exception>(async () => await service.GetHrPendingApprovalsAsync(1, 100));
         }
 
 

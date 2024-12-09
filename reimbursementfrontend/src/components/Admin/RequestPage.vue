@@ -115,16 +115,16 @@ export default {
     name: "RequestPage",
     data() {
         return {
-            requests: [], // Array of all requests
-            activeRequest: null, // ID of the currently expanded accordion
-            currentPage: 1, // Current page number
-            pageSize: 10, // Number of items per page
-            totalPages: 1, // Total number of pages
+            requests: [],
+            activeRequest: null,
+            currentPage: 1,
+            pageSize: 10,
+            totalPages: 1,
             filters: {
-                status: "", // Filter for request status
-                stage: "", // Filter for request stage
+                status: "",
+                stage: "",
             },
-            filteredRequests: [], // Array for filtered requests
+            filteredRequests: [],
         }
     },
     methods: {
@@ -140,7 +140,7 @@ export default {
                 const response = await getRequests(this.currentPage, this.pageSize);
                 this.requests = response.data.data;
                 this.totalPages = response.data.totalPages;
-                this.filteredRequests = this.requests; // Initialize filtered requests
+                this.filteredRequests = this.requests;
             } catch (err) {
                 console.error("Error fetching requests:", err);
             }

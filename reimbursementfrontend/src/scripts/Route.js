@@ -4,9 +4,9 @@ import UserProfile from "@/components/UserProfile.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import ReimbursementRequest from "@/components/ReimbursementRequest.vue";
-import HRDashboard from "@/components/HRDashboard.vue";
+// import HRDashboard from "@/components/HRDashboard.vue";
 import AdminDashboard from "@/components/AdminDashboard.vue";
-import FinanceDashboard from "@/components/FinanceDashboard.vue";
+// import FinanceDashboard from "@/components/FinanceDashboard.vue";
 import DashboardData from "@/components/Admin/DashboardData.vue";
 // import EmployeePage from "@/components/Admin/EmployeePage.vue";
 import RequestPage from "@/components/Admin/RequestPage.vue";
@@ -59,6 +59,10 @@ const routes = [
         path: "/payment",
         component: PaymentBank,
       },
+      {
+        path: "/profile",
+        component: UserProfile,
+      },
     ],
     beforeEnter: (to, from, next) => {
       if (sessionStorage.getItem("token")) {
@@ -68,17 +72,17 @@ const routes = [
       }
     },
   },
-  {
-    path: "/profile",
-    component: UserProfile,
-    beforeEnter: (to, from, next) => {
-      if (sessionStorage.getItem("token")) {
-        next();
-      } else {
-        next("/login");
-      }
-    },
-  },
+  // {
+  //   path: "/profile",
+  //   component: UserProfile,
+  //   beforeEnter: (to, from, next) => {
+  //     if (sessionStorage.getItem("token")) {
+  //       next();
+  //     } else {
+  //       next("/login");
+  //     }
+  //   },
+  // },
   {
     path: "/request",
     component: ReimbursementRequest,
@@ -90,21 +94,21 @@ const routes = [
       }
     },
   },
-  {
-    path: "/hr",
-    component: HRDashboard,
-    beforeEnter: (to, from, next) => {
-      if (
-        jwtDecode(sessionStorage.getItem("token"))[
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-        ] === "HR"
-      ) {
-        next();
-      } else {
-        next("/login");
-      }
-    },
-  },
+  // {
+  //   path: "/hr",
+  //   component: HRDashboard,
+  //   beforeEnter: (to, from, next) => {
+  //     if (
+  //       jwtDecode(sessionStorage.getItem("token"))[
+  //         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+  //       ] === "HR"
+  //     ) {
+  //       next();
+  //     } else {
+  //       next("/login");
+  //     }
+  //   },
+  // },
   {
     path: "/admin",
     component: AdminDashboard,
@@ -176,17 +180,17 @@ const routes = [
     component: UserFormFillUp,
   },
 
-  {
-    path: "/finance",
-    component: FinanceDashboard,
-    beforeEnter: (to, from, next) => {
-      if (sessionStorage.getItem("token")) {
-        next();
-      } else {
-        next("/login");
-      }
-    },
-  },
+  // {
+  //   path: "/finance",
+  //   component: FinanceDashboard,
+  //   beforeEnter: (to, from, next) => {
+  //     if (sessionStorage.getItem("token")) {
+  //       next();
+  //     } else {
+  //       next("/login");
+  //     }
+  //   },
+  // },
   { path: "/:pathMatch(.*)*", component: NotFound },
   { path: "/setup", component: RegistrationForm },
 ];

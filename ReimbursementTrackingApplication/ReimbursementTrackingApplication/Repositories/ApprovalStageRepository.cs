@@ -70,7 +70,8 @@ namespace ReimbursementTrackingApplication.Repositories
             var approvals = await _context.Approvals.ToListAsync();
             if (approvals.Count == 0)
             {
-                throw new CollectionEmptyException("Approvals");
+                //throw new CollectionEmptyException("Approvals");
+                return null;
             }
             return approvals;
         }

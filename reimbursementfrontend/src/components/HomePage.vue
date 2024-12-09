@@ -22,6 +22,9 @@
             <RouterLink to="/policies" class="hover:text-gray-900">Policies</RouterLink>
           </li>
           <li class="font-semibold text-gray-700">
+            <RouterLink to="/profile" class="hover:text-gray-900">Profile</RouterLink>
+          </li>
+          <li class="font-semibold text-gray-700">
             <RouterLink to="/payment" class="hover:text-gray-900">Payments</RouterLink>
           </li>
           <li class="font-semibold text-gray-700">

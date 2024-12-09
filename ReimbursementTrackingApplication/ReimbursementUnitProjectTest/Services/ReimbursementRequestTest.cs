@@ -142,7 +142,7 @@ namespace ReimbursementUnitProjectTest.Services
             items.Add(await AddItem());
             return new CreateReimbursementRequestDTO()
             {
-                UserId = 1,
+                UserId = 2,
                 PolicyId = 1,
                 Comments = "Request for Businees ",
                 Items = items
@@ -181,6 +181,7 @@ namespace ReimbursementUnitProjectTest.Services
         public async Task SubmitRequestTest()
         {
             await CreateUser();
+            await CreateUser();
             await CreatePolicy();
             await CreateEmployee();
             CreateReimbursementRequestDTO request = await CreateRequest();
@@ -199,7 +200,7 @@ namespace ReimbursementUnitProjectTest.Services
 
             ReimbursementRequest requestTest = new ReimbursementRequest()
             {
-                UserId = 1,
+                UserId = 2,
                 PolicyId = 1,
                 TotalAmount = 9000,
                 Comments = "Request for Businees ",
@@ -226,7 +227,7 @@ namespace ReimbursementUnitProjectTest.Services
 
             ResponseReimbursementRequestDTO reimRequestDTO = new ResponseReimbursementRequestDTO
             {
-                UserId = 1,
+                UserId = 2,
                 User = userDTO,
                 PolicyId = 1,
                 PolicyName = "Travel Policy",
@@ -252,6 +253,23 @@ namespace ReimbursementUnitProjectTest.Services
 
             //action
             await AddCategory();
+            Employee employee = new Employee()
+            {
+                ManagerId = 1,
+                EmployeeId = 2,
+
+            };
+            var addedEmployee = await employeeRepository.Add(employee);
+            BankAccount account = new BankAccount()
+            {
+                UserId = 2,
+                AccNo = "2293874242",
+                BranchName = "Branch Name",
+                IFSCCode = "23LK4LKJF ",
+                BranchAddress = "Address",
+            };
+            var addedBank = await bankRepository.Add(account);
+            Assert.IsTrue(addedBank.BranchName == account.BranchName);
 
             var result = await requestService.SubmitRequestAsync(request);
             Assert.IsNotNull(result.Data);
@@ -334,7 +352,7 @@ namespace ReimbursementUnitProjectTest.Services
 
             //action
 
-            Assert.ThrowsAsync<Exception>(async () => await requestService.SubmitRequestAsync(request));
+            Assert.ThrowsAsync<UnauthorizedException>(async () => await requestService.SubmitRequestAsync(request));
         }
 
         public async Task AddCategory()
@@ -864,14 +882,14 @@ namespace ReimbursementUnitProjectTest.Services
         {
             EmployeeDTO employeeDTO = new EmployeeDTO()
             {
-                EmployeeId = 1,
-                ManagerId = 3
+                ManagerId = 1,
+                EmployeeId = 2,
             };
 
             Employee employee = new Employee()
             {
-                EmployeeId = 1,
-                ManagerId = 3,
+                ManagerId = 1,
+                EmployeeId = 2,
             };
             UserDTO userDTO = new UserDTO()
             {
@@ -883,6 +901,15 @@ namespace ReimbursementUnitProjectTest.Services
             mapper.Setup(m => m.Map<UserDTO>(It.IsAny<User>())).Returns(userDTO);
 
             mapper.Setup(m => m.Map<Employee>(It.IsAny<EmployeeDTO>())).Returns(employee);
+            User manager = new User
+            {
+                UserName = "Rohit",
+                Password = Encoding.UTF8.GetBytes("TestPassword"),
+                HashKey = Encoding.UTF8.GetBytes("TestHashKey"),
+                Department = Departments.HR,
+                Email = "laishramrohit15@gmail.com",
+            };
+            await userRepository.Add(manager);
 
             var add = await employeeService.AddEmployeeAsync(employeeDTO);
 
@@ -919,14 +946,14 @@ namespace ReimbursementUnitProjectTest.Services
         {
             EmployeeDTO employeeDTO = new EmployeeDTO()
             {
-                EmployeeId = 1,
-                ManagerId = 3
+                ManagerId = 1,
+                EmployeeId = 2,
             };
 
             Employee employee = new Employee()
             {
                 EmployeeId = 1,
-                ManagerId = 3,
+                ManagerId = 2,
             };
             UserDTO userDTO = new UserDTO()
             {
@@ -938,7 +965,15 @@ namespace ReimbursementUnitProjectTest.Services
             mapper.Setup(m => m.Map<UserDTO>(It.IsAny<User>())).Returns(userDTO);
 
             mapper.Setup(m => m.Map<Employee>(It.IsAny<EmployeeDTO>())).Returns(employee);
-
+            User manager = new User
+            {
+                UserName = "Rohit",
+                Password = Encoding.UTF8.GetBytes("TestPassword"),
+                HashKey = Encoding.UTF8.GetBytes("TestHashKey"),
+                Department = Departments.HR,
+                Email = "laishramrohit15@gmail.com",
+            };
+            await userRepository.Add(manager);
             var add = await employeeService.AddEmployeeAsync(employeeDTO);
 
             User user = new User
@@ -975,14 +1010,14 @@ namespace ReimbursementUnitProjectTest.Services
         {
             EmployeeDTO employeeDTO = new EmployeeDTO()
             {
-                EmployeeId = 1,
-                ManagerId = 3
+                ManagerId = 1,
+                EmployeeId = 2,
             };
 
             Employee employee = new Employee()
             {
-                EmployeeId = 1,
-                ManagerId = 3,
+                ManagerId = 1,
+                EmployeeId = 2,
             };
             UserDTO userDTO = new UserDTO()
             {
@@ -994,7 +1029,15 @@ namespace ReimbursementUnitProjectTest.Services
             mapper.Setup(m => m.Map<UserDTO>(It.IsAny<User>())).Returns(userDTO);
 
             mapper.Setup(m => m.Map<Employee>(It.IsAny<EmployeeDTO>())).Returns(employee);
-
+            User manager = new User
+            {
+                UserName = "Rohit",
+                Password = Encoding.UTF8.GetBytes("TestPassword"),
+                HashKey = Encoding.UTF8.GetBytes("TestHashKey"),
+                Department = Departments.HR,
+                Email = "laishramrohit15@gmail.com",
+            };
+            await userRepository.Add(manager);
             var add = await employeeService.AddEmployeeAsync(employeeDTO);
 
             User user = new User
@@ -1044,7 +1087,15 @@ namespace ReimbursementUnitProjectTest.Services
 
 
             mapper.Setup(m => m.Map<Employee>(It.IsAny<EmployeeDTO>())).Returns(employee);
-
+            User manager = new User
+            {
+                UserName = "Rohit",
+                Password = Encoding.UTF8.GetBytes("TestPassword"),
+                HashKey = Encoding.UTF8.GetBytes("TestHashKey"),
+                Department = Departments.HR,
+                Email = "laishramrohit15@gmail.com",
+            };
+            await userRepository.Add(manager);
             var add = await employeeService.AddEmployeeAsync(employeeDTO);
 
             User user = new User

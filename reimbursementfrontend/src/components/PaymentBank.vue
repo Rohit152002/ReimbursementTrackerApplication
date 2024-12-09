@@ -78,6 +78,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Custom Scrollbar Styling */
-</style>
+<style scoped></style>

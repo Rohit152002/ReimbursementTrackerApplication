@@ -53,7 +53,7 @@ namespace ReimbursementUnitProjectTest.Repositories
         {
             User user = new User
             {
-                UserName = "Rohit",
+                UserName = null,
                 Password = null,
                 HashKey = Encoding.UTF8.GetBytes("TestHashKey"),
                 Department = Departments.IT,

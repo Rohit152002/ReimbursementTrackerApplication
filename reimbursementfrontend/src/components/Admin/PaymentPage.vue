@@ -54,11 +54,10 @@ export default {
     name: "PaymentPage",
     data() {
         return {
-            payment: [],            // Store all payment data
-            filteredPayments: [],   // Store filtered payments based on search query
-            pageNumber: 1,          // Current page number for pagination
-            pageSize: 10,           // Items per page
-            searchQuery: "",        // Search query string
+            payment: [],
+            filteredPayments: [],
+            pageSize: 10,
+            searchQuery: "",
         };
     },
     methods: {
@@ -66,14 +65,13 @@ export default {
             try {
                 const res = await getAllPayment(this.pageNumber, this.pageSize);
                 this.payment = res.data.data
-                    .sort((a, b) => b.paymentStatus - a.paymentStatus); // Payments are already marked as "paid" (status 2)
+                    .sort((a, b) => b.paymentStatus - a.paymentStatus);
                 this.applySearch();
             } catch (err) {
                 console.error(err.response.data.errorMessage);
             }
         },
         applySearch() {
-            // Filter payments based on the search query
             const query = this.searchQuery.toLowerCase();
             this.filteredPayments = this.payment.filter((p) => {
                 return (
@@ -103,6 +101,4 @@ export default {
 </script>
 
 
-<style scoped>
-/* Add any additional styling if needed */
-</style>
+<style scoped></style>

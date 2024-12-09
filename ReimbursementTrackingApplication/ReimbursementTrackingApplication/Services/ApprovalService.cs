@@ -53,11 +53,22 @@ IRepository<int, ExpenseCategory> expenseCategoryRepository, IMapper mapper, IMa
                 {
                     throw new Exception($"{approval.ReviewId}");
                 }
-                var approvals = await _repository.GetAll();
-                var existApproval = approvals.FirstOrDefault(r => r.RequestId == approval.RequestId && r.ReviewId == approval.ReviewId);
-                if (existApproval != null && existApproval.Status == Status.Approved)
+                try
                 {
-                    throw new Exception("Already Approved");
+                    var approvals = await _repository.GetAll();
+                    if (approvals.Any() || approvals != null)
+                    {
+
+                        var existApproval = approvals.FirstOrDefault(r => r.RequestId == approval.RequestId && r.ReviewId == approval.ReviewId);
+                        if (existApproval != null && existApproval.Status == Status.Approved)
+                        {
+                            throw new Exception("Already Approved");
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Empty");
                 }
 
                 Departments department = (Departments)reviewer.Department;

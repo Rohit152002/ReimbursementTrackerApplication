@@ -50,12 +50,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="mt-6 flex space-x-4">
 
-                <button @click="deleteRequest" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
-                    Delete Request
-                </button>
-            </div> -->
         </div>
         <div v-if="isModelOpen"
             class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-auto">
@@ -81,19 +76,17 @@ export default {
     name: "ReimbursementRequestById",
     data() {
         return {
-            request: {}, // Stores the request details
-            toast: useToast(), // Initialize Toast
+            request: {},
+            toast: useToast(),
             isModelOpen: false,
             selectedItem: null
         };
     },
     methods: {
         openModal(item) {
-            console.log(JSON.parse(JSON.stringify(item))
-            )
+
             this.selectedItem = (JSON.parse(JSON.stringify(item))
             );
-            console.log(this.selectedItem.receiptFile + "item");
 
             this.isModelOpen = true;
             console.log(this.isModelOpen);
@@ -121,17 +114,7 @@ export default {
                 this.toast.error("An error occurred while fetching the request. Please try again.");
             }
         },
-        async getRequestByHr() {
 
-        },
-        submitAdditionalInfo() {
-            // Placeholder functionality
-            this.toast.info("Submitting additional information is under development.");
-        },
-        withdrawRequest() {
-            // Placeholder functionality
-            this.toast.warning("Withdraw request functionality is under development.");
-        },
         statusClass(status) {
             return {
                 Pending: "bg-yellow-200 text-yellow-800 px-2 py-1 rounded",

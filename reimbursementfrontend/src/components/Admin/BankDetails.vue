@@ -51,12 +51,11 @@ import { getAllBanksDetails } from '@/scripts/Bank';
 export default {
     data() {
         return {
-            searchQuery: "", // For search input
+            searchQuery: "",
             response: {},
         };
     },
     computed: {
-        // Filter data based on the search query
         filteredData() {
             if (!this.searchQuery) return this.response.data;
 
@@ -89,6 +88,4 @@ export default {
 };
 </script>
 
-<style>
-/* No additional CSS needed as Tailwind handles everything */
-</style>
+<style></style>

@@ -152,8 +152,8 @@ export default {
     data() {
         return {
             policies: [],
-            selectedPolicy: null, // For viewing details modal
-            showAddPolicyModal: false, // Controls the visibility of Add Policy modal
+            selectedPolicy: null,
+            showAddPolicyModal: false,
             editPolicyModel: false,
             newPolicy: {
                 policyName: "",

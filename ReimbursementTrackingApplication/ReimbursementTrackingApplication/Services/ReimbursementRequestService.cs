@@ -55,17 +55,24 @@ namespace ReimbursementTrackingApplication.Services
             {
                 var request = MapRequest(requestDto);
                 var currentYear = DateTime.Now.Year;
+                try
+                {
+
                 var existingRequest = (await _repository.GetAll()).Where(r => r.UserId == requestDto.UserId && r.PolicyId == requestDto.PolicyId && r.CreatedAt.Year == currentYear &&( r.Status == RequestStatus.Passed || r.Status==RequestStatus.Pending)).ToList();
+                if (existingRequest.Any())
+                {
+                    throw new Exception("You have already submitted a request for this policy this year.");
+                }
+                }catch(Exception)
+                {
+                    Console.WriteLine("error");
+                }
                 var employee = (await _employeeRepository.GetAll()).FirstOrDefault(e => e.EmployeeId == requestDto.UserId);
                 if (employee == null)
                 {
                     throw new UnauthorizedException("Assign a Manager First");
                 }
 
-                if (existingRequest.Any())
-                {
-                    throw new Exception("You have already submitted a request for this policy this year.");
-                }
 
                 var banks = await _bankAccountRepository.GetAll();
                 var bank = banks.FirstOrDefault(b => b.UserId == requestDto.UserId) ?? throw new NotFoundException("Bank");
@@ -394,7 +401,7 @@ namespace ReimbursementTrackingApplication.Services
             {
                 var employess = (await _employeeRepository.GetAll()).Where(e => e.ManagerId == managerId).ToList();
 
-                var approvals = await _approvalStageRepository.GetAll();
+                var approvals = await _approvalStageRepository.GetAll() ?? null;
 
                 List<ResponseEmployeeDTO> result = new List<ResponseEmployeeDTO>();
                 foreach (var employee in employess)
